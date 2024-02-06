@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2 Lab I: Tidyverse | GOVT 8002 Shared Working Book</title>
+  <meta name="description" content="2 Lab I: Tidyverse | GOVT 8002 Shared Working Book" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2 Lab I: Tidyverse | GOVT 8002 Shared Working Book" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2 Lab I: Tidyverse | GOVT 8002 Shared Working Book" />
+  
+  
+  
+
+<meta name="author" content="Benjamin Reese | bfr11@georgetown.edu" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#purpose-of-this-site"><i class="fa fa-check"></i><b>1.1</b> Purpose of This Site</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#loading-data"><i class="fa fa-check"></i><b>1.2</b> Loading Data</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="lab-i-tidyverse.html"><a href="lab-i-tidyverse.html"><i class="fa fa-check"></i><b>2</b> Lab I: Tidyverse</a>
+<ul>
+<li class="chapter" data-level="2.0.1" data-path="lab-i-tidyverse.html"><a href="lab-i-tidyverse.html#preparation"><i class="fa fa-check"></i><b>2.0.1</b> Preparation</a></li>
+<li class="chapter" data-level="2.1" data-path="lab-i-tidyverse.html"><a href="lab-i-tidyverse.html#join-the-data-sets."><i class="fa fa-check"></i><b>2.1</b> Join the data sets.</a></li>
+<li class="chapter" data-level="2.2" data-path="lab-i-tidyverse.html"><a href="lab-i-tidyverse.html#create-and-add-the-following-four-variables-to-your-dataframe-density-based-on-sqmiles-and-pop2019-deaths-per-capita-based-on-new_death-cases-per-capita-based-on-new_case-and-vaccinated-percent-based-on-series_complete_12pluspop_pct."><i class="fa fa-check"></i><b>2.2</b> Create and add the following four variables to your dataframe: density (based on <em>sqMiles</em> and <em>pop2019</em>), deaths per capita (based on <em>new_death</em>), cases per capita (based on <em>new_case</em>) and vaccinated percent (based on <em>Series_Complete_12PlusPop_Pct</em>).</a></li>
+<li class="chapter" data-level="2.3" data-path="lab-i-tidyverse.html"><a href="lab-i-tidyverse.html#estimate-three-regression-models-with-deaths-per-capita-on-your-selected-day-as-the-dependent-variable."><i class="fa fa-check"></i><b>2.3</b> Estimate three regression models with deaths per capita on your selected day as the dependent variable.</a></li>
+<li class="chapter" data-level="2.4" data-path="lab-i-tidyverse.html"><a href="lab-i-tidyverse.html#assess-specific-vaccines"><i class="fa fa-check"></i><b>2.4</b> Assess specific vaccines</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">GOVT 8002 Shared Working Book</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="lab-i-tidyverse" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">2</span> Lab I: Tidyverse<a href="lab-i-tidyverse.html#lab-i-tidyverse" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><img src="Images/image_1.png" width="480" /></p>
+<div id="preparation" class="section level3 hasAnchor" number="2.0.1">
+<h3><span class="header-section-number">2.0.1</span> Preparation<a href="lab-i-tidyverse.html#preparation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="lab-i-tidyverse.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Packages</span></span>
+<span id="cb1-2"><a href="lab-i-tidyverse.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-3"><a href="lab-i-tidyverse.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-4"><a href="lab-i-tidyverse.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl) <span class="co"># Package to read Excel data</span></span>
+<span id="cb1-5"><a href="lab-i-tidyverse.html#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stargazer)</span></code></pre></div>
+</div>
+<div id="join-the-data-sets." class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Join the data sets.<a href="lab-i-tidyverse.html#join-the-data-sets." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>Join the cases and vaccination data by date and state.
+<ul>
+<li><p>Case data: <a href="#id_%20https://data.cdc.gov/Case-Surveillance/United-States-COVID-19-Cases-and-Deaths-by-State-o/9mfq-cb36">United_States_COVID-19_Cases_and_Deaths_by_State_over_Time.csv</a></p></li>
+<li><p>Vaccination data: <a href="https://data.cdc.gov/Vaccinations/COVID-19-Vaccinations-in-the-United-States-Jurisdi/unsk-b7fc">COVID-19_Vaccinations_in_the_United_States_Jurisdiction.csv</a></p></li>
+<li><p>Other state variables: USstates.xlsx</p></li>
+</ul></li>
+<li>Add the USstates.xlsx data and limit your dataframe to the states listed in USstates.xlsx.<br />
+</li>
+<li>How do you know if your merge was successful?</li>
+</ul>
+<p><strong>ANSWER: Looking at the dataframe is useful. Look at individual states - do the variables that are supposed to be the same (e.g. population) the same over the time period? Do the case numbers look reasonable?</strong></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="lab-i-tidyverse.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Load data </span></span>
+<span id="cb2-2"><a href="lab-i-tidyverse.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># https://data.cdc.gov/Case-Surveillance/United-States-COVID-19-Cases-and-Deaths-by-State-o/9mfq-cb36</span></span>
+<span id="cb2-3"><a href="lab-i-tidyverse.html#cb2-3" aria-hidden="true" tabindex="-1"></a>cases <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Data/United_States_COVID-19_Cases_and_Deaths_by_State_over_Time.csv&quot;</span>)</span>
+<span id="cb2-4"><a href="lab-i-tidyverse.html#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="lab-i-tidyverse.html#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Vax data </span></span>
+<span id="cb2-6"><a href="lab-i-tidyverse.html#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># &quot;COVID-19 Vaccinations in the United States,Jurisdiction&quot;</span></span>
+<span id="cb2-7"><a href="lab-i-tidyverse.html#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># https://data.cdc.gov/Vaccinations/COVID-19-Vaccinations-in-the-United-States-Jurisdi/unsk-b7fc</span></span>
+<span id="cb2-8"><a href="lab-i-tidyverse.html#cb2-8" aria-hidden="true" tabindex="-1"></a>vax <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Data/COVID-19_Vaccinations_in_the_United_States_Jurisdiction.csv&quot;</span>)</span>
+<span id="cb2-9"><a href="lab-i-tidyverse.html#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="lab-i-tidyverse.html#cb2-10" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> cases <span class="sc">%&gt;%</span> </span>
+<span id="cb2-11"><a href="lab-i-tidyverse.html#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(vax, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;submission_date&quot;</span> <span class="ot">=</span> <span class="st">&quot;Date&quot;</span>,</span>
+<span id="cb2-12"><a href="lab-i-tidyverse.html#cb2-12" aria-hidden="true" tabindex="-1"></a>                        <span class="st">&quot;state&quot;</span> <span class="ot">=</span> <span class="st">&quot;Location&quot;</span>))</span>
+<span id="cb2-13"><a href="lab-i-tidyverse.html#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="lab-i-tidyverse.html#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Add state variables</span></span>
+<span id="cb2-15"><a href="lab-i-tidyverse.html#cb2-15" aria-hidden="true" tabindex="-1"></a>stFacts <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;Data/USstates.xlsx&quot;</span>, <span class="at">sheet =</span> <span class="st">&quot;data&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-16"><a href="lab-i-tidyverse.html#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">trump2020Pct =</span> trump2020_percent) </span>
+<span id="cb2-17"><a href="lab-i-tidyverse.html#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co"># %&gt;% mutate(trump2020Pct = trump2020Pct)</span></span>
+<span id="cb2-18"><a href="lab-i-tidyverse.html#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="lab-i-tidyverse.html#cb2-19" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
+<span id="cb2-20"><a href="lab-i-tidyverse.html#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(state <span class="sc">%in%</span> stFacts<span class="sc">$</span>stateAbbr <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-21"><a href="lab-i-tidyverse.html#cb2-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(stFacts, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;state&quot;</span> <span class="ot">=</span> <span class="st">&quot;stateAbbr&quot;</span>)) </span></code></pre></div>
+</div>
+<div id="create-and-add-the-following-four-variables-to-your-dataframe-density-based-on-sqmiles-and-pop2019-deaths-per-capita-based-on-new_death-cases-per-capita-based-on-new_case-and-vaccinated-percent-based-on-series_complete_12pluspop_pct." class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Create and add the following four variables to your dataframe: density (based on <em>sqMiles</em> and <em>pop2019</em>), deaths per capita (based on <em>new_death</em>), cases per capita (based on <em>new_case</em>) and vaccinated percent (based on <em>Series_Complete_12PlusPop_Pct</em>).<a href="lab-i-tidyverse.html#create-and-add-the-following-four-variables-to-your-dataframe-density-based-on-sqmiles-and-pop2019-deaths-per-capita-based-on-new_death-cases-per-capita-based-on-new_case-and-vaccinated-percent-based-on-series_complete_12pluspop_pct." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>For a specific day (based on <em>submission_date</em>), show the top five states ranked by deaths per capita and calculate the average vaccinated per capita and the mean, minimum and maximum deaths per capita.</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="lab-i-tidyverse.html#cb3-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
+<span id="cb3-2"><a href="lab-i-tidyverse.html#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">&quot;deathsPC&quot;</span> <span class="ot">=</span> <span class="dv">100000</span><span class="sc">*</span>new_death<span class="sc">/</span>pop2019, </span>
+<span id="cb3-3"><a href="lab-i-tidyverse.html#cb3-3" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;casesPC&quot;</span>  <span class="ot">=</span> <span class="dv">100000</span><span class="sc">*</span>new_case<span class="sc">/</span>pop2019,</span>
+<span id="cb3-4"><a href="lab-i-tidyverse.html#cb3-4" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;vaxedPct&quot;</span>  <span class="ot">=</span> Series_Complete_12PlusPop_Pct<span class="sc">/</span><span class="dv">100</span>,</span>
+<span id="cb3-5"><a href="lab-i-tidyverse.html#cb3-5" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;density&quot;</span>   <span class="ot">=</span> pop2019<span class="sc">/</span>(<span class="dv">1000000</span><span class="sc">*</span>sqMiles))</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="lab-i-tidyverse.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pick a day</span></span>
+<span id="cb4-2"><a href="lab-i-tidyverse.html#cb4-2" aria-hidden="true" tabindex="-1"></a>DATE <span class="ot">&lt;-</span> <span class="st">&quot;10/18/2021&quot;</span></span>
+<span id="cb4-3"><a href="lab-i-tidyverse.html#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="lab-i-tidyverse.html#cb4-4" aria-hidden="true" tabindex="-1"></a>df_day <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
+<span id="cb4-5"><a href="lab-i-tidyverse.html#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(submission_date <span class="sc">==</span> DATE) <span class="sc">%&gt;%</span></span>
+<span id="cb4-6"><a href="lab-i-tidyverse.html#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(deathsPC))</span>
+<span id="cb4-7"><a href="lab-i-tidyverse.html#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="lab-i-tidyverse.html#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Look at data (check for negative deaths etc)</span></span>
+<span id="cb4-9"><a href="lab-i-tidyverse.html#cb4-9" aria-hidden="true" tabindex="-1"></a>df_day <span class="sc">%&gt;%</span> </span>
+<span id="cb4-10"><a href="lab-i-tidyverse.html#cb4-10" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(submission_date, state, new_case, new_death, deathsPC, casesPC) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-11"><a href="lab-i-tidyverse.html#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span></code></pre></div>
+<pre><code>##   submission_date state new_case new_death deathsPC  casesPC
+## 1      10/18/2021    ID     1290        42 2.350222 72.18540
+## 2      10/18/2021    AK      691        16 2.187152 94.45762
+## 3      10/18/2021    MT      426        19 1.777731 39.85860
+## 4      10/18/2021    AL      961        84 1.713172 19.59951
+## 5      10/18/2021    WV      689        26 1.450774 38.44551</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="lab-i-tidyverse.html#cb6-1" aria-hidden="true" tabindex="-1"></a>df_day <span class="sc">%&gt;%</span> </span>
+<span id="cb6-2"><a href="lab-i-tidyverse.html#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">meanVaxedPct =</span> <span class="fu">mean</span>(vaxedPct),</span>
+<span id="cb6-3"><a href="lab-i-tidyverse.html#cb6-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">meanDeath =</span> <span class="fu">mean</span>(deathsPC),</span>
+<span id="cb6-4"><a href="lab-i-tidyverse.html#cb6-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">minDeath =</span> <span class="fu">min</span>(deathsPC),</span>
+<span id="cb6-5"><a href="lab-i-tidyverse.html#cb6-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">maxDeath =</span> <span class="fu">max</span>(deathsPC))</span></code></pre></div>
+<pre><code>##   meanVaxedPct meanDeath minDeath maxDeath
+## 1    0.6388235 0.4587514        0 2.350222</code></pre>
+</div>
+<div id="estimate-three-regression-models-with-deaths-per-capita-on-your-selected-day-as-the-dependent-variable." class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Estimate three regression models with deaths per capita on your selected day as the dependent variable.<a href="lab-i-tidyverse.html#estimate-three-regression-models-with-deaths-per-capita-on-your-selected-day-as-the-dependent-variable." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>Your first model will have only Trump 2020 percent as an independent variable.</li>
+<li>Your second model will add vaccinated percent as an independent variable.</li>
+<li>Your third model will add density.</li>
+<li>Before you estimate the models, write down your expectations about what will happen in these models.</li>
+</ul>
+<p><strong>ANSWER: See table below. The key idea here is omitted variable bias. If we only have Trump percent, then vaccination rates are omitted. For October 1st, 2021, the Trump variable becomes insignificant when vaccination rates are included. One complication, for which I suspect there is no clear answer, is whether vaccination rates are a post-treatment variable. What do you think?</strong></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="lab-i-tidyverse.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Models</span></span>
+<span id="cb8-2"><a href="lab-i-tidyverse.html#cb8-2" aria-hidden="true" tabindex="-1"></a>ols<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">lm</span>(deathsPC <span class="sc">~</span> trump2020Pct, <span class="at">data =</span> df_day)</span>
+<span id="cb8-3"><a href="lab-i-tidyverse.html#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ols<span class="fl">.1</span>)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = deathsPC ~ trump2020Pct, data = df_day)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.86967 -0.29350 -0.10922  0.09968  1.65723 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)   
+## (Intercept)   -0.5191     0.3150  -1.648  0.10578   
+## trump2020Pct   1.9868     0.6222   3.193  0.00246 **
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.5275 on 49 degrees of freedom
+## Multiple R-squared:  0.1722, Adjusted R-squared:  0.1554 
+## F-statistic:  10.2 on 1 and 49 DF,  p-value: 0.00246</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="lab-i-tidyverse.html#cb10-1" aria-hidden="true" tabindex="-1"></a>ols<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">lm</span>(deathsPC <span class="sc">~</span> trump2020Pct <span class="sc">+</span> vaxedPct, <span class="at">data =</span> df_day)</span>
+<span id="cb10-2"><a href="lab-i-tidyverse.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ols<span class="fl">.2</span>)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = deathsPC ~ trump2020Pct + vaxedPct, data = df_day)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -0.8504 -0.3075 -0.0117  0.1776  1.6685 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)    2.0291     0.7263   2.794 0.007463 ** 
+## trump2020Pct   0.2193     0.7212   0.304 0.762361    
+## vaxedPct      -2.6272     0.6913  -3.800 0.000408 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.4673 on 48 degrees of freedom
+## Multiple R-squared:  0.3637, Adjusted R-squared:  0.3372 
+## F-statistic: 13.72 on 2 and 48 DF,  p-value: 1.941e-05</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="lab-i-tidyverse.html#cb12-1" aria-hidden="true" tabindex="-1"></a>ols<span class="fl">.3</span> <span class="ot">&lt;-</span> <span class="fu">lm</span>(deathsPC <span class="sc">~</span> trump2020Pct <span class="sc">+</span> vaxedPct <span class="sc">+</span> density, <span class="at">data =</span> df_day)</span>
+<span id="cb12-2"><a href="lab-i-tidyverse.html#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ols<span class="fl">.3</span>)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = deathsPC ~ trump2020Pct + vaxedPct + density, data = df_day)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.83946 -0.30634 -0.01337  0.16991  1.66741 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)    2.1095     0.8901   2.370 0.021938 *  
+## trump2020Pct   0.1205     0.9562   0.126 0.900283    
+## vaxedPct      -2.6711     0.7506  -3.559 0.000865 ***
+## density       -8.7715    54.9523  -0.160 0.873864    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.4721 on 47 degrees of freedom
+## Multiple R-squared:  0.364,  Adjusted R-squared:  0.3234 
+## F-statistic: 8.968 on 3 and 47 DF,  p-value: 8.334e-05</code></pre>
+</div>
+<div id="assess-specific-vaccines" class="section level2 hasAnchor" number="2.4">
+<h2><span class="header-section-number">2.4</span> Assess specific vaccines<a href="lab-i-tidyverse.html#assess-specific-vaccines" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><p>Create and add vaccinated percent by state for each of the Pfizer, Modern and Janssen (which is Johnson and Johnson) vaccines.</p></li>
+<li><p>Use <em>pop2019</em> for population</p></li>
+<li><p>Use Series_Complete_Moderna_18Plus, Series_Complete_Janssen_18Plus and Series_Complete_Pfizer_18Plus for the vaccination totals.</p></li>
+<li><p>Estimate a model in which deaths per capita is a function of all three vaccination rates.</p></li>
+<li><p>Explain what the results mean, especially in light of the results above for overall vaccination results.</p></li>
+<li><p>Explain how one would compare the efficacy of the individual vaccines (e.g., whether the Moderna vaccine works better than the Johnson and Johnson vaccine).</p></li>
+</ul>
+<p><strong>ANSWER: The major issue here is multicollinearity. For October 1, 2021, the overall vaccination rate was statistically significant (see models 1 - 3 in the table) yet each of the different vaccines was insignificant (see model 4). The vaccines are multicollinear (which can be assessed with an auxilliary regression) so the loss of power is not terribly surprising. An F-test whether <em>all</em> the specific vaccine variables equal zero is reported for model 4 and, broadly consistent with the results in models 1 -3 we can say that we can reject the null that all individual vaccines have zero effect. To assess whether Moderna is better than Johnson and Johnson we would do an F-test where our restricted equation adds those two vaccines. If doing so causes a substantial reduction in fit we would reject the null that the effects of those two vaccines are equal. (And we would want to take such results with a grain of salt given endogeneity in which states have which vaccines.)</strong></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="lab-i-tidyverse.html#cb14-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
+<span id="cb14-2"><a href="lab-i-tidyverse.html#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">&quot;vaxedPctModerna&quot;</span>  <span class="ot">=</span> Series_Complete_Moderna_18Plus<span class="sc">/</span>(<span class="dv">100</span><span class="sc">*</span>pop2019),</span>
+<span id="cb14-3"><a href="lab-i-tidyverse.html#cb14-3" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;vaxedPctJans&quot;</span>  <span class="ot">=</span> Series_Complete_Janssen_18Plus<span class="sc">/</span>(<span class="dv">100</span><span class="sc">*</span>pop2019),</span>
+<span id="cb14-4"><a href="lab-i-tidyverse.html#cb14-4" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;vaxedPctPfizer&quot;</span>  <span class="ot">=</span> Series_Complete_Pfizer_18Plus<span class="sc">/</span>(<span class="dv">100</span><span class="sc">*</span>pop2019))</span>
+<span id="cb14-5"><a href="lab-i-tidyverse.html#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="lab-i-tidyverse.html#cb14-6" aria-hidden="true" tabindex="-1"></a>df_day <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
+<span id="cb14-7"><a href="lab-i-tidyverse.html#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(submission_date <span class="sc">==</span> DATE)</span>
+<span id="cb14-8"><a href="lab-i-tidyverse.html#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="lab-i-tidyverse.html#cb14-9" aria-hidden="true" tabindex="-1"></a>ols<span class="fl">.4</span> <span class="ot">&lt;-</span> <span class="fu">lm</span>(deathsPC <span class="sc">~</span> vaxedPctJans <span class="sc">+</span> vaxedPctModerna <span class="sc">+</span></span>
+<span id="cb14-10"><a href="lab-i-tidyverse.html#cb14-10" aria-hidden="true" tabindex="-1"></a>             vaxedPctPfizer, <span class="at">data =</span> df_day)</span>
+<span id="cb14-11"><a href="lab-i-tidyverse.html#cb14-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-12"><a href="lab-i-tidyverse.html#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ols<span class="fl">.4</span>)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = deathsPC ~ vaxedPctJans + vaxedPctModerna + vaxedPctPfizer, 
+##     data = df_day)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -1.02398 -0.33730 -0.03042  0.16891  1.55666 
+## 
+## Coefficients:
+##                  Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)        2.3934     0.6526   3.667 0.000623 ***
+## vaxedPctJans     469.8399  1077.0087   0.436 0.664656    
+## vaxedPctModerna -156.1936   541.3745  -0.289 0.774223    
+## vaxedPctPfizer  -676.4798   305.1014  -2.217 0.031480 *  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.5201 on 47 degrees of freedom
+## Multiple R-squared:  0.2282, Adjusted R-squared:  0.1789 
+## F-statistic: 4.632 on 3 and 47 DF,  p-value: 0.006426</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="lab-i-tidyverse.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(ols<span class="fl">.1</span>, ols<span class="fl">.2</span>, ols<span class="fl">.3</span>, ols<span class="fl">.4</span>,</span>
+<span id="cb16-2"><a href="lab-i-tidyverse.html#cb16-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">type =</span> <span class="st">&quot;html&quot;</span>, <span class="co"># FOR PDF - the &quot;asis&quot; above makes it work</span></span>
+<span id="cb16-3"><a href="lab-i-tidyverse.html#cb16-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">keep.stat =</span> <span class="fu">c</span>(<span class="st">&quot;n&quot;</span>,<span class="st">&quot;ser&quot;</span>, <span class="st">&quot;rsq&quot;</span>, <span class="st">&quot;f&quot;</span>),</span>
+<span id="cb16-4"><a href="lab-i-tidyverse.html#cb16-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">report =</span> <span class="st">&quot;vcst&quot;</span>,</span>
+<span id="cb16-5"><a href="lab-i-tidyverse.html#cb16-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">column.labels =</span> <span class="fu">c</span>(<span class="st">&quot;Model 1&quot;</span>, <span class="st">&quot;Model 2&quot;</span>, <span class="st">&quot;Model 3&quot;</span>, <span class="st">&quot;Model 4&quot;</span>),</span>
+<span id="cb16-6"><a href="lab-i-tidyverse.html#cb16-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">digits =</span> <span class="dv">3</span>,</span>
+<span id="cb16-7"><a href="lab-i-tidyverse.html#cb16-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">dep.var.caption =</span> <span class="st">&quot;&quot;</span>, <span class="at">dep.var.labels.include =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<table style="text-align:center">
+<tr>
+<td colspan="5" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+Model 1
+</td>
+<td>
+Model 2
+</td>
+<td>
+Model 3
+</td>
+<td>
+Model 4
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(1)
+</td>
+<td>
+(2)
+</td>
+<td>
+(3)
+</td>
+<td>
+(4)
+</td>
+</tr>
+<tr>
+<td colspan="5" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+trump2020Pct
+</td>
+<td>
+1.987
+</td>
+<td>
+0.219
+</td>
+<td>
+0.120
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.622)
+</td>
+<td>
+(0.721)
+</td>
+<td>
+(0.956)
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+t = 3.193
+</td>
+<td>
+t = 0.304
+</td>
+<td>
+t = 0.126
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+vaxedPct
+</td>
+<td>
+</td>
+<td>
+-2.627
+</td>
+<td>
+-2.671
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+(0.691)
+</td>
+<td>
+(0.751)
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+t = -3.800
+</td>
+<td>
+t = -3.559
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+density
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+-8.772
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+(54.952)
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+t = -0.160
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+vaxedPctJans
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+469.840
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+(1,077.009)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+t = 0.436
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+vaxedPctModerna
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+-156.194
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+(541.375)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+t = -0.289
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+vaxedPctPfizer
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+-676.480
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+(305.101)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+t = -2.217
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Constant
+</td>
+<td>
+-0.519
+</td>
+<td>
+2.029
+</td>
+<td>
+2.110
+</td>
+<td>
+2.393
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.315)
+</td>
+<td>
+(0.726)
+</td>
+<td>
+(0.890)
+</td>
+<td>
+(0.653)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+t = -1.648
+</td>
+<td>
+t = 2.794
+</td>
+<td>
+t = 2.370
+</td>
+<td>
+t = 3.667
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td colspan="5" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Observations
+</td>
+<td>
+51
+</td>
+<td>
+51
+</td>
+<td>
+51
+</td>
+<td>
+51
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+R<sup>2</sup>
+</td>
+<td>
+0.172
+</td>
+<td>
+0.364
+</td>
+<td>
+0.364
+</td>
+<td>
+0.228
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Residual Std. Error
+</td>
+<td>
+0.528 (df = 49)
+</td>
+<td>
+0.467 (df = 48)
+</td>
+<td>
+0.472 (df = 47)
+</td>
+<td>
+0.520 (df = 47)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+F Statistic
+</td>
+<td>
+10.196<sup>***</sup> (df = 1; 49)
+</td>
+<td>
+13.717<sup>***</sup> (df = 2; 48)
+</td>
+<td>
+8.968<sup>***</sup> (df = 3; 47)
+</td>
+<td>
+4.632<sup>***</sup> (df = 3; 47)
+</td>
+</tr>
+<tr>
+<td colspan="5" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+<em>Note:</em>
+</td>
+<td colspan="4" style="text-align:right">
+<sup><em></sup>p&lt;0.1; <sup><strong></sup>p&lt;0.05; <sup></strong></em></sup>p&lt;0.01
+</td>
+</tr>
+</table>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

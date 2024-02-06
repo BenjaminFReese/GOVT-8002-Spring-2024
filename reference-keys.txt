@@ -1,0 +1,9 @@
+introduction
+purpose-of-this-site
+loading-data
+lab-i-tidyverse
+preparation
+join-the-data-sets.
+create-and-add-the-following-four-variables-to-your-dataframe-density-based-on-sqmiles-and-pop2019-deaths-per-capita-based-on-new_death-cases-per-capita-based-on-new_case-and-vaccinated-percent-based-on-series_complete_12pluspop_pct.
+estimate-three-regression-models-with-deaths-per-capita-on-your-selected-day-as-the-dependent-variable.
+assess-specific-vaccines
