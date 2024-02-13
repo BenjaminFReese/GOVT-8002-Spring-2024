@@ -195,31 +195,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="load-the-data-from-oxford_covid_data_us_latest.csv" class="section level2 hasAnchor" number="3.1">
 <h2><span class="header-section-number">3.1</span> Load the data from Oxford_Covid_data_US_latest.csv<a href="lab-ii-panel-data.html#load-the-data-from-oxford_covid_data_us_latest.csv" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Oxford provides data on covid deaths/cases and policy variables by day by state. For more background, see this <a href="https://www.bsg.ox.ac.uk/research/research-projects/coronavirus-government-response-tracker#data">data archive</a> or this <a href="https://www.nytimes.com/interactive/2020/11/18/us/covid-state-restrictions.html">story</a> that uses the data.</p>
-<pre><code>                                                                                                                          We will use a variable called _GovernmentResponseIndex_.  For details, see [this](https://www.bsg.ox.ac.uk/sites/default/files/2020-08/2020-08-06%20Oxford%20COVID-19%20Government%20Response%20Tracker%20expanded%20to%20US%20states%20PRESS%20RELEASE.pdf).  (And feel free to experiment with the other measures.)
-                                                                                                                          
-                                                                                                                          
-                                                                                                                          ##  Data organization
-                                                                                                                          - Load the _Oxford_Covid_data_US_latest.csv_ data
-                                                                                                                          - Limit it to U.S. states (CountryName == &quot;United States)</code></pre>
-<ul>
-<li>Create the following variables: RegionName, RegionCode, Date, GovernmentResponseIndex, ConfirmedCases and ConfirmedDeaths</li>
-<li>Add a variable to this data frame using the following code (this variable will help us when merging below)</li>
-</ul>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="lab-ii-panel-data.html#cb19-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">&quot;stAbbrev&quot;</span> <span class="ot">=</span> <span class="fu">str_replace_all</span>(<span class="at">string =</span> RegionCode, <span class="at">pattern =</span> <span class="st">&quot;US_&quot;</span>, <span class="at">replacement =</span> <span class="st">&quot;&quot;</span> ))</span></code></pre></div>
+<p>Oxford provides data on covid deaths/cases and policy variables by day by state. For more background, see this <a href="https://www.bsg.ox.ac.uk/research/research-projects/coronavirus-government-response-tracker#data">data archive</a> or this <a href="https://www.nytimes.com/interactive/2020/11/18/us/covid-state-restrictions.html">story</a> that uses the data. We will use a variable called <em>GovernmentResponseIndex</em>. For details, see <a href="https://www.bsg.ox.ac.uk/sites/default/files/2020-08/2020-08-06%20Oxford%20COVID-19%20Government%20Response%20Tracker%20expanded%20to%20US%20states%20PRESS%20RELEASE.pdf">this</a>. (And feel free to experiment with the other measures.)
+## Data organization
+- Load the <em>Oxford_Covid_data_US_latest.csv</em> data
+- Limit it to U.S. states (CountryName == “United States)
+- Create the following variables: RegionName, RegionCode, Date, GovernmentResponseIndex, ConfirmedCases and ConfirmedDeaths
+- Add a variable to this data frame using the following code (this variable will help us when merging below)</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="lab-ii-panel-data.html#cb18-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">&quot;stAbbrev&quot;</span> <span class="ot">=</span> <span class="fu">str_replace_all</span>(<span class="at">string =</span> RegionCode, <span class="at">pattern =</span> <span class="st">&quot;US_&quot;</span>, <span class="at">replacement =</span> <span class="st">&quot;&quot;</span> ))</span></code></pre></div>
 <ul>
 <li>Show the first three variables of the first three lines of this data frame.</li>
 </ul>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="lab-ii-panel-data.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load and filter state stringency data</span></span>
-<span id="cb20-2"><a href="lab-ii-panel-data.html#cb20-2" aria-hidden="true" tabindex="-1"></a>stPolicy <span class="ot">=</span> <span class="fu">read_csv</span>(<span class="st">&quot;Data/Oxford_Covid_data_US_latest.csv&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb20-3"><a href="lab-ii-panel-data.html#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(CountryName <span class="sc">==</span> <span class="st">&quot;United States&quot;</span> <span class="sc">&amp;</span> </span>
-<span id="cb20-4"><a href="lab-ii-panel-data.html#cb20-4" aria-hidden="true" tabindex="-1"></a>           <span class="fu">is.na</span>(RegionName) <span class="sc">==</span> <span class="dv">0</span> <span class="sc">&amp;</span> </span>
-<span id="cb20-5"><a href="lab-ii-panel-data.html#cb20-5" aria-hidden="true" tabindex="-1"></a>           RegionName <span class="sc">!=</span> <span class="st">&quot;&quot;</span> <span class="sc">&amp;</span></span>
-<span id="cb20-6"><a href="lab-ii-panel-data.html#cb20-6" aria-hidden="true" tabindex="-1"></a>           RegionCode <span class="sc">!=</span> <span class="st">&quot;US_VI&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb20-7"><a href="lab-ii-panel-data.html#cb20-7" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(RegionName, RegionCode, Date, ContainmentHealthIndex,</span>
-<span id="cb20-8"><a href="lab-ii-panel-data.html#cb20-8" aria-hidden="true" tabindex="-1"></a>         GovernmentResponseIndex, StringencyIndex, </span>
-<span id="cb20-9"><a href="lab-ii-panel-data.html#cb20-9" aria-hidden="true" tabindex="-1"></a>         ConfirmedCases, ConfirmedDeaths) <span class="sc">%&gt;%</span></span>
-<span id="cb20-10"><a href="lab-ii-panel-data.html#cb20-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">&quot;stAbbrev&quot;</span> <span class="ot">=</span> <span class="fu">str_replace_all</span>(<span class="at">string =</span> RegionCode, <span class="at">pattern =</span> <span class="st">&quot;US_&quot;</span>, <span class="at">replacement =</span> <span class="st">&quot;&quot;</span> ))</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="lab-ii-panel-data.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load and filter state stringency data</span></span>
+<span id="cb19-2"><a href="lab-ii-panel-data.html#cb19-2" aria-hidden="true" tabindex="-1"></a>stPolicy <span class="ot">=</span> <span class="fu">read_csv</span>(<span class="st">&quot;Data/Oxford_Covid_data_US_latest.csv&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb19-3"><a href="lab-ii-panel-data.html#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(CountryName <span class="sc">==</span> <span class="st">&quot;United States&quot;</span> <span class="sc">&amp;</span> </span>
+<span id="cb19-4"><a href="lab-ii-panel-data.html#cb19-4" aria-hidden="true" tabindex="-1"></a>           <span class="fu">is.na</span>(RegionName) <span class="sc">==</span> <span class="dv">0</span> <span class="sc">&amp;</span> </span>
+<span id="cb19-5"><a href="lab-ii-panel-data.html#cb19-5" aria-hidden="true" tabindex="-1"></a>           RegionName <span class="sc">!=</span> <span class="st">&quot;&quot;</span> <span class="sc">&amp;</span></span>
+<span id="cb19-6"><a href="lab-ii-panel-data.html#cb19-6" aria-hidden="true" tabindex="-1"></a>           RegionCode <span class="sc">!=</span> <span class="st">&quot;US_VI&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb19-7"><a href="lab-ii-panel-data.html#cb19-7" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(RegionName, RegionCode, Date, ContainmentHealthIndex,</span>
+<span id="cb19-8"><a href="lab-ii-panel-data.html#cb19-8" aria-hidden="true" tabindex="-1"></a>         GovernmentResponseIndex, StringencyIndex, </span>
+<span id="cb19-9"><a href="lab-ii-panel-data.html#cb19-9" aria-hidden="true" tabindex="-1"></a>         ConfirmedCases, ConfirmedDeaths) <span class="sc">%&gt;%</span></span>
+<span id="cb19-10"><a href="lab-ii-panel-data.html#cb19-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">&quot;stAbbrev&quot;</span> <span class="ot">=</span> <span class="fu">str_replace_all</span>(<span class="at">string =</span> RegionCode, <span class="at">pattern =</span> <span class="st">&quot;US_&quot;</span>, <span class="at">replacement =</span> <span class="st">&quot;&quot;</span> ))</span></code></pre></div>
 <pre><code>## Rows: 20724 Columns: 69
 ## ── Column specification ──────────────────────────────────────────────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
@@ -229,8 +224,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="lab-ii-panel-data.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the first three variables of first three lines</span></span>
-<span id="cb22-2"><a href="lab-ii-panel-data.html#cb22-2" aria-hidden="true" tabindex="-1"></a>stPolicy[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="lab-ii-panel-data.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the first three variables of first three lines</span></span>
+<span id="cb21-2"><a href="lab-ii-panel-data.html#cb21-2" aria-hidden="true" tabindex="-1"></a>stPolicy[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span></code></pre></div>
 <pre><code>## # A tibble: 3 × 3
 ##   RegionName RegionCode     Date
 ##   &lt;chr&gt;      &lt;chr&gt;         &lt;dbl&gt;
@@ -241,14 +236,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="use-the-lag-function-in-dplyr-to-create-lagged-variables-for-cases-and-deaths.-also-create-difference-e.g.-dcases-that-is-the-change-in-cases-for-each-state-by-date." class="section level2 hasAnchor" number="3.2">
 <h2><span class="header-section-number">3.2</span> Use the lag function in dplyr to create lagged variables for cases and deaths. Also create “difference” (e.g., dCases) that is the change in cases for each state by date.<a href="lab-ii-panel-data.html#use-the-lag-function-in-dplyr-to-create-lagged-variables-for-cases-and-deaths.-also-create-difference-e.g.-dcases-that-is-the-change-in-cases-for-each-state-by-date." class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>See slide “Creating differenced data in R” in Topic 3 class slides.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="lab-ii-panel-data.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Create lagged value </span></span>
-<span id="cb24-2"><a href="lab-ii-panel-data.html#cb24-2" aria-hidden="true" tabindex="-1"></a>stPolicy <span class="ot">=</span> stPolicy <span class="sc">%&gt;%</span> </span>
-<span id="cb24-3"><a href="lab-ii-panel-data.html#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(RegionName) <span class="sc">%&gt;%</span> </span>
-<span id="cb24-4"><a href="lab-ii-panel-data.html#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">lagCases  =</span> dplyr<span class="sc">::</span><span class="fu">lag</span>(ConfirmedCases, <span class="at">order_by =</span> Date),</span>
-<span id="cb24-5"><a href="lab-ii-panel-data.html#cb24-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">dCases    =</span> ConfirmedCases <span class="sc">-</span> lagCases,</span>
-<span id="cb24-6"><a href="lab-ii-panel-data.html#cb24-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">lagDeaths =</span> dplyr<span class="sc">::</span><span class="fu">lag</span>(ConfirmedDeaths, <span class="at">order_by =</span> Date),</span>
-<span id="cb24-7"><a href="lab-ii-panel-data.html#cb24-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">dDeaths   =</span> ConfirmedDeaths <span class="sc">-</span> lagDeaths) <span class="sc">%&gt;%</span></span>
-<span id="cb24-8"><a href="lab-ii-panel-data.html#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="lab-ii-panel-data.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Create lagged value </span></span>
+<span id="cb23-2"><a href="lab-ii-panel-data.html#cb23-2" aria-hidden="true" tabindex="-1"></a>stPolicy <span class="ot">=</span> stPolicy <span class="sc">%&gt;%</span> </span>
+<span id="cb23-3"><a href="lab-ii-panel-data.html#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(RegionName) <span class="sc">%&gt;%</span> </span>
+<span id="cb23-4"><a href="lab-ii-panel-data.html#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">lagCases  =</span> dplyr<span class="sc">::</span><span class="fu">lag</span>(ConfirmedCases, <span class="at">order_by =</span> Date),</span>
+<span id="cb23-5"><a href="lab-ii-panel-data.html#cb23-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">dCases    =</span> ConfirmedCases <span class="sc">-</span> lagCases,</span>
+<span id="cb23-6"><a href="lab-ii-panel-data.html#cb23-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">lagDeaths =</span> dplyr<span class="sc">::</span><span class="fu">lag</span>(ConfirmedDeaths, <span class="at">order_by =</span> Date),</span>
+<span id="cb23-7"><a href="lab-ii-panel-data.html#cb23-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">dDeaths   =</span> ConfirmedDeaths <span class="sc">-</span> lagDeaths) <span class="sc">%&gt;%</span></span>
+<span id="cb23-8"><a href="lab-ii-panel-data.html#cb23-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code></pre></div>
 </div>
 <div id="merge-the-above-data-frame-to-data-in-usstates.xlsx" class="section level2 hasAnchor" number="3.3">
 <h2><span class="header-section-number">3.3</span> Merge the above data frame to data in <em>USstates.xlsx</em><a href="lab-ii-panel-data.html#merge-the-above-data-frame-to-data-in-usstates.xlsx" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -257,19 +252,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Create per capita measures of change in deaths and cases (e.g. “deathsPC” = 10000*dDeaths/pop2019).</li>
 </ul>
 <p>Check your data by looking at level and lagged data for a given state for a few years. The lagged data should match up to the previous period observation.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="lab-ii-panel-data.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load excel data</span></span>
-<span id="cb25-2"><a href="lab-ii-panel-data.html#cb25-2" aria-hidden="true" tabindex="-1"></a>stFacts <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;Data/USstates.xlsx&quot;</span>, <span class="at">sheet =</span> <span class="st">&quot;data&quot;</span>)</span>
-<span id="cb25-3"><a href="lab-ii-panel-data.html#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-4"><a href="lab-ii-panel-data.html#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge with data frame and create per capita data</span></span>
-<span id="cb25-5"><a href="lab-ii-panel-data.html#cb25-5" aria-hidden="true" tabindex="-1"></a>dfState <span class="ot">&lt;-</span> stPolicy <span class="sc">%&gt;%</span></span>
-<span id="cb25-6"><a href="lab-ii-panel-data.html#cb25-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(stFacts, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;stAbbrev&quot;</span> <span class="ot">=</span> <span class="st">&quot;stateAbbr&quot;</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb25-7"><a href="lab-ii-panel-data.html#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">&quot;deathsPC&quot;</span> <span class="ot">=</span> <span class="dv">10000</span><span class="sc">*</span>dDeaths<span class="sc">/</span>pop2019, </span>
-<span id="cb25-8"><a href="lab-ii-panel-data.html#cb25-8" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;casesPC&quot;</span>  <span class="ot">=</span> <span class="dv">10000</span><span class="sc">*</span>dCases<span class="sc">/</span>pop2019) </span>
-<span id="cb25-9"><a href="lab-ii-panel-data.html#cb25-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-10"><a href="lab-ii-panel-data.html#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Check data</span></span>
-<span id="cb25-11"><a href="lab-ii-panel-data.html#cb25-11" aria-hidden="true" tabindex="-1"></a>dfState <span class="sc">%&gt;%</span> <span class="fu">filter</span>(RegionName <span class="sc">==</span> <span class="st">&quot;California&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb25-12"><a href="lab-ii-panel-data.html#cb25-12" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(RegionName, Date, ConfirmedDeaths, lagDeaths, dDeaths, deathsPC) <span class="sc">%&gt;%</span> </span>
-<span id="cb25-13"><a href="lab-ii-panel-data.html#cb25-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">245</span><span class="sc">:</span><span class="dv">248</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="lab-ii-panel-data.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load excel data</span></span>
+<span id="cb24-2"><a href="lab-ii-panel-data.html#cb24-2" aria-hidden="true" tabindex="-1"></a>stFacts <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;Data/USstates.xlsx&quot;</span>, <span class="at">sheet =</span> <span class="st">&quot;data&quot;</span>)</span>
+<span id="cb24-3"><a href="lab-ii-panel-data.html#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="lab-ii-panel-data.html#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge with data frame and create per capita data</span></span>
+<span id="cb24-5"><a href="lab-ii-panel-data.html#cb24-5" aria-hidden="true" tabindex="-1"></a>dfState <span class="ot">&lt;-</span> stPolicy <span class="sc">%&gt;%</span></span>
+<span id="cb24-6"><a href="lab-ii-panel-data.html#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(stFacts, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;stAbbrev&quot;</span> <span class="ot">=</span> <span class="st">&quot;stateAbbr&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb24-7"><a href="lab-ii-panel-data.html#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">&quot;deathsPC&quot;</span> <span class="ot">=</span> <span class="dv">10000</span><span class="sc">*</span>dDeaths<span class="sc">/</span>pop2019, </span>
+<span id="cb24-8"><a href="lab-ii-panel-data.html#cb24-8" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;casesPC&quot;</span>  <span class="ot">=</span> <span class="dv">10000</span><span class="sc">*</span>dCases<span class="sc">/</span>pop2019) </span>
+<span id="cb24-9"><a href="lab-ii-panel-data.html#cb24-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-10"><a href="lab-ii-panel-data.html#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Check data</span></span>
+<span id="cb24-11"><a href="lab-ii-panel-data.html#cb24-11" aria-hidden="true" tabindex="-1"></a>dfState <span class="sc">%&gt;%</span> <span class="fu">filter</span>(RegionName <span class="sc">==</span> <span class="st">&quot;California&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb24-12"><a href="lab-ii-panel-data.html#cb24-12" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(RegionName, Date, ConfirmedDeaths, lagDeaths, dDeaths, deathsPC) <span class="sc">%&gt;%</span> </span>
+<span id="cb24-13"><a href="lab-ii-panel-data.html#cb24-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">245</span><span class="sc">:</span><span class="dv">248</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 4 × 6
 ##   RegionName     Date ConfirmedDeaths lagDeaths dDeaths deathsPC
 ##   &lt;chr&gt;         &lt;dbl&gt;           &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;
@@ -280,8 +275,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="estimate-a-pooled-model-of-total-cases-per-capita-as-a-function-of-state-policy.-discuss." class="section level2 hasAnchor" number="3.4">
 <h2><span class="header-section-number">3.4</span> Estimate a pooled model of total cases per capita as a function of state policy. Discuss.<a href="lab-ii-panel-data.html#estimate-a-pooled-model-of-total-cases-per-capita-as-a-function-of-state-policy.-discuss." class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="lab-ii-panel-data.html#cb27-1" aria-hidden="true" tabindex="-1"></a>ols<span class="fl">.1</span> <span class="ot">=</span> <span class="fu">lm</span>(casesPC <span class="sc">~</span> GovernmentResponseIndex, <span class="at">data =</span> dfState)</span>
-<span id="cb27-2"><a href="lab-ii-panel-data.html#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ols<span class="fl">.1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="lab-ii-panel-data.html#cb26-1" aria-hidden="true" tabindex="-1"></a>ols<span class="fl">.1</span> <span class="ot">=</span> <span class="fu">lm</span>(casesPC <span class="sc">~</span> GovernmentResponseIndex, <span class="at">data =</span> dfState)</span>
+<span id="cb26-2"><a href="lab-ii-panel-data.html#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ols<span class="fl">.1</span>)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = casesPC ~ GovernmentResponseIndex, data = dfState)
@@ -304,17 +299,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="estimate-a-one-way-fixed-effect-model-where-the-fixed-effect-is-state.-note-that-state-is-indicated-in-a-variable-called-regionname.-estimate-using-both-lsdv-and-the-de-meaned-version-in-the-plm-package.-can-you-identify-a-source-of-bias" class="section level2 hasAnchor" number="3.5">
 <h2><span class="header-section-number">3.5</span> Estimate a one-way fixed effect model where the fixed effect is state. (Note that state is indicated in a variable called <em>RegionName</em>.) Estimate using both LSDV and the <em>de-meaned</em> version in the plm package. Can you identify a source of bias?<a href="lab-ii-panel-data.html#estimate-a-one-way-fixed-effect-model-where-the-fixed-effect-is-state.-note-that-state-is-indicated-in-a-variable-called-regionname.-estimate-using-both-lsdv-and-the-de-meaned-version-in-the-plm-package.-can-you-identify-a-source-of-bias" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="lab-ii-panel-data.html#cb29-1" aria-hidden="true" tabindex="-1"></a>fe<span class="fl">.1</span> <span class="ot">=</span> <span class="fu">lm</span>(casesPC <span class="sc">~</span> GovernmentResponseIndex <span class="sc">+</span> <span class="fu">factor</span>(RegionName), <span class="at">data =</span> dfState)</span>
-<span id="cb29-2"><a href="lab-ii-panel-data.html#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co">#summary(fe.1)</span></span>
-<span id="cb29-3"><a href="lab-ii-panel-data.html#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="fu">coefficients</span>(<span class="fu">summary</span>(fe<span class="fl">.1</span>))[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>,]</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="lab-ii-panel-data.html#cb28-1" aria-hidden="true" tabindex="-1"></a>fe<span class="fl">.1</span> <span class="ot">=</span> <span class="fu">lm</span>(casesPC <span class="sc">~</span> GovernmentResponseIndex <span class="sc">+</span> <span class="fu">factor</span>(RegionName), <span class="at">data =</span> dfState)</span>
+<span id="cb28-2"><a href="lab-ii-panel-data.html#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co">#summary(fe.1)</span></span>
+<span id="cb28-3"><a href="lab-ii-panel-data.html#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">coefficients</span>(<span class="fu">summary</span>(fe<span class="fl">.1</span>))[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>,]</span></code></pre></div>
 <pre><code>##                           Estimate  Std. Error  t value      Pr(&gt;|t|)
 ## (Intercept)             0.93487083 0.155462286  6.01349  1.849930e-09
 ## GovernmentResponseIndex 0.04020073 0.001193666 33.67837 2.326953e-241</code></pre>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="lab-ii-panel-data.html#cb31-1" aria-hidden="true" tabindex="-1"></a>fe<span class="fl">.1</span>plm <span class="ot">=</span> <span class="fu">plm</span>(casesPC <span class="sc">~</span> GovernmentResponseIndex, </span>
-<span id="cb31-2"><a href="lab-ii-panel-data.html#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dfState, </span>
-<span id="cb31-3"><a href="lab-ii-panel-data.html#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">index =</span> <span class="fu">c</span>(<span class="st">&quot;RegionName&quot;</span>,<span class="st">&quot;Date&quot;</span>),</span>
-<span id="cb31-4"><a href="lab-ii-panel-data.html#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">model=</span><span class="st">&quot;within&quot;</span>)</span>
-<span id="cb31-5"><a href="lab-ii-panel-data.html#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fe<span class="fl">.1</span>plm)</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="lab-ii-panel-data.html#cb30-1" aria-hidden="true" tabindex="-1"></a>fe<span class="fl">.1</span>plm <span class="ot">=</span> <span class="fu">plm</span>(casesPC <span class="sc">~</span> GovernmentResponseIndex, </span>
+<span id="cb30-2"><a href="lab-ii-panel-data.html#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dfState, </span>
+<span id="cb30-3"><a href="lab-ii-panel-data.html#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">index =</span> <span class="fu">c</span>(<span class="st">&quot;RegionName&quot;</span>,<span class="st">&quot;Date&quot;</span>),</span>
+<span id="cb30-4"><a href="lab-ii-panel-data.html#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">model=</span><span class="st">&quot;within&quot;</span>)</span>
+<span id="cb30-5"><a href="lab-ii-panel-data.html#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fe<span class="fl">.1</span>plm)</span></code></pre></div>
 <pre><code>## Oneway (individual) effect Within Model
 ## 
 ## Call:
@@ -341,19 +336,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="estimate-a-two-way-fixed-effect-model-where-the-fixed-effects-are-state-and-date.-estimate-using-both-lsdv-and-the-de-meaned-version-in-the-plm-package.-does-this-model-address-the-source-of-bias-identified-earlier" class="section level2 hasAnchor" number="3.6">
 <h2><span class="header-section-number">3.6</span> Estimate a two-way fixed effect model where the fixed effects are state and date. Estimate using both LSDV and the <em>de-meaned</em> version in the plm package. Does this model address the source of bias identified earlier?<a href="lab-ii-panel-data.html#estimate-a-two-way-fixed-effect-model-where-the-fixed-effects-are-state-and-date.-estimate-using-both-lsdv-and-the-de-meaned-version-in-the-plm-package.-does-this-model-address-the-source-of-bias-identified-earlier" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="lab-ii-panel-data.html#cb33-1" aria-hidden="true" tabindex="-1"></a>fe<span class="fl">.2</span> <span class="ot">=</span> <span class="fu">lm</span>(casesPC <span class="sc">~</span> GovernmentResponseIndex <span class="sc">+</span> <span class="fu">factor</span>(RegionName) <span class="sc">+</span> <span class="fu">factor</span>(Date), <span class="at">data =</span> dfState)</span>
-<span id="cb33-2"><a href="lab-ii-panel-data.html#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="co">#summary(fe.2)</span></span>
-<span id="cb33-3"><a href="lab-ii-panel-data.html#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Show non-fixed effect coefficients</span></span>
-<span id="cb33-4"><a href="lab-ii-panel-data.html#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="fu">coefficients</span>(<span class="fu">summary</span>(fe<span class="fl">.2</span>))[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>,]</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="lab-ii-panel-data.html#cb32-1" aria-hidden="true" tabindex="-1"></a>fe<span class="fl">.2</span> <span class="ot">=</span> <span class="fu">lm</span>(casesPC <span class="sc">~</span> GovernmentResponseIndex <span class="sc">+</span> <span class="fu">factor</span>(RegionName) <span class="sc">+</span> <span class="fu">factor</span>(Date), <span class="at">data =</span> dfState)</span>
+<span id="cb32-2"><a href="lab-ii-panel-data.html#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="co">#summary(fe.2)</span></span>
+<span id="cb32-3"><a href="lab-ii-panel-data.html#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Show non-fixed effect coefficients</span></span>
+<span id="cb32-4"><a href="lab-ii-panel-data.html#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="fu">coefficients</span>(<span class="fu">summary</span>(fe<span class="fl">.2</span>))[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>,]</span></code></pre></div>
 <pre><code>##                            Estimate  Std. Error    t value     Pr(&gt;|t|)
 ## (Intercept)              0.18910849 0.293599291  0.6441041 5.195161e-01
 ## GovernmentResponseIndex -0.02309587 0.002596958 -8.8934323 6.472717e-19</code></pre>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="lab-ii-panel-data.html#cb35-1" aria-hidden="true" tabindex="-1"></a>fe<span class="fl">.2</span>plm <span class="ot">=</span> <span class="fu">plm</span>(casesPC <span class="sc">~</span> GovernmentResponseIndex, </span>
-<span id="cb35-2"><a href="lab-ii-panel-data.html#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dfState, </span>
-<span id="cb35-3"><a href="lab-ii-panel-data.html#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">index =</span> <span class="fu">c</span>(<span class="st">&quot;RegionName&quot;</span>,<span class="st">&quot;Date&quot;</span>),</span>
-<span id="cb35-4"><a href="lab-ii-panel-data.html#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">model=</span><span class="st">&quot;within&quot;</span>, </span>
-<span id="cb35-5"><a href="lab-ii-panel-data.html#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">effect=</span><span class="st">&quot;twoways&quot;</span>)</span>
-<span id="cb35-6"><a href="lab-ii-panel-data.html#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fe<span class="fl">.2</span>plm)</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="lab-ii-panel-data.html#cb34-1" aria-hidden="true" tabindex="-1"></a>fe<span class="fl">.2</span>plm <span class="ot">=</span> <span class="fu">plm</span>(casesPC <span class="sc">~</span> GovernmentResponseIndex, </span>
+<span id="cb34-2"><a href="lab-ii-panel-data.html#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dfState, </span>
+<span id="cb34-3"><a href="lab-ii-panel-data.html#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">index =</span> <span class="fu">c</span>(<span class="st">&quot;RegionName&quot;</span>,<span class="st">&quot;Date&quot;</span>),</span>
+<span id="cb34-4"><a href="lab-ii-panel-data.html#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">model=</span><span class="st">&quot;within&quot;</span>, </span>
+<span id="cb34-5"><a href="lab-ii-panel-data.html#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">effect=</span><span class="st">&quot;twoways&quot;</span>)</span>
+<span id="cb34-6"><a href="lab-ii-panel-data.html#cb34-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fe<span class="fl">.2</span>plm)</span></code></pre></div>
 <pre><code>## Twoways effects Within Model
 ## 
 ## Call:

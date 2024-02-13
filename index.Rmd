@@ -240,14 +240,10 @@ In this lab we will estimate standard panel data models on covid policy and case
 
 ## Load the data from Oxford_Covid_data_US_latest.csv
 
-Oxford provides data on covid deaths/cases and policy variables by day by state. For more background, see this [data archive](https://www.bsg.ox.ac.uk/research/research-projects/coronavirus-government-response-tracker#data) or this [story](https://www.nytimes.com/interactive/2020/11/18/us/covid-state-restrictions.html) that uses the data.
-                                                                                                                              
-                                                                                                                              We will use a variable called _GovernmentResponseIndex_.  For details, see [this](https://www.bsg.ox.ac.uk/sites/default/files/2020-08/2020-08-06%20Oxford%20COVID-19%20Government%20Response%20Tracker%20expanded%20to%20US%20states%20PRESS%20RELEASE.pdf).  (And feel free to experiment with the other measures.)
-                                                                                                                              
-                                                                                                                              
-                                                                                                                              ##  Data organization
-                                                                                                                              - Load the _Oxford_Covid_data_US_latest.csv_ data
-                                                                                                                              - Limit it to U.S. states (CountryName == "United States)
+Oxford provides data on covid deaths/cases and policy variables by day by state. For more background, see this [data archive](https://www.bsg.ox.ac.uk/research/research-projects/coronavirus-government-response-tracker#data) or this [story](https://www.nytimes.com/interactive/2020/11/18/us/covid-state-restrictions.html) that uses the data. We will use a variable called _GovernmentResponseIndex_.  For details, see [this](https://www.bsg.ox.ac.uk/sites/default/files/2020-08/2020-08-06%20Oxford%20COVID-19%20Government%20Response%20Tracker%20expanded%20to%20US%20states%20PRESS%20RELEASE.pdf).  (And feel free to experiment with the other measures.)
+                                                                                                                       ##  Data organization
+                                                                                                                      - Load the _Oxford_Covid_data_US_latest.csv_ data
+                                                                                                                      - Limit it to U.S. states (CountryName == "United States)
 - Create the following variables: RegionName, RegionCode, Date, GovernmentResponseIndex, ConfirmedCases and ConfirmedDeaths
 - Add a variable to this data frame using the following code (this variable will help us when merging below)
 ```{r eval = FALSE}
