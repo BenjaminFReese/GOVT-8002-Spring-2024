@@ -10,6 +10,7 @@ assess-specific-vaccines
 lab-ii-panel-data
 preparation-1
 load-the-data-from-oxford_covid_data_us_latest.csv
+data-organization
 use-the-lag-function-in-dplyr-to-create-lagged-variables-for-cases-and-deaths.-also-create-difference-e.g.-dcases-that-is-the-change-in-cases-for-each-state-by-date.
 merge-the-above-data-frame-to-data-in-usstates.xlsx
 estimate-a-pooled-model-of-total-cases-per-capita-as-a-function-of-state-policy.-discuss.
