@@ -17,3 +17,11 @@ estimate-a-pooled-model-of-total-cases-per-capita-as-a-function-of-state-policy.
 estimate-a-one-way-fixed-effect-model-where-the-fixed-effect-is-state.-note-that-state-is-indicated-in-a-variable-called-regionname.-estimate-using-both-lsdv-and-the-de-meaned-version-in-the-plm-package.-can-you-identify-a-source-of-bias
 estimate-a-two-way-fixed-effect-model-where-the-fixed-effects-are-state-and-date.-estimate-using-both-lsdv-and-the-de-meaned-version-in-the-plm-package.-does-this-model-address-the-source-of-bias-identified-earlier
 this-is-an-initial-analysis.-we-would-also-want-to
+lab-iii-2sls-instrumental-variables
+preparation-2
+estimate-a-basic-ols-model-with-do-others-regard-you-as-religious-as-the-dependent-variable-as-a-function-of-hajj2006.-explain-how-there-might-be-endogeneity.
+explain-how-the-success-variable-may-satisfy-the-conditions-for-a-instrumental-variable.
+estimate-a-2sls-model-religious-as-a-function-of-hajj2006.
+show-the-first-stage-from-the-2sls-model-above.-explain-the-implications-of-the-results.
+add-covariates-for-age-literacy-urban-group-size-and-gender-to-the-2sls-model-religious-as-a-function-of-hajj2006.-what-is-different-which-variables-are-included-in-the-first-stage
+run-multiple-2sls-models-with-ossamaincorrect-govtforce-natlinterest-happy-girlsschool-and-jobswomen-variables-as-dependent-variables.-use-the-list-of-covariates-from-earlier.-if-you-want-try-using-a-loop-or-lapply-but-not-necessary.

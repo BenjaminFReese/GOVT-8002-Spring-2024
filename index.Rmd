@@ -517,8 +517,7 @@ t <- round(sapply(model_list, function(x) {
 
 names <- c("OsamaIncorrect", "GovtForce", "NatlInterest", "Happy", "GirlsSchool", "JobsWomen")
 
-results <- data.frame(DV = names, b, t) %>%
+data.frame(DV = names, b, t) %>%
   arrange(desc(b))
 
-results
 ```

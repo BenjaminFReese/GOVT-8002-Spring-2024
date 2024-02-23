@@ -458,10 +458,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb59-19"><a href="lab-iii-2sls-instrumental-variables.html#cb59-19" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb59-20"><a href="lab-iii-2sls-instrumental-variables.html#cb59-20" aria-hidden="true" tabindex="-1"></a>names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;OsamaIncorrect&quot;</span>, <span class="st">&quot;GovtForce&quot;</span>, <span class="st">&quot;NatlInterest&quot;</span>, <span class="st">&quot;Happy&quot;</span>, <span class="st">&quot;GirlsSchool&quot;</span>, <span class="st">&quot;JobsWomen&quot;</span>)</span>
 <span id="cb59-21"><a href="lab-iii-2sls-instrumental-variables.html#cb59-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-22"><a href="lab-iii-2sls-instrumental-variables.html#cb59-22" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">DV =</span> names, b, t) <span class="sc">%&gt;%</span></span>
-<span id="cb59-23"><a href="lab-iii-2sls-instrumental-variables.html#cb59-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(b))</span>
-<span id="cb59-24"><a href="lab-iii-2sls-instrumental-variables.html#cb59-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-25"><a href="lab-iii-2sls-instrumental-variables.html#cb59-25" aria-hidden="true" tabindex="-1"></a>results</span></code></pre></div>
+<span id="cb59-22"><a href="lab-iii-2sls-instrumental-variables.html#cb59-22" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">DV =</span> names, b, t) <span class="sc">%&gt;%</span></span>
+<span id="cb59-23"><a href="lab-iii-2sls-instrumental-variables.html#cb59-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(b))</span></code></pre></div>
 <pre><code>##               DV     b     t
 ## 1 OsamaIncorrect  0.06  2.33
 ## 2    GirlsSchool  0.03  1.99
