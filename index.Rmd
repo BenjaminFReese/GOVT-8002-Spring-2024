@@ -355,3 +355,170 @@ summary(fe.2plm)
 - assess the data for outliers (e.g, `min(dfState$casesPC, na.rm = TRUE)`)
 - consider a lagged dependent variable
 - For more, read [this](https://cdn.vanderbilt.edu/vu-my/wp-content/uploads/sites/2318/2020/05/11154933/Covid-DD_v2.pdf)
+
+# Lab III: 2SLS & Instrumental Variables
+
+```{r, echo=FALSE}
+knitr::include_graphics("Images/image_3.png")
+```
+
+
+### Preparation
+
+```{r}
+## Packages
+library(haven)  ## Package to read Stata data
+library(ivreg) ## Package to run 2sls
+library(fixest) ## This package can also run 2SLS
+library(tidyverse) ## For tidyverse commands
+library(here) ## Importing Data
+
+## Loading Data
+hajj_public <- read_dta(here("Data", "hajj_public.dta"))
+
+```
+
+Do important life experiences influence political and social views?  In particular, does performing the Hajj pilgrimage to Mecca affect the views of pilgrims?  David Clingingsmith, Asim Ijaz Khwaja, and Michael Kremer (2009) analyze this question by using two-stage least squares to compare successful and unsuccessful applicants in a lottery used by Pakistan to allocate Hajj visas.
+
+We will conduct pared-down models. The paper creates indices and implements additional statistical procedures to produce a broader and clearer picture. It is not a bad idea to read this paper to see how we can extend the methods we learn in class to your own work. I posted the paper on Canvas for your convenience. 
+
+Data description
+
+Variable  | 	Description
+------------- | -------------
+hajj2006 | Went on Hajj trip in 2006
+success  | Won the lottery to have expenses covered for Hajj
+ptygrp   |  Categorical variable indicating size of party for Hajj trip
+smallpty |  1 if small party group, 0 otherwise
+urban    |  1 if live in urban area, 0 otherwise
+age      | Age
+female   | 1 if female, 0 otherwise
+literate | 1 if literate, 0 otherwise
+x_s7q10  | _Natl affairs_:  How often do you follow national affairs in the news on television or on the radio? Binary: 0=Twice a week or less, 1=Several times a week or more
+x_s14aq10 | _Religious_: Do others regard you as religious? Binary: 1=Religious, 0=Not Religious
+x_s10bq4 | _OssamaIncorrect_: Do you believe goals Ossama is fighting for are correct?  Binary: 1=Not Correct at All/Slightly Incorrect, 0=Correct/Absolutely Correct
+x_s7q12a | _GovtForce_: Govt should force people to conform to Islamic injunctions. Binary: 1=Agree Strongly/Agree, 0=Neutral/Disagree/Strongly Disagree 
+x_s7q1 | _NatlInterest_ How interested would you say you are in national affairs? Binary: 0=Not interested, 1=Interested 
+x_s3q3 | _Happy_: how happy are you? From 1 (not at all happy) to 4 (very happy).
+x_s10eq2 | _GirlsSchool_: In your opinion, girls should attend school. Binary: 0=Disagree, 1=Agree
+s10dq1 | _JobsWomen_: When jobs are scarce, men should always have more right to a job than women. Binary: 0=Generally agree, 1=Generally Disagree
+
+More details on these and other variables are available in Appendix 3 of the paper. If you cannot access the \emph{Quarterly Journal of Economics} version, the SSRN version works as well.
+
+## Estimate a basic OLS model with "Do others regard you as religious" as the dependent variable as a function of Hajj2006. Explain how there might be endogeneity.
+
+```{r}
+hajj_public %>%
+  lm(x_s14aq10~hajj2006, data=.) %>%
+  broom::tidy()
+```
+
+There may be endogeneity due to baseline bias caused by the religiosity of respondents. A more religious respondent may be more likely to go on a Hajj trip and be classified as religious by others. Going to church, like actually being religious, is also a factor that may be correlated with x and lurking in the error term.
+
+## Explain how the "success" variable may satisfy the conditions for a instrumental variable.
+
+The two conditions, inclusion and exclusion, are:
+$$Cov(X,Z)\ne0$$
+&
+$$Cov(Z,\epsilon)=0$$
+
+The lottery is randomizes, which means it is not correlated with the error term, or anything else other than the treatment variable, in our model. Further, it meaningfully effects our key independent which is tested below.
+
+## Estimate a 2SLS model _Religious_ as a function of Hajj2006.
+
+```{r}
+## With library(ivreg)
+hajj_public %>%
+  ivreg(x_s14aq10~hajj2006 | success, data=.) %>%
+  broom::tidy()
+
+```
+
+## Show the first stage from the 2SLS model above.  Explain the implications of the results.
+
+```{r}
+hajj_public %>%
+  lm(hajj2006~success, data=.) %>%
+  broom::tidy()
+
+```
+
+The t-score is `r hajj_public %>% lm(hajj2006~success, data=.) %>% broom::tidy() %>% filter(term=="success") %>% dplyr::select(statistic)` which is much higher than the 3 threshold. Our instrument meets in the inclusion condition.
+
+## Add covariates for age, literacy, urban, group size and gender to the 2SLS model _Religious_ as a function of Hajj2006. What is different?  Which variables are included in the first stage?
+
+```{r}
+hajj_public %>%
+  ivreg(x_s14aq10~hajj2006 + age + literate + ptygrp + female + urban | 
+          success + age + literate + ptygrp + female + urban, data=.)
+```
+
+## Run multiple 2SLS models with OssamaIncorrect, GovtForce, NatlInterest, Happy, GirlsSchool and JobsWomen variables as dependent variables. Use the list of covariates from earlier. If you want, try using a loop or lapply (but not necessary).
+
+```{r}
+## OssamaIncorrect
+hajj_public %>%
+  ivreg(x_s10bq4~hajj2006 + age + literate + ptygrp + female + urban | success +
+                 age + literate + ptygrp + female + urban, data=.) %>%
+  broom::tidy()
+
+
+## GovtForce
+hajj_public %>%
+  ivreg(x_s7q12a~hajj2006 + age + literate + ptygrp + female + urban | success + 
+                 age + literate + ptygrp + female + urban, data=.) %>%
+  broom::tidy()
+
+
+## NatlInterest
+hajj_public %>%
+  ivreg(x_s7q1~hajj2006 + age + literate + ptygrp + female + urban | success + 
+                 age + literate + ptygrp + female + urban, data=.) %>%
+  broom::tidy()
+
+## Happy
+hajj_public %>%
+  ivreg(x_s3q3~hajj2006 + age + literate + ptygrp + female + urban | success + 
+                 age + literate + ptygrp + female + urban, data=.) %>%
+  broom::tidy()
+
+## Girl School
+hajj_public %>%
+  ivreg(x_s10eq2~hajj2006 + age + literate + ptygrp + female + urban | success + 
+                 age + literate + ptygrp + female, data=.) %>%
+  broom::tidy()
+
+## Jobs Women
+hajj_public %>%
+  ivreg(x_s10dq1~hajj2006 + age + literate + ptygrp + female + urban | success +
+                  age + literate + ptygrp + female, data=.) %>%
+  broom::tidy()
+```
+
+```{r}
+## Loop
+
+## DVs 
+dvs <- c("hajj_public$x_s10bq4", "hajj_public$x_s7q12a", "hajj_public$x_s7q1", 
+         "hajj_public$x_s3q3", "hajj_public$x_s10eq2", "hajj_public$x_s10dq1")
+
+## Loop
+for(i in 1:length(dvs)){
+  model <- paste("model",i, sep="")
+  m <- ivreg(as.formula(paste(dvs[i],"~ hajj2006 + age + literate + ptygrp +
+  female + urban | success + age + literate + ptygrp + female + urban")), data = hajj_public)
+  assign(model,m)}
+
+model_list <- list(model1, model2, model3, model4, model5, model6)
+
+b  <- round(sapply(model_list, function(x) x$coefficients["hajj2006"]) , 2)
+t <- round(sapply(model_list, function(x) {
+            summary(x)$coefficients["hajj2006", 3]}) , 2)
+
+names <- c("OsamaIncorrect", "GovtForce", "NatlInterest", "Happy", "GirlsSchool", "JobsWomen")
+
+results <- data.frame(DV = names, b, t) %>%
+  arrange(desc(b))
+
+results
+```
