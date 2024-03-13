@@ -1,3 +1,4 @@
+tab:unnamed-chunk-32
 introduction
 purpose-of-this-site
 loading-data
@@ -25,3 +26,19 @@ estimate-a-2sls-model-religious-as-a-function-of-hajj2006.
 show-the-first-stage-from-the-2sls-model-above.-explain-the-implications-of-the-results.
 add-covariates-for-age-literacy-urban-group-size-and-gender-to-the-2sls-model-religious-as-a-function-of-hajj2006.-what-is-different-which-variables-are-included-in-the-first-stage
 run-multiple-2sls-models-with-ossamaincorrect-govtforce-natlinterest-happy-girlsschool-and-jobswomen-variables-as-dependent-variables.-use-the-list-of-covariates-from-earlier.-if-you-want-try-using-a-loop-or-lapply-but-not-necessary.
+lab-iv-data-visualization
+preparation-3
+base-r-version
+base-r-version-2
+libraryggplot-version-1
+libraryggplot-version-2
+alternative-plot-of-your-choice
+lab-v-experiments
+preparation-4
+why-is-an-experiment-useful-in-this-context
+is-there-evidence-of-balance-in-the-treatment-why-is-this-relevant-check-for-balance-of-each-treatment-with-respect-to-age-category-gender-education-income-voting-for-sisi-and-not-voting-for-non-boycott-reasons.
+is-there-evidence-of-an-overall-unbalanced-sample-look-at-gender-and-discuss-results-in-light-of-your-answer-on-treatment-balance-above.
+what-is-the-effect-of-the-treatments-on-whether-respondents-viewed-the-police-tactics-as-justified-run-one-model-with-only-the-treatment-variables-and-another-that-includes-controls-for-age-category-gender-education-income-voting-for-sisi-and-not-voting-for-non-boycott-reasons.
+what-is-the-effect-of-the-treatments-on-whether-respondents-viewed-the-police-tactics-as-justified
+test-whether-the-effects-of-treatment-1-police-favorable-message-are-the-same-as-treatment-3-both-sides-for-each-dependent-variable.-feel-free-to-use-the-linearhypothesis-function-in-the-car-package.
+in-some-political-contexts-messages-have-a-different-effect-on-people-with-less-engagement-in-politics.-are-there-heterogeneous-treatment-effects-by-those-who-did-not-vote-for-reasons-other-than-to-boycott-the-election-and-those-who-did-not-feel-free-to-explore-multiple-other-ways-there-could-be-heterogeneous-effects-e.g.-perhaps-there-are-different-effects-on-sisi-supporters-but-you-only-need-to-report-on-possible-differential-effects-of-the-treatments-on-the-not-accountable-dependent-variable.

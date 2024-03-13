@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>6 Lab V: Experiments | GOVT 8002 Shared Working Book</title>
+  <meta name="description" content="6 Lab V: Experiments | GOVT 8002 Shared Working Book" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="6 Lab V: Experiments | GOVT 8002 Shared Working Book" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="6 Lab V: Experiments | GOVT 8002 Shared Working Book" />
+  
+  
+  
+
+<meta name="author" content="Benjamin Reese | bfr11@georgetown.edu" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="lab-iv-data-visualization.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#purpose-of-this-site"><i class="fa fa-check"></i><b>1.1</b> Purpose of This Site</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#loading-data"><i class="fa fa-check"></i><b>1.2</b> Loading Data</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="lab-i-tidyverse.html"><a href="lab-i-tidyverse.html"><i class="fa fa-check"></i><b>2</b> Lab I: Tidyverse</a>
+<ul>
+<li class="chapter" data-level="2.0.1" data-path="lab-i-tidyverse.html"><a href="lab-i-tidyverse.html#preparation"><i class="fa fa-check"></i><b>2.0.1</b> Preparation</a></li>
+<li class="chapter" data-level="2.1" data-path="lab-i-tidyverse.html"><a href="lab-i-tidyverse.html#join-the-data-sets."><i class="fa fa-check"></i><b>2.1</b> Join the data sets.</a></li>
+<li class="chapter" data-level="2.2" data-path="lab-i-tidyverse.html"><a href="lab-i-tidyverse.html#create-and-add-the-following-four-variables-to-your-dataframe-density-based-on-sqmiles-and-pop2019-deaths-per-capita-based-on-new_death-cases-per-capita-based-on-new_case-and-vaccinated-percent-based-on-series_complete_12pluspop_pct."><i class="fa fa-check"></i><b>2.2</b> Create and add the following four variables to your dataframe: density (based on <em>sqMiles</em> and <em>pop2019</em>), deaths per capita (based on <em>new_death</em>), cases per capita (based on <em>new_case</em>) and vaccinated percent (based on <em>Series_Complete_12PlusPop_Pct</em>).</a></li>
+<li class="chapter" data-level="2.3" data-path="lab-i-tidyverse.html"><a href="lab-i-tidyverse.html#estimate-three-regression-models-with-deaths-per-capita-on-your-selected-day-as-the-dependent-variable."><i class="fa fa-check"></i><b>2.3</b> Estimate three regression models with deaths per capita on your selected day as the dependent variable.</a></li>
+<li class="chapter" data-level="2.4" data-path="lab-i-tidyverse.html"><a href="lab-i-tidyverse.html#assess-specific-vaccines"><i class="fa fa-check"></i><b>2.4</b> Assess specific vaccines</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="lab-ii-panel-data.html"><a href="lab-ii-panel-data.html"><i class="fa fa-check"></i><b>3</b> Lab II: Panel Data</a>
+<ul>
+<li class="chapter" data-level="3.0.1" data-path="lab-ii-panel-data.html"><a href="lab-ii-panel-data.html#preparation-1"><i class="fa fa-check"></i><b>3.0.1</b> Preparation</a></li>
+<li class="chapter" data-level="3.1" data-path="lab-ii-panel-data.html"><a href="lab-ii-panel-data.html#load-the-data-from-oxford_covid_data_us_latest.csv"><i class="fa fa-check"></i><b>3.1</b> Load the data from Oxford_Covid_data_US_latest.csv</a></li>
+<li class="chapter" data-level="3.2" data-path="lab-ii-panel-data.html"><a href="lab-ii-panel-data.html#data-organization"><i class="fa fa-check"></i><b>3.2</b> Data Organization</a></li>
+<li class="chapter" data-level="3.3" data-path="lab-ii-panel-data.html"><a href="lab-ii-panel-data.html#use-the-lag-function-in-dplyr-to-create-lagged-variables-for-cases-and-deaths.-also-create-difference-e.g.-dcases-that-is-the-change-in-cases-for-each-state-by-date."><i class="fa fa-check"></i><b>3.3</b> Use the lag function in dplyr to create lagged variables for cases and deaths. Also create “difference” (e.g., dCases) that is the change in cases for each state by date.</a></li>
+<li class="chapter" data-level="3.4" data-path="lab-ii-panel-data.html"><a href="lab-ii-panel-data.html#merge-the-above-data-frame-to-data-in-usstates.xlsx"><i class="fa fa-check"></i><b>3.4</b> Merge the above data frame to data in <em>USstates.xlsx</em></a></li>
+<li class="chapter" data-level="3.5" data-path="lab-ii-panel-data.html"><a href="lab-ii-panel-data.html#estimate-a-pooled-model-of-total-cases-per-capita-as-a-function-of-state-policy.-discuss."><i class="fa fa-check"></i><b>3.5</b> Estimate a pooled model of total cases per capita as a function of state policy. Discuss.</a></li>
+<li class="chapter" data-level="3.6" data-path="lab-ii-panel-data.html"><a href="lab-ii-panel-data.html#estimate-a-one-way-fixed-effect-model-where-the-fixed-effect-is-state.-note-that-state-is-indicated-in-a-variable-called-regionname.-estimate-using-both-lsdv-and-the-de-meaned-version-in-the-plm-package.-can-you-identify-a-source-of-bias"><i class="fa fa-check"></i><b>3.6</b> Estimate a one-way fixed effect model where the fixed effect is state. (Note that state is indicated in a variable called <em>RegionName</em>.) Estimate using both LSDV and the <em>de-meaned</em> version in the plm package. Can you identify a source of bias?</a></li>
+<li class="chapter" data-level="3.7" data-path="lab-ii-panel-data.html"><a href="lab-ii-panel-data.html#estimate-a-two-way-fixed-effect-model-where-the-fixed-effects-are-state-and-date.-estimate-using-both-lsdv-and-the-de-meaned-version-in-the-plm-package.-does-this-model-address-the-source-of-bias-identified-earlier"><i class="fa fa-check"></i><b>3.7</b> Estimate a two-way fixed effect model where the fixed effects are state and date. Estimate using both LSDV and the <em>de-meaned</em> version in the plm package. Does this model address the source of bias identified earlier?</a>
+<ul>
+<li class="chapter" data-level="3.7.1" data-path="lab-ii-panel-data.html"><a href="lab-ii-panel-data.html#this-is-an-initial-analysis.-we-would-also-want-to"><i class="fa fa-check"></i><b>3.7.1</b> This is an initial analysis. We would also want to</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="lab-iii-2sls-instrumental-variables.html"><a href="lab-iii-2sls-instrumental-variables.html"><i class="fa fa-check"></i><b>4</b> Lab III: 2SLS &amp; Instrumental Variables</a>
+<ul>
+<li class="chapter" data-level="4.0.1" data-path="lab-iii-2sls-instrumental-variables.html"><a href="lab-iii-2sls-instrumental-variables.html#preparation-2"><i class="fa fa-check"></i><b>4.0.1</b> Preparation</a></li>
+<li class="chapter" data-level="4.1" data-path="lab-iii-2sls-instrumental-variables.html"><a href="lab-iii-2sls-instrumental-variables.html#estimate-a-basic-ols-model-with-do-others-regard-you-as-religious-as-the-dependent-variable-as-a-function-of-hajj2006.-explain-how-there-might-be-endogeneity."><i class="fa fa-check"></i><b>4.1</b> Estimate a basic OLS model with “Do others regard you as religious” as the dependent variable as a function of Hajj2006. Explain how there might be endogeneity.</a></li>
+<li class="chapter" data-level="4.2" data-path="lab-iii-2sls-instrumental-variables.html"><a href="lab-iii-2sls-instrumental-variables.html#explain-how-the-success-variable-may-satisfy-the-conditions-for-a-instrumental-variable."><i class="fa fa-check"></i><b>4.2</b> Explain how the “success” variable may satisfy the conditions for a instrumental variable.</a></li>
+<li class="chapter" data-level="4.3" data-path="lab-iii-2sls-instrumental-variables.html"><a href="lab-iii-2sls-instrumental-variables.html#estimate-a-2sls-model-religious-as-a-function-of-hajj2006."><i class="fa fa-check"></i><b>4.3</b> Estimate a 2SLS model <em>Religious</em> as a function of Hajj2006.</a></li>
+<li class="chapter" data-level="4.4" data-path="lab-iii-2sls-instrumental-variables.html"><a href="lab-iii-2sls-instrumental-variables.html#show-the-first-stage-from-the-2sls-model-above.-explain-the-implications-of-the-results."><i class="fa fa-check"></i><b>4.4</b> Show the first stage from the 2SLS model above. Explain the implications of the results.</a></li>
+<li class="chapter" data-level="4.5" data-path="lab-iii-2sls-instrumental-variables.html"><a href="lab-iii-2sls-instrumental-variables.html#add-covariates-for-age-literacy-urban-group-size-and-gender-to-the-2sls-model-religious-as-a-function-of-hajj2006.-what-is-different-which-variables-are-included-in-the-first-stage"><i class="fa fa-check"></i><b>4.5</b> Add covariates for age, literacy, urban, group size and gender to the 2SLS model <em>Religious</em> as a function of Hajj2006. What is different? Which variables are included in the first stage?</a></li>
+<li class="chapter" data-level="4.6" data-path="lab-iii-2sls-instrumental-variables.html"><a href="lab-iii-2sls-instrumental-variables.html#run-multiple-2sls-models-with-ossamaincorrect-govtforce-natlinterest-happy-girlsschool-and-jobswomen-variables-as-dependent-variables.-use-the-list-of-covariates-from-earlier.-if-you-want-try-using-a-loop-or-lapply-but-not-necessary."><i class="fa fa-check"></i><b>4.6</b> Run multiple 2SLS models with OssamaIncorrect, GovtForce, NatlInterest, Happy, GirlsSchool and JobsWomen variables as dependent variables. Use the list of covariates from earlier. If you want, try using a loop or lapply (but not necessary).</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="lab-iv-data-visualization.html"><a href="lab-iv-data-visualization.html"><i class="fa fa-check"></i><b>5</b> Lab IV: Data Visualization</a>
+<ul>
+<li class="chapter" data-level="5.0.1" data-path="lab-iv-data-visualization.html"><a href="lab-iv-data-visualization.html#preparation-3"><i class="fa fa-check"></i><b>5.0.1</b> Preparation</a></li>
+<li class="chapter" data-level="5.1" data-path="lab-iv-data-visualization.html"><a href="lab-iv-data-visualization.html#base-r-version"><i class="fa fa-check"></i><b>5.1</b> Base R Version</a></li>
+<li class="chapter" data-level="5.2" data-path="lab-iv-data-visualization.html"><a href="lab-iv-data-visualization.html#base-r-version-2"><i class="fa fa-check"></i><b>5.2</b> Base R Version 2</a></li>
+<li class="chapter" data-level="5.3" data-path="lab-iv-data-visualization.html"><a href="lab-iv-data-visualization.html#libraryggplot-version-1"><i class="fa fa-check"></i><b>5.3</b> <code>library(ggplot)</code> Version 1</a></li>
+<li class="chapter" data-level="5.4" data-path="lab-iv-data-visualization.html"><a href="lab-iv-data-visualization.html#libraryggplot-version-2"><i class="fa fa-check"></i><b>5.4</b> <code>library(ggplot)</code> Version 2</a></li>
+<li class="chapter" data-level="5.5" data-path="lab-iv-data-visualization.html"><a href="lab-iv-data-visualization.html#alternative-plot-of-your-choice"><i class="fa fa-check"></i><b>5.5</b> Alternative Plot of Your Choice</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="lab-v-experiments.html"><a href="lab-v-experiments.html"><i class="fa fa-check"></i><b>6</b> Lab V: Experiments</a>
+<ul>
+<li class="chapter" data-level="6.0.1" data-path="lab-v-experiments.html"><a href="lab-v-experiments.html#preparation-4"><i class="fa fa-check"></i><b>6.0.1</b> Preparation</a></li>
+<li class="chapter" data-level="6.1" data-path="lab-v-experiments.html"><a href="lab-v-experiments.html#why-is-an-experiment-useful-in-this-context"><i class="fa fa-check"></i><b>6.1</b> Why is an experiment useful in this context?</a></li>
+<li class="chapter" data-level="6.2" data-path="lab-v-experiments.html"><a href="lab-v-experiments.html#is-there-evidence-of-balance-in-the-treatment-why-is-this-relevant-check-for-balance-of-each-treatment-with-respect-to-age-category-gender-education-income-voting-for-sisi-and-not-voting-for-non-boycott-reasons."><i class="fa fa-check"></i><b>6.2</b> Is there evidence of balance in the treatment? Why is this relevant? Check for balance of each treatment with respect to age category, gender, education, income, voting for Sisi and not voting for non-boycott reasons.</a></li>
+<li class="chapter" data-level="6.3" data-path="lab-v-experiments.html"><a href="lab-v-experiments.html#is-there-evidence-of-an-overall-unbalanced-sample-look-at-gender-and-discuss-results-in-light-of-your-answer-on-treatment-balance-above."><i class="fa fa-check"></i><b>6.3</b> Is there evidence of an overall unbalanced sample? Look at gender and discuss results in light of your answer on treatment-balance above.</a></li>
+<li class="chapter" data-level="6.4" data-path="lab-v-experiments.html"><a href="lab-v-experiments.html#what-is-the-effect-of-the-treatments-on-whether-respondents-viewed-the-police-tactics-as-justified-run-one-model-with-only-the-treatment-variables-and-another-that-includes-controls-for-age-category-gender-education-income-voting-for-sisi-and-not-voting-for-non-boycott-reasons."><i class="fa fa-check"></i><b>6.4</b> What is the effect of the treatments on whether respondents viewed the police tactics as justified? Run one model with only the treatment variables and another that includes controls for age category, gender, education, income, voting for Sisi and not voting for non-boycott reasons.</a></li>
+<li class="chapter" data-level="6.5" data-path="lab-v-experiments.html"><a href="lab-v-experiments.html#what-is-the-effect-of-the-treatments-on-whether-respondents-viewed-the-police-tactics-as-justified"><i class="fa fa-check"></i><b>6.5</b> What is the effect of the treatments on whether respondents viewed the police tactics as justified?</a></li>
+<li class="chapter" data-level="6.6" data-path="lab-v-experiments.html"><a href="lab-v-experiments.html#test-whether-the-effects-of-treatment-1-police-favorable-message-are-the-same-as-treatment-3-both-sides-for-each-dependent-variable.-feel-free-to-use-the-linearhypothesis-function-in-the-car-package."><i class="fa fa-check"></i><b>6.6</b> Test whether the effects of treatment 1 (police-favorable message) are the same as treatment 3 (both sides) for each dependent variable. Feel free to use the linearHypothesis function in the car package.</a></li>
+<li class="chapter" data-level="6.7" data-path="lab-v-experiments.html"><a href="lab-v-experiments.html#in-some-political-contexts-messages-have-a-different-effect-on-people-with-less-engagement-in-politics.-are-there-heterogeneous-treatment-effects-by-those-who-did-not-vote-for-reasons-other-than-to-boycott-the-election-and-those-who-did-not-feel-free-to-explore-multiple-other-ways-there-could-be-heterogeneous-effects-e.g.-perhaps-there-are-different-effects-on-sisi-supporters-but-you-only-need-to-report-on-possible-differential-effects-of-the-treatments-on-the-not-accountable-dependent-variable."><i class="fa fa-check"></i><b>6.7</b> In some political contexts, messages have a different effect on people with less engagement in politics. Are there heterogeneous treatment effects by those who did not vote for reasons other than to boycott the election and those who did not? Feel free to explore multiple other ways there could be heterogeneous effects (e.g., perhaps there are different effects on Sisi supporters), but you only need to report on possible differential effects of the treatments on the “not-accountable” dependent variable.</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">GOVT 8002 Shared Working Book</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="lab-v-experiments" class="section level1 hasAnchor" number="6">
+<h1><span class="header-section-number">6</span> Lab V: Experiments<a href="lab-v-experiments.html#lab-v-experiments" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><img src="Images/image_5.jpg" width="600" /></p>
+<div id="preparation-4" class="section level3 hasAnchor" number="6.0.1">
+<h3><span class="header-section-number">6.0.1</span> Preparation<a href="lab-v-experiments.html#preparation-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="lab-v-experiments.html#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb77-2"><a href="lab-v-experiments.html#cb77-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
+<span id="cb77-3"><a href="lab-v-experiments.html#cb77-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb77-4"><a href="lab-v-experiments.html#cb77-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span></code></pre></div>
+<p>Williamson and Malik (2020) used a survey experiment to examine the public response to how Egyptians responded to different framings regarding a protest in which protesters were killed by police.</p>
+<p>All respondents were given the following statement: “Last year, police raided an apartment in 6 October City. During the raid, they killed 9 members of the Muslim Brotherhood.”</p>
+<p>Respondents were assigned with equal probability to a control group that got no more information or one of three treatment groups that received additional information.</p>
+<ul>
+<li><p>Respondents in the first treatment group were provided a paragraph that justified the killings from the security forces perspective.</p></li>
+<li><p>Respondents in the second treatment group were provided a paragraph that criticized the killings from a human rights perspective.</p></li>
+<li><p>Respondents in the third treatment group were provided both the security forces and human rights perspectives.</p></li>
+</ul>
+<p>Two outcomes were measured:</p>
+<ul>
+<li><p>if respondents thought the police tactics were justified, and</p></li>
+<li><p>if the police should the police be held accountable for killing the nine men. So that both variables are coded in same direction, this variable is coded as 1 if the respondent gave a pro-police answer (saying the police did not need to be held accountable).</p></li>
+</ul>
+<p>Data description</p>
+<table>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>just_binary_main</td>
+<td>1 if the respondent said the police tactics were justified; 0 otherwise.</td>
+</tr>
+<tr class="even">
+<td>not_acc_binary_main</td>
+<td>1 if the respondent said the police should definitely or probably not be held accountable; 0 otherwise. We call this variable no-accountability</td>
+</tr>
+<tr class="odd">
+<td>treat_b1</td>
+<td>1 if respondent was given the pro-police paragraph</td>
+</tr>
+<tr class="even">
+<td>treat_b2</td>
+<td>1 if respondent was given the human rights paragraph</td>
+</tr>
+<tr class="odd">
+<td>treat_b3</td>
+<td>1 if respondent was given both the pro-police and human rights paragraphs</td>
+</tr>
+<tr class="even">
+<td>sisi_vote</td>
+<td>1 if the respondent voted for Sisi</td>
+</tr>
+<tr class="odd">
+<td>not_voteboycott</td>
+<td>1 if the respondent did not vote for some other reason than boycotting the election</td>
+</tr>
+<tr class="even">
+<td>opposition_vote_boycott</td>
+<td>1 if the respondent either voted for the opposition candidate or boycotted the election</td>
+</tr>
+<tr class="odd">
+<td>education</td>
+<td>from 1 (no formal education) to 8 (graduate degree). Values from 6 to 8 went to college.</td>
+</tr>
+<tr class="even">
+<td>income</td>
+<td>1 = Less than 500 pounds per month, 2 = 500 to 1000 pounds per month, 3 = 1000 to 4000 pounds per month, 4 = 4000 to 10000 pounds per month, 5 = More than 10000 pounds per month</td>
+</tr>
+<tr class="odd">
+<td>male</td>
+<td>1 for men, 0 otherwise</td>
+</tr>
+<tr class="even">
+<td>age_cat</td>
+<td>age categories: 1 is less than 35, 2 is 35 to 50 and 3 is over 50.</td>
+</tr>
+</tbody>
+</table>
+<p><a href="https://journals.sagepub.com/doi/abs/10.1177/0022343320961835?journalCode=jpra">Published paper</a> (paywalled)</p>
+<p><a href="https://static1.squarespace.com/static/5b23cff07c9327b8cde5c995/t/5d5c3f1bc49f210001338d1f/1566326555630/Contesting+Repression+-+Website.pdf">Draft version of the paper</a></p>
+</div>
+<div id="why-is-an-experiment-useful-in-this-context" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> Why is an experiment useful in this context?<a href="lab-v-experiments.html#why-is-an-experiment-useful-in-this-context" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Simply asking respondents if they agree or disagree with the police does not answer if and how different messages work. If respondents were simply asked if they agree with the either the pro-police or human rights messages it may be difficult to separate out whether the message was persuasive or whether the respondent was predisposed to approve of the argument.</p>
+</div>
+<div id="is-there-evidence-of-balance-in-the-treatment-why-is-this-relevant-check-for-balance-of-each-treatment-with-respect-to-age-category-gender-education-income-voting-for-sisi-and-not-voting-for-non-boycott-reasons." class="section level2 hasAnchor" number="6.2">
+<h2><span class="header-section-number">6.2</span> Is there evidence of balance in the treatment? Why is this relevant? Check for balance of each treatment with respect to age category, gender, education, income, voting for Sisi and not voting for non-boycott reasons.<a href="lab-v-experiments.html#is-there-evidence-of-balance-in-the-treatment-why-is-this-relevant-check-for-balance-of-each-treatment-with-respect-to-age-category-gender-education-income-voting-for-sisi-and-not-voting-for-non-boycott-reasons." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="lab-v-experiments.html#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Loading saved dataset</span></span>
+<span id="cb78-2"><a href="lab-v-experiments.html#cb78-2" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;~/GOVT8002/Spring 2024/Lab V/Ch10_lab_EgyptProtests.RData&quot;</span>)</span>
+<span id="cb78-3"><a href="lab-v-experiments.html#cb78-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-4"><a href="lab-v-experiments.html#cb78-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Removing NAs</span></span>
+<span id="cb78-5"><a href="lab-v-experiments.html#cb78-5" aria-hidden="true" tabindex="-1"></a>dta <span class="ot">&lt;-</span> dta[<span class="fu">is.na</span>(dta<span class="sc">$</span>just_binary_main)<span class="sc">==</span><span class="dv">0</span> <span class="sc">&amp;</span> <span class="fu">is.na</span>(dta<span class="sc">$</span>not_acc_binary_main)<span class="sc">==</span><span class="dv">0</span>,]</span>
+<span id="cb78-6"><a href="lab-v-experiments.html#cb78-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-7"><a href="lab-v-experiments.html#cb78-7" aria-hidden="true" tabindex="-1"></a>dep_vars <span class="ot">&lt;-</span> dta <span class="sc">%&gt;%</span> </span>
+<span id="cb78-8"><a href="lab-v-experiments.html#cb78-8" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(age_cat, male, education, sisi_vote, not_voteboycott, income)</span>
+<span id="cb78-9"><a href="lab-v-experiments.html#cb78-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-10"><a href="lab-v-experiments.html#cb78-10" aria-hidden="true" tabindex="-1"></a>b_test <span class="ot">&lt;-</span> <span class="fu">lapply</span>(dep_vars, <span class="cf">function</span>(bal) { </span>
+<span id="cb78-11"><a href="lab-v-experiments.html#cb78-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(bal <span class="sc">~</span> dta<span class="sc">$</span>treat_b1 <span class="sc">+</span> dta<span class="sc">$</span>treat_b2 <span class="sc">+</span> dta<span class="sc">$</span>treat_b3)})</span>
+<span id="cb78-12"><a href="lab-v-experiments.html#cb78-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-13"><a href="lab-v-experiments.html#cb78-13" aria-hidden="true" tabindex="-1"></a><span class="do">## Extracting Slopes and P Values</span></span>
+<span id="cb78-14"><a href="lab-v-experiments.html#cb78-14" aria-hidden="true" tabindex="-1"></a>slopes  <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">sapply</span>(b_test, <span class="cf">function</span>(x) x<span class="sc">$</span>coefficients), <span class="dv">2</span>)</span>
+<span id="cb78-15"><a href="lab-v-experiments.html#cb78-15" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">sapply</span>(b_test, <span class="cf">function</span>(x) {</span>
+<span id="cb78-16"><a href="lab-v-experiments.html#cb78-16" aria-hidden="true" tabindex="-1"></a>            <span class="fu">summary</span>(x)<span class="sc">$</span>coefficients[,<span class="dv">4</span>]}), <span class="dv">2</span>)</span>
+<span id="cb78-17"><a href="lab-v-experiments.html#cb78-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-18"><a href="lab-v-experiments.html#cb78-18" aria-hidden="true" tabindex="-1"></a><span class="do">## Showing Results</span></span>
+<span id="cb78-19"><a href="lab-v-experiments.html#cb78-19" aria-hidden="true" tabindex="-1"></a>balance_results <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">b1=</span> slopes[<span class="dv">2</span>,], <span class="at">b1.p =</span> p[<span class="dv">2</span>,], </span>
+<span id="cb78-20"><a href="lab-v-experiments.html#cb78-20" aria-hidden="true" tabindex="-1"></a>                            <span class="at">b2=</span> slopes[<span class="dv">3</span>,], <span class="at">b2.p =</span> p[<span class="dv">3</span>,],</span>
+<span id="cb78-21"><a href="lab-v-experiments.html#cb78-21" aria-hidden="true" tabindex="-1"></a>                            <span class="at">b3=</span> slopes[<span class="dv">4</span>,], <span class="at">b3.p =</span> p[<span class="dv">4</span>,]) </span>
+<span id="cb78-22"><a href="lab-v-experiments.html#cb78-22" aria-hidden="true" tabindex="-1"></a>balance_results</span></code></pre></div>
+<pre><code>##                    b1 b1.p    b2 b2.p    b3 b3.p
+## age_cat          0.05 0.60  0.01 0.89 -0.01 0.89
+## male             0.01 0.77  0.00 0.90  0.05 0.18
+## education        0.45 0.01  0.27 0.12  0.04 0.82
+## sisi_vote        0.02 0.74  0.05 0.36  0.09 0.12
+## not_voteboycott -0.02 0.71 -0.02 0.76 -0.05 0.37
+## income           0.18 0.10  0.06 0.55  0.24 0.03</code></pre>
+<p>There is some evidence of imbalance.</p>
+</div>
+<div id="is-there-evidence-of-an-overall-unbalanced-sample-look-at-gender-and-discuss-results-in-light-of-your-answer-on-treatment-balance-above." class="section level2 hasAnchor" number="6.3">
+<h2><span class="header-section-number">6.3</span> Is there evidence of an overall unbalanced sample? Look at gender and discuss results in light of your answer on treatment-balance above.<a href="lab-v-experiments.html#is-there-evidence-of-an-overall-unbalanced-sample-look-at-gender-and-discuss-results-in-light-of-your-answer-on-treatment-balance-above." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="lab-v-experiments.html#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(dta<span class="sc">$</span>gender)</span></code></pre></div>
+<pre><code>## 
+##   1   2 
+## 497  76</code></pre>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="lab-v-experiments.html#cb82-1" aria-hidden="true" tabindex="-1"></a>dta <span class="sc">%&gt;%</span></span>
+<span id="cb82-2"><a href="lab-v-experiments.html#cb82-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(gender) <span class="sc">%&gt;%</span></span>
+<span id="cb82-3"><a href="lab-v-experiments.html#cb82-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>()</span></code></pre></div>
+<pre><code>## # A tibble: 3 × 2
+## # Groups:   gender [3]
+##   gender     n
+##    &lt;dbl&gt; &lt;int&gt;
+## 1      1   497
+## 2      2    76
+## 3     NA    10</code></pre>
+</div>
+<div id="what-is-the-effect-of-the-treatments-on-whether-respondents-viewed-the-police-tactics-as-justified-run-one-model-with-only-the-treatment-variables-and-another-that-includes-controls-for-age-category-gender-education-income-voting-for-sisi-and-not-voting-for-non-boycott-reasons." class="section level2 hasAnchor" number="6.4">
+<h2><span class="header-section-number">6.4</span> What is the effect of the treatments on whether respondents viewed the police tactics as justified? Run one model with only the treatment variables and another that includes controls for age category, gender, education, income, voting for Sisi and not voting for non-boycott reasons.<a href="lab-v-experiments.html#what-is-the-effect-of-the-treatments-on-whether-respondents-viewed-the-police-tactics-as-justified-run-one-model-with-only-the-treatment-variables-and-another-that-includes-controls-for-age-category-gender-education-income-voting-for-sisi-and-not-voting-for-non-boycott-reasons." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="lab-v-experiments.html#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Without Controls</span></span>
+<span id="cb84-2"><a href="lab-v-experiments.html#cb84-2" aria-hidden="true" tabindex="-1"></a>dta <span class="sc">%&gt;%</span></span>
+<span id="cb84-3"><a href="lab-v-experiments.html#cb84-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(just_binary_main<span class="sc">~</span>treat_b1 <span class="sc">+</span> treat_b2 <span class="sc">+</span> treat_b3, <span class="at">data=</span>.) <span class="sc">%&gt;%</span></span>
+<span id="cb84-4"><a href="lab-v-experiments.html#cb84-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = just_binary_main ~ treat_b1 + treat_b2 + treat_b3, 
+##     data = .)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -0.459 -0.345 -0.315  0.541  0.685 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   0.3154     0.0392    8.04    5e-15 ***
+## treat_b1      0.1435     0.0558    2.57     0.01 *  
+## treat_b2      0.0134     0.0555    0.24     0.81    
+## treat_b3      0.0299     0.0565    0.53     0.60    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.48 on 579 degrees of freedom
+## Multiple R-squared:  0.0141, Adjusted R-squared:  0.00898 
+## F-statistic: 2.76 on 3 and 579 DF,  p-value: 0.0417</code></pre>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="lab-v-experiments.html#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="do">## With Controls</span></span>
+<span id="cb86-2"><a href="lab-v-experiments.html#cb86-2" aria-hidden="true" tabindex="-1"></a>dta <span class="sc">%&gt;%</span></span>
+<span id="cb86-3"><a href="lab-v-experiments.html#cb86-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(just_binary_main<span class="sc">~</span>treat_b1 <span class="sc">+</span> treat_b2 <span class="sc">+</span> treat_b3 <span class="sc">+</span> <span class="fu">factor</span>(age_cat) <span class="sc">+</span> </span>
+<span id="cb86-4"><a href="lab-v-experiments.html#cb86-4" aria-hidden="true" tabindex="-1"></a>       male <span class="sc">+</span> education <span class="sc">+</span> income <span class="sc">+</span> sisi_vote <span class="sc">+</span> not_voteboycott, <span class="at">data=</span>.) <span class="sc">%&gt;%</span></span>
+<span id="cb86-5"><a href="lab-v-experiments.html#cb86-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = just_binary_main ~ treat_b1 + treat_b2 + treat_b3 + 
+##     factor(age_cat) + male + education + income + sisi_vote + 
+##     not_voteboycott, data = .)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -0.790 -0.199 -0.101  0.333  0.945 
+## 
+## Coefficients:
+##                      Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)          0.077108   0.101560    0.76    0.448    
+## treat_b1             0.118974   0.049977    2.38    0.018 *  
+## treat_b2            -0.024984   0.049672   -0.50    0.615    
+## treat_b3            -0.016967   0.050694   -0.33    0.738    
+## factor(age_cat)2    -0.036249   0.042545   -0.85    0.395    
+## factor(age_cat)3     0.000590   0.047200    0.01    0.990    
+## male                 0.049475   0.053435    0.93    0.355    
+## education           -0.000762   0.012569   -0.06    0.952    
+## income              -0.001007   0.020909   -0.05    0.962    
+## sisi_voteTRUE        0.549402   0.041442   13.26   &lt;2e-16 ***
+## not_voteboycottTRUE  0.080694   0.045381    1.78    0.076 .  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.4 on 516 degrees of freedom
+##   (56 observations deleted due to missingness)
+## Multiple R-squared:  0.293,  Adjusted R-squared:  0.279 
+## F-statistic: 21.3 on 10 and 516 DF,  p-value: &lt;2e-16</code></pre>
+</div>
+<div id="what-is-the-effect-of-the-treatments-on-whether-respondents-viewed-the-police-tactics-as-justified" class="section level2 hasAnchor" number="6.5">
+<h2><span class="header-section-number">6.5</span> What is the effect of the treatments on whether respondents viewed the police tactics as justified?<a href="lab-v-experiments.html#what-is-the-effect-of-the-treatments-on-whether-respondents-viewed-the-police-tactics-as-justified" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="lab-v-experiments.html#cb88-1" aria-hidden="true" tabindex="-1"></a>dta <span class="sc">%&gt;%</span></span>
+<span id="cb88-2"><a href="lab-v-experiments.html#cb88-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(not_acc_binary_main <span class="sc">~</span> treat_b1 <span class="sc">+</span> treat_b2 <span class="sc">+</span> treat_b3, <span class="at">data=</span>.) <span class="sc">%&gt;%</span></span>
+<span id="cb88-3"><a href="lab-v-experiments.html#cb88-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = not_acc_binary_main ~ treat_b1 + treat_b2 + treat_b3, 
+##     data = .)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -0.302 -0.294 -0.222  0.698  0.805 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   0.1946     0.0355    5.48  6.2e-08 ***
+## treat_b1      0.0999     0.0505    1.98    0.048 *  
+## treat_b2      0.0268     0.0502    0.53    0.593    
+## treat_b3      0.1075     0.0511    2.10    0.036 *  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.43 on 579 degrees of freedom
+## Multiple R-squared:  0.0113, Adjusted R-squared:  0.00618 
+## F-statistic: 2.21 on 3 and 579 DF,  p-value: 0.0862</code></pre>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="lab-v-experiments.html#cb90-1" aria-hidden="true" tabindex="-1"></a>dta <span class="sc">%&gt;%</span></span>
+<span id="cb90-2"><a href="lab-v-experiments.html#cb90-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(not_acc_binary_main <span class="sc">~</span> treat_b1 <span class="sc">+</span> treat_b2 <span class="sc">+</span> treat_b3<span class="sc">+</span> <span class="fu">factor</span>(age_cat) <span class="sc">+</span> </span>
+<span id="cb90-3"><a href="lab-v-experiments.html#cb90-3" aria-hidden="true" tabindex="-1"></a>       male <span class="sc">+</span> education <span class="sc">+</span> income <span class="sc">+</span> sisi_vote <span class="sc">+</span> not_voteboycott, <span class="at">data=</span>.) <span class="sc">%&gt;%</span></span>
+<span id="cb90-4"><a href="lab-v-experiments.html#cb90-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = not_acc_binary_main ~ treat_b1 + treat_b2 + treat_b3 + 
+##     factor(age_cat) + male + education + income + sisi_vote + 
+##     not_voteboycott, data = .)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -0.5577 -0.1762 -0.0834  0.0147  1.0161 
+## 
+## Coefficients:
+##                     Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)          0.07156    0.09466    0.76    0.450    
+## treat_b1             0.08072    0.04658    1.73    0.084 .  
+## treat_b2            -0.01806    0.04630   -0.39    0.697    
+## treat_b3             0.06037    0.04725    1.28    0.202    
+## factor(age_cat)2     0.01238    0.03965    0.31    0.755    
+## factor(age_cat)3     0.00815    0.04399    0.19    0.853    
+## male                -0.01509    0.04981   -0.30    0.762    
+## education           -0.00862    0.01171   -0.74    0.462    
+## income               0.00479    0.01949    0.25    0.806    
+## sisi_voteTRUE        0.43902    0.03863   11.37   &lt;2e-16 ***
+## not_voteboycottTRUE  0.09667    0.04230    2.29    0.023 *  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.38 on 516 degrees of freedom
+##   (56 observations deleted due to missingness)
+## Multiple R-squared:  0.23,   Adjusted R-squared:  0.215 
+## F-statistic: 15.4 on 10 and 516 DF,  p-value: &lt;2e-16</code></pre>
+</div>
+<div id="test-whether-the-effects-of-treatment-1-police-favorable-message-are-the-same-as-treatment-3-both-sides-for-each-dependent-variable.-feel-free-to-use-the-linearhypothesis-function-in-the-car-package." class="section level2 hasAnchor" number="6.6">
+<h2><span class="header-section-number">6.6</span> Test whether the effects of treatment 1 (police-favorable message) are the same as treatment 3 (both sides) for each dependent variable. Feel free to use the linearHypothesis function in the car package.<a href="lab-v-experiments.html#test-whether-the-effects-of-treatment-1-police-favorable-message-are-the-same-as-treatment-3-both-sides-for-each-dependent-variable.-feel-free-to-use-the-linearhypothesis-function-in-the-car-package." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="lab-v-experiments.html#cb92-1" aria-hidden="true" tabindex="-1"></a>reg<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">lm</span>(just_binary_main<span class="sc">~</span>treat_b1 <span class="sc">+</span> treat_b2 <span class="sc">+</span> treat_b3 <span class="sc">+</span></span>
+<span id="cb92-2"><a href="lab-v-experiments.html#cb92-2" aria-hidden="true" tabindex="-1"></a>               <span class="fu">factor</span>(age_cat) <span class="sc">+</span> male <span class="sc">+</span> education <span class="sc">+</span> income <span class="sc">+</span></span>
+<span id="cb92-3"><a href="lab-v-experiments.html#cb92-3" aria-hidden="true" tabindex="-1"></a>               sisi_vote <span class="sc">+</span> not_voteboycott, <span class="at">data=</span>dta)</span>
+<span id="cb92-4"><a href="lab-v-experiments.html#cb92-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-5"><a href="lab-v-experiments.html#cb92-5" aria-hidden="true" tabindex="-1"></a><span class="fu">linearHypothesis</span>(reg<span class="fl">.1</span>, <span class="st">&quot;treat_b1=treat_b3&quot;</span>)</span></code></pre></div>
+<pre><code>## Linear hypothesis test
+## 
+## Hypothesis:
+## treat_b1 - treat_b3 = 0
+## 
+## Model 1: restricted model
+## Model 2: just_binary_main ~ treat_b1 + treat_b2 + treat_b3 + factor(age_cat) + 
+##     male + education + income + sisi_vote + not_voteboycott
+## 
+##   Res.Df  RSS Df Sum of Sq    F Pr(&gt;F)   
+## 1    517 85.2                            
+## 2    516 84.1  1      1.17 7.21 0.0075 **
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="lab-v-experiments.html#cb94-1" aria-hidden="true" tabindex="-1"></a>reg<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">lm</span>(not_acc_binary_main<span class="sc">~</span>treat_b1 <span class="sc">+</span> treat_b2 <span class="sc">+</span> treat_b3 <span class="sc">+</span></span>
+<span id="cb94-2"><a href="lab-v-experiments.html#cb94-2" aria-hidden="true" tabindex="-1"></a>               <span class="fu">factor</span>(age_cat) <span class="sc">+</span> male <span class="sc">+</span> education <span class="sc">+</span> income <span class="sc">+</span></span>
+<span id="cb94-3"><a href="lab-v-experiments.html#cb94-3" aria-hidden="true" tabindex="-1"></a>               sisi_vote <span class="sc">+</span> not_voteboycott, <span class="at">data=</span>dta)</span>
+<span id="cb94-4"><a href="lab-v-experiments.html#cb94-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-5"><a href="lab-v-experiments.html#cb94-5" aria-hidden="true" tabindex="-1"></a><span class="fu">linearHypothesis</span>(reg<span class="fl">.2</span>, <span class="st">&quot;treat_b1=treat_b3&quot;</span>)</span></code></pre></div>
+<pre><code>## Linear hypothesis test
+## 
+## Hypothesis:
+## treat_b1 - treat_b3 = 0
+## 
+## Model 1: restricted model
+## Model 2: not_acc_binary_main ~ treat_b1 + treat_b2 + treat_b3 + factor(age_cat) + 
+##     male + education + income + sisi_vote + not_voteboycott
+## 
+##   Res.Df  RSS Df Sum of Sq    F Pr(&gt;F)
+## 1    517 73.1                         
+## 2    516 73.0  1    0.0263 0.19   0.67</code></pre>
+</div>
+<div id="in-some-political-contexts-messages-have-a-different-effect-on-people-with-less-engagement-in-politics.-are-there-heterogeneous-treatment-effects-by-those-who-did-not-vote-for-reasons-other-than-to-boycott-the-election-and-those-who-did-not-feel-free-to-explore-multiple-other-ways-there-could-be-heterogeneous-effects-e.g.-perhaps-there-are-different-effects-on-sisi-supporters-but-you-only-need-to-report-on-possible-differential-effects-of-the-treatments-on-the-not-accountable-dependent-variable." class="section level2 hasAnchor" number="6.7">
+<h2><span class="header-section-number">6.7</span> In some political contexts, messages have a different effect on people with less engagement in politics. Are there heterogeneous treatment effects by those who did not vote for reasons other than to boycott the election and those who did not? Feel free to explore multiple other ways there could be heterogeneous effects (e.g., perhaps there are different effects on Sisi supporters), but you only need to report on possible differential effects of the treatments on the “not-accountable” dependent variable.<a href="lab-v-experiments.html#in-some-political-contexts-messages-have-a-different-effect-on-people-with-less-engagement-in-politics.-are-there-heterogeneous-treatment-effects-by-those-who-did-not-vote-for-reasons-other-than-to-boycott-the-election-and-those-who-did-not-feel-free-to-explore-multiple-other-ways-there-could-be-heterogeneous-effects-e.g.-perhaps-there-are-different-effects-on-sisi-supporters-but-you-only-need-to-report-on-possible-differential-effects-of-the-treatments-on-the-not-accountable-dependent-variable." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="lab-v-experiments.html#cb96-1" aria-hidden="true" tabindex="-1"></a>dta <span class="sc">%&gt;%</span></span>
+<span id="cb96-2"><a href="lab-v-experiments.html#cb96-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(not_acc_binary_main <span class="sc">~</span> not_voteboycott<span class="sc">*</span>treat_b1 <span class="sc">+</span> not_voteboycott<span class="sc">*</span>treat_b2 <span class="sc">+</span> </span>
+<span id="cb96-3"><a href="lab-v-experiments.html#cb96-3" aria-hidden="true" tabindex="-1"></a>                          not_voteboycott<span class="sc">*</span>treat_b3 <span class="sc">+</span><span class="fu">factor</span>(age_cat) <span class="sc">+</span> male <span class="sc">+</span> </span>
+<span id="cb96-4"><a href="lab-v-experiments.html#cb96-4" aria-hidden="true" tabindex="-1"></a>                          education <span class="sc">+</span> income <span class="sc">+</span> sisi_vote, <span class="at">data =</span> .) <span class="sc">%&gt;%</span></span>
+<span id="cb96-5"><a href="lab-v-experiments.html#cb96-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = not_acc_binary_main ~ not_voteboycott * treat_b1 + 
+##     not_voteboycott * treat_b2 + not_voteboycott * treat_b3 + 
+##     factor(age_cat) + male + education + income + sisi_vote, 
+##     data = .)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -0.5824 -0.2292 -0.0516  0.0338  0.9981 
+## 
+## Coefficients:
+##                              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)                   0.02227    0.09584    0.23   0.8164    
+## not_voteboycottTRUE           0.25001    0.07586    3.30   0.0010 ** 
+## treat_b1                      0.10557    0.05355    1.97   0.0492 *  
+## treat_b2                      0.03852    0.05354    0.72   0.4722    
+## treat_b3                      0.14407    0.05405    2.67   0.0079 ** 
+## factor(age_cat)2              0.00943    0.03936    0.24   0.8108    
+## factor(age_cat)3              0.01563    0.04372    0.36   0.7209    
+## male                         -0.01769    0.04968   -0.36   0.7219    
+## education                    -0.00751    0.01163   -0.65   0.5190    
+## income                        0.00628    0.01939    0.32   0.7460    
+## sisi_voteTRUE                 0.43424    0.03836   11.32   &lt;2e-16 ***
+## not_voteboycottTRUE:treat_b1 -0.09147    0.10526   -0.87   0.3853    
+## not_voteboycottTRUE:treat_b2 -0.21232    0.10454   -2.03   0.0428 *  
+## not_voteboycottTRUE:treat_b3 -0.33778    0.10839   -3.12   0.0019 ** 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.37 on 513 degrees of freedom
+##   (56 observations deleted due to missingness)
+## Multiple R-squared:  0.246,  Adjusted R-squared:  0.227 
+## F-statistic: 12.9 on 13 and 513 DF,  p-value: &lt;2e-16</code></pre>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="lab-iv-data-visualization.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
