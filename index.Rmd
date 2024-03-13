@@ -524,7 +524,7 @@ data.frame(DV = names, b, t) %>%
 
 # Lab IV: Data Visualization
 
-```{r}
+```{r, echo=FALSE}
 knitr::include_graphics("Images/image_4.png")
 ```
 
