@@ -192,6 +192,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.6" data-path="lab-v-experiments.html"><a href="lab-v-experiments.html#test-whether-the-effects-of-treatment-1-police-favorable-message-are-the-same-as-treatment-3-both-sides-for-each-dependent-variable.-feel-free-to-use-the-linearhypothesis-function-in-the-car-package."><i class="fa fa-check"></i><b>6.6</b> Test whether the effects of treatment 1 (police-favorable message) are the same as treatment 3 (both sides) for each dependent variable. Feel free to use the linearHypothesis function in the car package.</a></li>
 <li class="chapter" data-level="6.7" data-path="lab-v-experiments.html"><a href="lab-v-experiments.html#in-some-political-contexts-messages-have-a-different-effect-on-people-with-less-engagement-in-politics.-are-there-heterogeneous-treatment-effects-by-those-who-did-not-vote-for-reasons-other-than-to-boycott-the-election-and-those-who-did-not-feel-free-to-explore-multiple-other-ways-there-could-be-heterogeneous-effects-e.g.-perhaps-there-are-different-effects-on-sisi-supporters-but-you-only-need-to-report-on-possible-differential-effects-of-the-treatments-on-the-not-accountable-dependent-variable."><i class="fa fa-check"></i><b>6.7</b> In some political contexts, messages have a different effect on people with less engagement in politics. Are there heterogeneous treatment effects by those who did not vote for reasons other than to boycott the election and those who did not? Feel free to explore multiple other ways there could be heterogeneous effects (e.g., perhaps there are different effects on Sisi supporters), but you only need to report on possible differential effects of the treatments on the “not-accountable” dependent variable.</a></li>
 </ul></li>
+<li class="chapter" data-level="7" data-path="lab-vi-lists-loops-functions-in-r.html"><a href="lab-vi-lists-loops-functions-in-r.html"><i class="fa fa-check"></i><b>7</b> Lab VI: Lists, Loops, &amp; Functions in R</a>
+<ul>
+<li class="chapter" data-level="7.0.1" data-path="lab-vi-lists-loops-functions-in-r.html"><a href="lab-vi-lists-loops-functions-in-r.html#preperation"><i class="fa fa-check"></i><b>7.0.1</b> Preperation</a></li>
+<li class="chapter" data-level="7.1" data-path="lab-vi-lists-loops-functions-in-r.html"><a href="lab-vi-lists-loops-functions-in-r.html#load-data.-stock-price-data-is-in-stocks2020.csv.-presidential-prices-are-in-uspres_2020_price-history-by-market--bulk.xlsx."><i class="fa fa-check"></i><b>7.1</b> Load data. Stock price data is in stocks2020.csv. Presidential prices are in USPres_2020_Price History By Market -Bulk.xlsx.</a></li>
+<li class="chapter" data-level="7.2" data-path="lab-vi-lists-loops-functions-in-r.html"><a href="lab-vi-lists-loops-functions-in-r.html#create-data-frame-with-daily-price-data-for-trump-in-2020"><i class="fa fa-check"></i><b>7.2</b> Create data frame with daily price data for Trump in 2020</a></li>
+<li class="chapter" data-level="7.3" data-path="lab-vi-lists-loops-functions-in-r.html"><a href="lab-vi-lists-loops-functions-in-r.html#merge-the-stock-price-and-trump-price-data"><i class="fa fa-check"></i><b>7.3</b> Merge the stock price and Trump price data</a></li>
+<li class="chapter" data-level="7.4" data-path="lab-vi-lists-loops-functions-in-r.html"><a href="lab-vi-lists-loops-functions-in-r.html#create-a-list-of-stock-ticker-names-do-not-include-dji-as-a-ticker"><i class="fa fa-check"></i><b>7.4</b> Create a list of stock ticker names (do not include DJI as a ticker)</a></li>
+<li class="chapter" data-level="7.5" data-path="lab-vi-lists-loops-functions-in-r.html"><a href="lab-vi-lists-loops-functions-in-r.html#create-a-function-that-calculates-daily-percent-change."><i class="fa fa-check"></i><b>7.5</b> Create a function that calculates daily percent change.</a></li>
+<li class="chapter" data-level="7.6" data-path="lab-vi-lists-loops-functions-in-r.html"><a href="lab-vi-lists-loops-functions-in-r.html#check-that-your-function-worked"><i class="fa fa-check"></i><b>7.6</b> Check that your function worked</a></li>
+<li class="chapter" data-level="7.7" data-path="lab-vi-lists-loops-functions-in-r.html"><a href="lab-vi-lists-loops-functions-in-r.html#loop-thru-list-of-tickers-and-run-regressions-in-which-daily-change-in-stock-price-is-a-function-of-change-in-djia-and-change-in-trump-price.-create-a-data-frame-that-stores-the-coefficient-standard-error-and-t-stat-for-the-trump-variable-for-each-stock.-include-a-column-that-has-the-stock-ticker-in-that-data-frame-as-well.-show-the-first-six-rows-of-the-data-frame-with-the-ticker-and-coefficient-information."><i class="fa fa-check"></i><b>7.7</b> Loop thru list of tickers and run regressions in which daily change in stock price is a function of change in DJIA and change in Trump price. Create a data frame that stores the coefficient, standard error and t-stat for the Trump variable for each stock. Include a column that has the stock ticker in that data frame as well. Show the first six rows of the data frame with the ticker and coefficient information.</a>
+<ul>
+<li class="chapter" data-level="7.7.1" data-path="lab-vi-lists-loops-functions-in-r.html"><a href="lab-vi-lists-loops-functions-in-r.html#if-interested-in-doing-more-not-required-or-for-credit-use-lapply-list-apply-to-regress-stock-price-on-trump-and-dji-for-all-stock-tickers."><i class="fa fa-check"></i><b>7.7.1</b> <em>IF INTERESTED IN DOING MORE (not required or for credit)</em>: Use <code>lapply()</code> (list apply) to regress stock price on Trump and DJI for all stock tickers.</a></li>
+</ul></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -303,10 +317,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## # A tibble: 4 × 6
 ##   RegionName     Date ConfirmedDeaths lagDeaths dDeaths deathsPC
 ##   &lt;chr&gt;         &lt;dbl&gt;           &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;
-## 1 California 20200901           13150     13022     128   0.0324
-## 2 California 20200902           13317     13150     167   0.0423
-## 3 California 20200903           13493     13317     176   0.0445
-## 4 California 20200904           13638     13493     145   0.0367</code></pre>
+## 1 California 20200901           13150      5044    8106     2.05
+## 2 California 20200902           13317      5065    8252     2.09
+## 3 California 20200903           13493      5130    8363     2.12
+## 4 California 20200904           13638      5171    8467     2.14</code></pre>
 </div>
 <div id="estimate-a-pooled-model-of-total-cases-per-capita-as-a-function-of-state-policy.-discuss." class="section level2 hasAnchor" number="3.5">
 <h2><span class="header-section-number">3.5</span> Estimate a pooled model of total cases per capita as a function of state policy. Discuss.<a href="lab-ii-panel-data.html#estimate-a-pooled-model-of-total-cases-per-capita-as-a-function-of-state-policy.-discuss." class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -318,19 +332,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## Residuals:
 ##    Min     1Q Median     3Q    Max 
-##  -3.90  -1.68  -1.01   0.46  42.29 
+##  -7972     20    215    342   1120 
 ## 
 ## Coefficients:
 ##                         Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)              0.92502    0.05392    17.2   &lt;2e-16 ***
-## GovernmentResponseIndex  0.02551    0.00113    22.6   &lt;2e-16 ***
+## (Intercept)               -19.67      14.78   -1.33     0.18    
+## GovernmentResponseIndex    -5.04       0.31  -16.28   &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 3 on 18497 degrees of freedom
-##   (1442 observations deleted due to missingness)
-## Multiple R-squared:  0.0269, Adjusted R-squared:  0.0269 
-## F-statistic:  512 on 1 and 18497 DF,  p-value: &lt;2e-16</code></pre>
+## Residual standard error: 815 on 18547 degrees of freedom
+##   (1392 observations deleted due to missingness)
+## Multiple R-squared:  0.0141, Adjusted R-squared:  0.014 
+## F-statistic:  265 on 1 and 18547 DF,  p-value: &lt;2e-16</code></pre>
 </div>
 <div id="estimate-a-one-way-fixed-effect-model-where-the-fixed-effect-is-state.-note-that-state-is-indicated-in-a-variable-called-regionname.-estimate-using-both-lsdv-and-the-de-meaned-version-in-the-plm-package.-can-you-identify-a-source-of-bias" class="section level2 hasAnchor" number="3.6">
 <h2><span class="header-section-number">3.6</span> Estimate a one-way fixed effect model where the fixed effect is state. (Note that state is indicated in a variable called <em>RegionName</em>.) Estimate using both LSDV and the <em>de-meaned</em> version in the plm package. Can you identify a source of bias?<a href="lab-ii-panel-data.html#estimate-a-one-way-fixed-effect-model-where-the-fixed-effect-is-state.-note-that-state-is-indicated-in-a-variable-called-regionname.-estimate-using-both-lsdv-and-the-de-meaned-version-in-the-plm-package.-can-you-identify-a-source-of-bias" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -338,8 +352,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb28-2"><a href="lab-ii-panel-data.html#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co">#summary(fe.1)</span></span>
 <span id="cb28-3"><a href="lab-ii-panel-data.html#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">coefficients</span>(<span class="fu">summary</span>(fe<span class="fl">.1</span>))[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>,]</span></code></pre></div>
 <pre><code>##                         Estimate Std. Error t value Pr(&gt;|t|)
-## (Intercept)                 0.93     0.1555       6  1.8e-09
-## GovernmentResponseIndex     0.04     0.0012      34 2.3e-241</code></pre>
+## (Intercept)                404.5      33.55      12  2.4e-33
+## GovernmentResponseIndex     -5.7       0.26     -22 7.5e-107</code></pre>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="lab-ii-panel-data.html#cb30-1" aria-hidden="true" tabindex="-1"></a>fe<span class="fl">.1</span>plm <span class="ot">=</span> <span class="fu">plm</span>(casesPC <span class="sc">~</span> GovernmentResponseIndex, </span>
 <span id="cb30-2"><a href="lab-ii-panel-data.html#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dfState, </span>
 <span id="cb30-3"><a href="lab-ii-panel-data.html#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">index =</span> <span class="fu">c</span>(<span class="st">&quot;RegionName&quot;</span>,<span class="st">&quot;Date&quot;</span>),</span>
@@ -351,23 +365,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## plm(formula = casesPC ~ GovernmentResponseIndex, data = dfState, 
 ##     model = &quot;within&quot;, index = c(&quot;RegionName&quot;, &quot;Date&quot;))
 ## 
-## Unbalanced Panel: n = 51, T = 348-368, N = 18499
+## Unbalanced Panel: n = 51, T = 349-369, N = 18549
 ## 
 ## Residuals:
 ##    Min. 1st Qu.  Median 3rd Qu.    Max. 
-##  -4.313  -1.671  -0.764   0.510  41.900 
+## -6256.0   -95.8    31.4   152.4  1915.2 
 ## 
 ## Coefficients:
 ##                         Estimate Std. Error t-value Pr(&gt;|t|)    
-## GovernmentResponseIndex  0.04020    0.00119    33.7   &lt;2e-16 ***
+## GovernmentResponseIndex   -5.657      0.256   -22.1   &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Total Sum of Squares:    158000
-## Residual Sum of Squares: 149000
-## R-Squared:      0.0579
-## Adj. R-Squared: 0.0553
-## F-statistic: 1134.23 on 1 and 18447 DF, p-value: &lt;2e-16</code></pre>
+## Total Sum of Squares:    7.17e+09
+## Residual Sum of Squares: 6.98e+09
+## R-Squared:      0.0257
+## Adj. R-Squared: 0.023
+## F-statistic: 488.43 on 1 and 18497 DF, p-value: &lt;2e-16</code></pre>
 </div>
 <div id="estimate-a-two-way-fixed-effect-model-where-the-fixed-effects-are-state-and-date.-estimate-using-both-lsdv-and-the-de-meaned-version-in-the-plm-package.-does-this-model-address-the-source-of-bias-identified-earlier" class="section level2 hasAnchor" number="3.7">
 <h2><span class="header-section-number">3.7</span> Estimate a two-way fixed effect model where the fixed effects are state and date. Estimate using both LSDV and the <em>de-meaned</em> version in the plm package. Does this model address the source of bias identified earlier?<a href="lab-ii-panel-data.html#estimate-a-two-way-fixed-effect-model-where-the-fixed-effects-are-state-and-date.-estimate-using-both-lsdv-and-the-de-meaned-version-in-the-plm-package.-does-this-model-address-the-source-of-bias-identified-earlier" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -376,8 +390,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb32-3"><a href="lab-ii-panel-data.html#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Show non-fixed effect coefficients</span></span>
 <span id="cb32-4"><a href="lab-ii-panel-data.html#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="fu">coefficients</span>(<span class="fu">summary</span>(fe<span class="fl">.2</span>))[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>,]</span></code></pre></div>
 <pre><code>##                         Estimate Std. Error t value Pr(&gt;|t|)
-## (Intercept)                0.189     0.2936    0.64  5.2e-01
-## GovernmentResponseIndex   -0.023     0.0026   -8.89  6.5e-19</code></pre>
+## (Intercept)                393.5      86.62     4.5  5.6e-06
+## GovernmentResponseIndex     -6.8       0.76    -9.0  2.4e-19</code></pre>
 <div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="lab-ii-panel-data.html#cb34-1" aria-hidden="true" tabindex="-1"></a>fe<span class="fl">.2</span>plm <span class="ot">=</span> <span class="fu">plm</span>(casesPC <span class="sc">~</span> GovernmentResponseIndex, </span>
 <span id="cb34-2"><a href="lab-ii-panel-data.html#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dfState, </span>
 <span id="cb34-3"><a href="lab-ii-panel-data.html#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">index =</span> <span class="fu">c</span>(<span class="st">&quot;RegionName&quot;</span>,<span class="st">&quot;Date&quot;</span>),</span>
@@ -391,23 +405,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##     effect = &quot;twoways&quot;, model = &quot;within&quot;, index = c(&quot;RegionName&quot;, 
 ##         &quot;Date&quot;))
 ## 
-## Unbalanced Panel: n = 51, T = 348-368, N = 18499
+## Unbalanced Panel: n = 51, T = 349-369, N = 18549
 ## 
 ## Residuals:
 ##    Min. 1st Qu.  Median 3rd Qu.    Max. 
-##  -8.015  -0.749  -0.164   0.531  38.625 
+##   -5510    -239     -14     173    1736 
 ## 
 ## Coefficients:
 ##                         Estimate Std. Error t-value Pr(&gt;|t|)    
-## GovernmentResponseIndex  -0.0231     0.0026   -8.89   &lt;2e-16 ***
+## GovernmentResponseIndex   -6.822      0.758      -9   &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Total Sum of Squares:    69900
-## Residual Sum of Squares: 69600
-## R-Squared:      0.00436
-## Adj. R-Squared: -0.0187
-## F-statistic: 79.0931 on 1 and 18080 DF, p-value: &lt;2e-16</code></pre>
+## Total Sum of Squares:    6e+09
+## Residual Sum of Squares: 5.97e+09
+## R-Squared:      0.00445
+## Adj. R-Squared: -0.0186
+## F-statistic: 81.0794 on 1 and 18129 DF, p-value: &lt;2e-16</code></pre>
 <div id="this-is-an-initial-analysis.-we-would-also-want-to" class="section level3 hasAnchor" number="3.7.1">
 <h3><span class="header-section-number">3.7.1</span> This is an initial analysis. We would also want to<a href="lab-ii-panel-data.html#this-is-an-initial-analysis.-we-would-also-want-to" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>

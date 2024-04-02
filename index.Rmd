@@ -113,8 +113,7 @@ df <- cases %>%
 
 # Add state variables
 stFacts <- read_excel("Data/USstates.xlsx", sheet = "data") %>% 
-  rename(trump2020Pct = trump2020_percent) 
-# %>% mutate(trump2020Pct = trump2020Pct)
+  dplyr::rename("trump2020Pct" = "trump2020_percent")
 
 df <- df %>% 
   filter(state %in% stFacts$stateAbbr == 1) %>%
@@ -374,7 +373,7 @@ library(tidyverse) ## For tidyverse commands
 library(here) ## Importing Data
 
 ## Loading Data
-hajj_public <- read_dta(here("Data", "hajj_public.dta"))
+hajj_public <- read_dta("Data/hajj_public.dta")
 
 ```
 
@@ -857,4 +856,130 @@ dta %>%
                           not_voteboycott*treat_b3 +factor(age_cat) + male + 
                           education + income + sisi_vote, data = .) %>%
   summary()
+```
+
+# Lab VI: Lists, Loops, & Functions in R
+
+```{r, echo=FALSE}
+knitr::include_graphics("Images/image_6.jpg")
+```
+
+### Preperation
+
+```{r}
+## Packages
+library(plyr)
+library(tidyverse)
+library(readxl)
+library(readr)
+library(lubridate)
+library(knitr)
+
+```
+
+## Load data. Stock price data is in stocks2020.csv.  Presidential prices are in  USPres_2020_Price History By Market -Bulk.xlsx.
+
+```{r, warning=FALSE, message=FALSE}
+## Reading in stock data
+stk <- read_csv("~/GOVT8002/Spring 2023/Lab VII/stocks2020.csv",  col_names = TRUE)
+
+## Reading in presidential market data
+pres_mkt <- read_excel("~/GOVT8002/Spring 2023/Lab VII/USPres_2020_Price History By Market -Bulk.xlsx", 
+                       col_names = TRUE) %>%   
+  dplyr::rename("date" = "Date (ET)", 
+         "name" = "Contract Name", 
+         "price" = "Close Share Price")
+
+```
+
+## Create data frame with daily price data for Trump in 2020
+
+```{r}
+## Creating daily price data for Trump
+trump2020 <- pres_mkt %>%
+  filter(year(date) > 2019 & name == "Donald Trump") %>%
+  dplyr::select(c(date, "Trump" = price))
+
+```
+
+## Merge the stock price and Trump price data
+
+```{r}
+## Joining the two datasets
+stk_pres <- left_join(stk, trump2020, by = "date")
+
+```
+
+## Create a list of stock ticker names (do not include DJI as a ticker)
+
+```{r}
+## Creating list of ticker names
+stk_tickers <- 
+  c(names(stk)[!names(stk) %in% c("date", "DJI")])
+
+## Creating number of stocks
+stk_num <- length(stk_tickers)
+
+```
+
+## Create a function that calculates daily percent change.  
+- Use the `dplyr::lag()` function inside your function.
+- Apply the function to price data in your data frame using the `mutate_at()` function.
+
+```{r}
+## Price Change Function
+pct_change <- function(x){
+  
+(x - dplyr::lag(x))/dplyr::lag(x)
+  
+}
+
+## Daily Change Dataset
+daily_df <- stk_pres %>% 
+  dplyr::mutate_at(c("DJI", "Trump", stk_tickers), pct_change) %>% 
+  dplyr::select(c(date, c("DJI", "Trump", stk_tickers)))
+
+```
+
+## Check that your function worked
+
+```{r}
+cbind(stk_pres$AAPL, daily_df$AAPL)[1:3,]
+
+```
+
+## Loop thru list of tickers and run regressions in which daily change in stock price is a function of change in DJIA and change in Trump price.  Create a data frame that stores the coefficient, standard error and t-stat for the Trump variable for each stock.  Include a column that has the stock ticker in that data frame as well.  Show the first six rows of the data frame with the ticker and coefficient information.
+
+```{r}
+## Preparing Data Frame to store results
+ols_results <- data.frame("row" = 1:stk_num,
+                         "ticker" = NA, 
+                         "coef" = NA, 
+                         "se" = NA,
+                         "tStat" = NA)
+
+## Looping Though Regressions
+for(i in 1:stk_num){
+  daily_df$temp <- unlist(daily_df[, i + 3])
+  ols.1 <- lm(temp ~ DJI + Trump, data = daily_df)
+  ols_results[i, "ticker"] <- stk_tickers[i]
+  ols_results[i, 3:5] <- round(summary(ols.1)$coefficients["Trump", 1:3], 3)
+}
+
+## Showing results
+head(ols_results)
+
+```
+
+### _IF INTERESTED IN DOING MORE (not required or for credit)_: Use `lapply()` (list apply) to regress stock price on Trump and DJI for all stock tickers.
+
+```{r}
+## Now with lapply()
+ols_results2 <- lapply(stk_tickers, function(x){
+  daily_df$temp = unlist(daily_df[, which(names(daily_df) == x)])
+  ols.1 <- lm(temp ~ DJI + Trump, data = daily_df)
+})
+
+head(ols_results2)
+
 ```

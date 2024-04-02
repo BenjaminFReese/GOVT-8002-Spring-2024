@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>GOVT 8002 Shared Working Book</title>
-  <meta name="description" content="GOVT 8002 Shared Working Book" />
+  <title>7 Lab VI: Lists, Loops, &amp; Functions in R | GOVT 8002 Shared Working Book</title>
+  <meta name="description" content="7 Lab VI: Lists, Loops, &amp; Functions in R | GOVT 8002 Shared Working Book" />
   <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="GOVT 8002 Shared Working Book" />
+  <meta property="og:title" content="7 Lab VI: Lists, Loops, &amp; Functions in R | GOVT 8002 Shared Working Book" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="GOVT 8002 Shared Working Book" />
+  <meta name="twitter:title" content="7 Lab VI: Lists, Loops, &amp; Functions in R | GOVT 8002 Shared Working Book" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
+<link rel="prev" href="lab-v-experiments.html"/>
 
-<link rel="next" href="lab-i-tidyverse.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -223,43 +223,173 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">GOVT 8002 Shared Working Book</h1>
-<h2 class="subtitle"><em>Spring 2024</em></h2>
-<p class="author"><em>Benjamin Reese | <a href="mailto:bfr11@georgetown.edu" class="email">bfr11@georgetown.edu</a></em></p>
+<div id="lab-vi-lists-loops-functions-in-r" class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number">7</span> Lab VI: Lists, Loops, &amp; Functions in R<a href="lab-vi-lists-loops-functions-in-r.html#lab-vi-lists-loops-functions-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><img src="Images/image_6.jpg" width="512" /></p>
+<div id="preperation" class="section level3 hasAnchor" number="7.0.1">
+<h3><span class="header-section-number">7.0.1</span> Preperation<a href="lab-vi-lists-loops-functions-in-r.html#preperation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="lab-vi-lists-loops-functions-in-r.html#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Packages</span></span>
+<span id="cb89-2"><a href="lab-vi-lists-loops-functions-in-r.html#cb89-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plyr)</span>
+<span id="cb89-3"><a href="lab-vi-lists-loops-functions-in-r.html#cb89-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb89-4"><a href="lab-vi-lists-loops-functions-in-r.html#cb89-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb89-5"><a href="lab-vi-lists-loops-functions-in-r.html#cb89-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb89-6"><a href="lab-vi-lists-loops-functions-in-r.html#cb89-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb89-7"><a href="lab-vi-lists-loops-functions-in-r.html#cb89-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span></code></pre></div>
 </div>
-<div id="introduction" class="section level1 hasAnchor" number="1">
-<h1><span class="header-section-number">1</span> Introduction<a href="index.html#introduction" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p><img src="Images/intro_image.jpg" width="3045" /></p>
-<div id="purpose-of-this-site" class="section level2 hasAnchor" number="1.1">
-<h2><span class="header-section-number">1.1</span> Purpose of This Site<a href="index.html#purpose-of-this-site" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The goal of this site is to have a place where you can look for examples of code. Think of this site as a log of all of the topics we cover in class and in lab sessions. I will make updates throughout the semester as we cover more advanced material. I hope this proves to be a helpful and beneficial resource and offer an easier to access format than the files posted to Canvas. If you are interested, I am happy to add you to the GitHub and you can make some direct edits to add your code!</p>
-<p>Let me know if any of this code doesn’t run correctly or if you have any questions or issues!</p>
+<div id="load-data.-stock-price-data-is-in-stocks2020.csv.-presidential-prices-are-in-uspres_2020_price-history-by-market--bulk.xlsx." class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> Load data. Stock price data is in stocks2020.csv. Presidential prices are in USPres_2020_Price History By Market -Bulk.xlsx.<a href="lab-vi-lists-loops-functions-in-r.html#load-data.-stock-price-data-is-in-stocks2020.csv.-presidential-prices-are-in-uspres_2020_price-history-by-market--bulk.xlsx." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="lab-vi-lists-loops-functions-in-r.html#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Reading in stock data</span></span>
+<span id="cb90-2"><a href="lab-vi-lists-loops-functions-in-r.html#cb90-2" aria-hidden="true" tabindex="-1"></a>stk <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;~/GOVT8002/Spring 2023/Lab VII/stocks2020.csv&quot;</span>,  <span class="at">col_names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb90-3"><a href="lab-vi-lists-loops-functions-in-r.html#cb90-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb90-4"><a href="lab-vi-lists-loops-functions-in-r.html#cb90-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Reading in presidential market data</span></span>
+<span id="cb90-5"><a href="lab-vi-lists-loops-functions-in-r.html#cb90-5" aria-hidden="true" tabindex="-1"></a>pres_mkt <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;~/GOVT8002/Spring 2023/Lab VII/USPres_2020_Price History By Market -Bulk.xlsx&quot;</span>, </span>
+<span id="cb90-6"><a href="lab-vi-lists-loops-functions-in-r.html#cb90-6" aria-hidden="true" tabindex="-1"></a>                       <span class="at">col_names =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span>   </span>
+<span id="cb90-7"><a href="lab-vi-lists-loops-functions-in-r.html#cb90-7" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="st">&quot;date&quot;</span> <span class="ot">=</span> <span class="st">&quot;Date (ET)&quot;</span>, </span>
+<span id="cb90-8"><a href="lab-vi-lists-loops-functions-in-r.html#cb90-8" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;name&quot;</span> <span class="ot">=</span> <span class="st">&quot;Contract Name&quot;</span>, </span>
+<span id="cb90-9"><a href="lab-vi-lists-loops-functions-in-r.html#cb90-9" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;price&quot;</span> <span class="ot">=</span> <span class="st">&quot;Close Share Price&quot;</span>)</span></code></pre></div>
 </div>
-<div id="loading-data" class="section level2 hasAnchor" number="1.2">
-<h2><span class="header-section-number">1.2</span> Loading Data<a href="index.html#loading-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The easiest way to load data into R and ensure you have the correct file path is to create a folder on your computer for each assignment and place the datasets directly into that folder.</p>
-<ol style="list-style-type: decimal">
-<li><p>Create a folder on your computer for each new analysis</p></li>
-<li><p>Download your Data and move the file to your newly created folder</p></li>
-<li><p>Then open RStudio</p></li>
-<li><p>Click the project button in the top right corner</p></li>
-<li><p>Click new project</p></li>
-<li><p>Click existing directory</p></li>
-<li><p>Click browse and find the folder that you created</p></li>
-<li><p>Click create project</p></li>
-<li><p>Once your new project opens, click the blank page with a green plus sign icon in the top left corner under the file option</p></li>
-<li><p>Click R script to open a new script</p></li>
-<li><p>You should also be able to see your data file in the bottom right window of RStudio, click the file and follow the options depending on the file type</p></li>
-<li><p>Once your data is imported into R, the code that R automatically ran will be in the console window on the bottom left, copy and paste it to your fresh R script</p></li>
-</ol>
+<div id="create-data-frame-with-daily-price-data-for-trump-in-2020" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> Create data frame with daily price data for Trump in 2020<a href="lab-vi-lists-loops-functions-in-r.html#create-data-frame-with-daily-price-data-for-trump-in-2020" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="lab-vi-lists-loops-functions-in-r.html#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Creating daily price data for Trump</span></span>
+<span id="cb91-2"><a href="lab-vi-lists-loops-functions-in-r.html#cb91-2" aria-hidden="true" tabindex="-1"></a>trump2020 <span class="ot">&lt;-</span> pres_mkt <span class="sc">%&gt;%</span></span>
+<span id="cb91-3"><a href="lab-vi-lists-loops-functions-in-r.html#cb91-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">year</span>(date) <span class="sc">&gt;</span> <span class="dv">2019</span> <span class="sc">&amp;</span> name <span class="sc">==</span> <span class="st">&quot;Donald Trump&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb91-4"><a href="lab-vi-lists-loops-functions-in-r.html#cb91-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">c</span>(date, <span class="st">&quot;Trump&quot;</span> <span class="ot">=</span> price))</span></code></pre></div>
+</div>
+<div id="merge-the-stock-price-and-trump-price-data" class="section level2 hasAnchor" number="7.3">
+<h2><span class="header-section-number">7.3</span> Merge the stock price and Trump price data<a href="lab-vi-lists-loops-functions-in-r.html#merge-the-stock-price-and-trump-price-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="lab-vi-lists-loops-functions-in-r.html#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Joining the two datasets</span></span>
+<span id="cb92-2"><a href="lab-vi-lists-loops-functions-in-r.html#cb92-2" aria-hidden="true" tabindex="-1"></a>stk_pres <span class="ot">&lt;-</span> <span class="fu">left_join</span>(stk, trump2020, <span class="at">by =</span> <span class="st">&quot;date&quot;</span>)</span></code></pre></div>
+</div>
+<div id="create-a-list-of-stock-ticker-names-do-not-include-dji-as-a-ticker" class="section level2 hasAnchor" number="7.4">
+<h2><span class="header-section-number">7.4</span> Create a list of stock ticker names (do not include DJI as a ticker)<a href="lab-vi-lists-loops-functions-in-r.html#create-a-list-of-stock-ticker-names-do-not-include-dji-as-a-ticker" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="lab-vi-lists-loops-functions-in-r.html#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Creating list of ticker names</span></span>
+<span id="cb93-2"><a href="lab-vi-lists-loops-functions-in-r.html#cb93-2" aria-hidden="true" tabindex="-1"></a>stk_tickers <span class="ot">&lt;-</span> </span>
+<span id="cb93-3"><a href="lab-vi-lists-loops-functions-in-r.html#cb93-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="fu">names</span>(stk)[<span class="sc">!</span><span class="fu">names</span>(stk) <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;date&quot;</span>, <span class="st">&quot;DJI&quot;</span>)])</span>
+<span id="cb93-4"><a href="lab-vi-lists-loops-functions-in-r.html#cb93-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-5"><a href="lab-vi-lists-loops-functions-in-r.html#cb93-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Creating number of stocks</span></span>
+<span id="cb93-6"><a href="lab-vi-lists-loops-functions-in-r.html#cb93-6" aria-hidden="true" tabindex="-1"></a>stk_num <span class="ot">&lt;-</span> <span class="fu">length</span>(stk_tickers)</span></code></pre></div>
+</div>
+<div id="create-a-function-that-calculates-daily-percent-change." class="section level2 hasAnchor" number="7.5">
+<h2><span class="header-section-number">7.5</span> Create a function that calculates daily percent change.<a href="lab-vi-lists-loops-functions-in-r.html#create-a-function-that-calculates-daily-percent-change." class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
-<li>For example, in Lab 1, my code looked like: <code>read_excel("USstates.xlsx")</code></li>
+<li>Use the <code>dplyr::lag()</code> function inside your function.</li>
+<li>Apply the function to price data in your data frame using the <code>mutate_at()</code> function.</li>
 </ul>
-<ol start="13" style="list-style-type: decimal">
-<li><p>Run this copy and pasted line of code whenever you open the R Project and you will never have to worry about complicated file pathing commands</p></li>
-<li><p>I recommend using the assignment operator <code>&lt;-</code> to give your dataset a short and simple name like <code>df</code>, <code>dta</code>, or, if you are working with multiple datasets, name each something short and descriptive</p></li>
-</ol>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="lab-vi-lists-loops-functions-in-r.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Price Change Function</span></span>
+<span id="cb94-2"><a href="lab-vi-lists-loops-functions-in-r.html#cb94-2" aria-hidden="true" tabindex="-1"></a>pct_change <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
+<span id="cb94-3"><a href="lab-vi-lists-loops-functions-in-r.html#cb94-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb94-4"><a href="lab-vi-lists-loops-functions-in-r.html#cb94-4" aria-hidden="true" tabindex="-1"></a>(x <span class="sc">-</span> dplyr<span class="sc">::</span><span class="fu">lag</span>(x))<span class="sc">/</span>dplyr<span class="sc">::</span><span class="fu">lag</span>(x)</span>
+<span id="cb94-5"><a href="lab-vi-lists-loops-functions-in-r.html#cb94-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb94-6"><a href="lab-vi-lists-loops-functions-in-r.html#cb94-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb94-7"><a href="lab-vi-lists-loops-functions-in-r.html#cb94-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-8"><a href="lab-vi-lists-loops-functions-in-r.html#cb94-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Daily Change Dataset</span></span>
+<span id="cb94-9"><a href="lab-vi-lists-loops-functions-in-r.html#cb94-9" aria-hidden="true" tabindex="-1"></a>daily_df <span class="ot">&lt;-</span> stk_pres <span class="sc">%&gt;%</span> </span>
+<span id="cb94-10"><a href="lab-vi-lists-loops-functions-in-r.html#cb94-10" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate_at</span>(<span class="fu">c</span>(<span class="st">&quot;DJI&quot;</span>, <span class="st">&quot;Trump&quot;</span>, stk_tickers), pct_change) <span class="sc">%&gt;%</span> </span>
+<span id="cb94-11"><a href="lab-vi-lists-loops-functions-in-r.html#cb94-11" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">c</span>(date, <span class="fu">c</span>(<span class="st">&quot;DJI&quot;</span>, <span class="st">&quot;Trump&quot;</span>, stk_tickers)))</span></code></pre></div>
+</div>
+<div id="check-that-your-function-worked" class="section level2 hasAnchor" number="7.6">
+<h2><span class="header-section-number">7.6</span> Check that your function worked<a href="lab-vi-lists-loops-functions-in-r.html#check-that-your-function-worked" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="lab-vi-lists-loops-functions-in-r.html#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(stk_pres<span class="sc">$</span>AAPL, daily_df<span class="sc">$</span>AAPL)[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,]</span></code></pre></div>
+<pre><code>##      [,1]    [,2]
+## [1,]   75      NA
+## [2,]   74 -0.0097
+## [3,]   75  0.0080</code></pre>
+</div>
+<div id="loop-thru-list-of-tickers-and-run-regressions-in-which-daily-change-in-stock-price-is-a-function-of-change-in-djia-and-change-in-trump-price.-create-a-data-frame-that-stores-the-coefficient-standard-error-and-t-stat-for-the-trump-variable-for-each-stock.-include-a-column-that-has-the-stock-ticker-in-that-data-frame-as-well.-show-the-first-six-rows-of-the-data-frame-with-the-ticker-and-coefficient-information." class="section level2 hasAnchor" number="7.7">
+<h2><span class="header-section-number">7.7</span> Loop thru list of tickers and run regressions in which daily change in stock price is a function of change in DJIA and change in Trump price. Create a data frame that stores the coefficient, standard error and t-stat for the Trump variable for each stock. Include a column that has the stock ticker in that data frame as well. Show the first six rows of the data frame with the ticker and coefficient information.<a href="lab-vi-lists-loops-functions-in-r.html#loop-thru-list-of-tickers-and-run-regressions-in-which-daily-change-in-stock-price-is-a-function-of-change-in-djia-and-change-in-trump-price.-create-a-data-frame-that-stores-the-coefficient-standard-error-and-t-stat-for-the-trump-variable-for-each-stock.-include-a-column-that-has-the-stock-ticker-in-that-data-frame-as-well.-show-the-first-six-rows-of-the-data-frame-with-the-ticker-and-coefficient-information." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="lab-vi-lists-loops-functions-in-r.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Preparing Data Frame to store results</span></span>
+<span id="cb97-2"><a href="lab-vi-lists-loops-functions-in-r.html#cb97-2" aria-hidden="true" tabindex="-1"></a>ols_results <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="st">&quot;row&quot;</span> <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span>stk_num,</span>
+<span id="cb97-3"><a href="lab-vi-lists-loops-functions-in-r.html#cb97-3" aria-hidden="true" tabindex="-1"></a>                         <span class="st">&quot;ticker&quot;</span> <span class="ot">=</span> <span class="cn">NA</span>, </span>
+<span id="cb97-4"><a href="lab-vi-lists-loops-functions-in-r.html#cb97-4" aria-hidden="true" tabindex="-1"></a>                         <span class="st">&quot;coef&quot;</span> <span class="ot">=</span> <span class="cn">NA</span>, </span>
+<span id="cb97-5"><a href="lab-vi-lists-loops-functions-in-r.html#cb97-5" aria-hidden="true" tabindex="-1"></a>                         <span class="st">&quot;se&quot;</span> <span class="ot">=</span> <span class="cn">NA</span>,</span>
+<span id="cb97-6"><a href="lab-vi-lists-loops-functions-in-r.html#cb97-6" aria-hidden="true" tabindex="-1"></a>                         <span class="st">&quot;tStat&quot;</span> <span class="ot">=</span> <span class="cn">NA</span>)</span>
+<span id="cb97-7"><a href="lab-vi-lists-loops-functions-in-r.html#cb97-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-8"><a href="lab-vi-lists-loops-functions-in-r.html#cb97-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Looping Though Regressions</span></span>
+<span id="cb97-9"><a href="lab-vi-lists-loops-functions-in-r.html#cb97-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>stk_num){</span>
+<span id="cb97-10"><a href="lab-vi-lists-loops-functions-in-r.html#cb97-10" aria-hidden="true" tabindex="-1"></a>  daily_df<span class="sc">$</span>temp <span class="ot">&lt;-</span> <span class="fu">unlist</span>(daily_df[, i <span class="sc">+</span> <span class="dv">3</span>])</span>
+<span id="cb97-11"><a href="lab-vi-lists-loops-functions-in-r.html#cb97-11" aria-hidden="true" tabindex="-1"></a>  ols<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">lm</span>(temp <span class="sc">~</span> DJI <span class="sc">+</span> Trump, <span class="at">data =</span> daily_df)</span>
+<span id="cb97-12"><a href="lab-vi-lists-loops-functions-in-r.html#cb97-12" aria-hidden="true" tabindex="-1"></a>  ols_results[i, <span class="st">&quot;ticker&quot;</span>] <span class="ot">&lt;-</span> stk_tickers[i]</span>
+<span id="cb97-13"><a href="lab-vi-lists-loops-functions-in-r.html#cb97-13" aria-hidden="true" tabindex="-1"></a>  ols_results[i, <span class="dv">3</span><span class="sc">:</span><span class="dv">5</span>] <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">summary</span>(ols<span class="fl">.1</span>)<span class="sc">$</span>coefficients[<span class="st">&quot;Trump&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>], <span class="dv">3</span>)</span>
+<span id="cb97-14"><a href="lab-vi-lists-loops-functions-in-r.html#cb97-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb97-15"><a href="lab-vi-lists-loops-functions-in-r.html#cb97-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-16"><a href="lab-vi-lists-loops-functions-in-r.html#cb97-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Showing results</span></span>
+<span id="cb97-17"><a href="lab-vi-lists-loops-functions-in-r.html#cb97-17" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ols_results)</span></code></pre></div>
+<pre><code>##   row ticker   coef    se  tStat
+## 1   1   AAPL -0.015 0.011 -1.304
+## 2   2   NFLX -0.036 0.016 -2.208
+## 3   3   AMZN -0.034 0.013 -2.643
+## 4   4      K -0.003 0.011 -0.259
+## 5   5   TSLA -0.004 0.031 -0.115
+## 6   6    LMT  0.000 0.011 -0.026</code></pre>
+<div id="if-interested-in-doing-more-not-required-or-for-credit-use-lapply-list-apply-to-regress-stock-price-on-trump-and-dji-for-all-stock-tickers." class="section level3 hasAnchor" number="7.7.1">
+<h3><span class="header-section-number">7.7.1</span> <em>IF INTERESTED IN DOING MORE (not required or for credit)</em>: Use <code>lapply()</code> (list apply) to regress stock price on Trump and DJI for all stock tickers.<a href="lab-vi-lists-loops-functions-in-r.html#if-interested-in-doing-more-not-required-or-for-credit-use-lapply-list-apply-to-regress-stock-price-on-trump-and-dji-for-all-stock-tickers." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="lab-vi-lists-loops-functions-in-r.html#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Now with lapply()</span></span>
+<span id="cb99-2"><a href="lab-vi-lists-loops-functions-in-r.html#cb99-2" aria-hidden="true" tabindex="-1"></a>ols_results2 <span class="ot">&lt;-</span> <span class="fu">lapply</span>(stk_tickers, <span class="cf">function</span>(x){</span>
+<span id="cb99-3"><a href="lab-vi-lists-loops-functions-in-r.html#cb99-3" aria-hidden="true" tabindex="-1"></a>  daily_df<span class="sc">$</span>temp <span class="ot">=</span> <span class="fu">unlist</span>(daily_df[, <span class="fu">which</span>(<span class="fu">names</span>(daily_df) <span class="sc">==</span> x)])</span>
+<span id="cb99-4"><a href="lab-vi-lists-loops-functions-in-r.html#cb99-4" aria-hidden="true" tabindex="-1"></a>  ols<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">lm</span>(temp <span class="sc">~</span> DJI <span class="sc">+</span> Trump, <span class="at">data =</span> daily_df)</span>
+<span id="cb99-5"><a href="lab-vi-lists-loops-functions-in-r.html#cb99-5" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb99-6"><a href="lab-vi-lists-loops-functions-in-r.html#cb99-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-7"><a href="lab-vi-lists-loops-functions-in-r.html#cb99-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ols_results2)</span></code></pre></div>
+<pre><code>## [[1]]
+## 
+## Call:
+## lm(formula = temp ~ DJI + Trump, data = daily_df)
+## 
+## Coefficients:
+## (Intercept)          DJI        Trump  
+##     0.00189      0.98010     -0.01476  
+## 
+## 
+## [[2]]
+## 
+## Call:
+## lm(formula = temp ~ DJI + Trump, data = daily_df)
+## 
+## Coefficients:
+## (Intercept)          DJI        Trump  
+##      0.0019       0.5354      -0.0358  
+## 
+## 
+## [[3]]
+## 
+## Call:
+## lm(formula = temp ~ DJI + Trump, data = daily_df)
+## 
+## Coefficients:
+## (Intercept)          DJI        Trump  
+##      0.0021       0.5324      -0.0336  
+## 
+## 
+## [[4]]
+## 
+## Call:
+## lm(formula = temp ~ DJI + Trump, data = daily_df)
+## 
+## Coefficients:
+## (Intercept)          DJI        Trump  
+##    -0.00033      0.41330     -0.00285  
+## 
+## 
+## [[5]]
+## 
+## Call:
+## lm(formula = temp ~ DJI + Trump, data = daily_df)
+## 
+## Coefficients:
+## (Intercept)          DJI        Trump  
+##     0.00954      1.04214     -0.00360  
+## 
+## 
+## [[6]]
+## 
+## Call:
+## lm(formula = temp ~ DJI + Trump, data = daily_df)
+## 
+## Coefficients:
+## (Intercept)          DJI        Trump  
+##   -0.000279     0.833710    -0.000286</code></pre>
+
+</div>
 </div>
 </div>
             </section>
@@ -267,8 +397,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
+<a href="lab-v-experiments.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
-<a href="lab-i-tidyverse.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

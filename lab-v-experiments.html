@@ -30,7 +30,7 @@
   
   
 <link rel="prev" href="lab-iv-data-visualization.html"/>
-
+<link rel="next" href="lab-vi-lists-loops-functions-in-r.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -192,6 +192,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.6" data-path="lab-v-experiments.html"><a href="lab-v-experiments.html#test-whether-the-effects-of-treatment-1-police-favorable-message-are-the-same-as-treatment-3-both-sides-for-each-dependent-variable.-feel-free-to-use-the-linearhypothesis-function-in-the-car-package."><i class="fa fa-check"></i><b>6.6</b> Test whether the effects of treatment 1 (police-favorable message) are the same as treatment 3 (both sides) for each dependent variable. Feel free to use the linearHypothesis function in the car package.</a></li>
 <li class="chapter" data-level="6.7" data-path="lab-v-experiments.html"><a href="lab-v-experiments.html#in-some-political-contexts-messages-have-a-different-effect-on-people-with-less-engagement-in-politics.-are-there-heterogeneous-treatment-effects-by-those-who-did-not-vote-for-reasons-other-than-to-boycott-the-election-and-those-who-did-not-feel-free-to-explore-multiple-other-ways-there-could-be-heterogeneous-effects-e.g.-perhaps-there-are-different-effects-on-sisi-supporters-but-you-only-need-to-report-on-possible-differential-effects-of-the-treatments-on-the-not-accountable-dependent-variable."><i class="fa fa-check"></i><b>6.7</b> In some political contexts, messages have a different effect on people with less engagement in politics. Are there heterogeneous treatment effects by those who did not vote for reasons other than to boycott the election and those who did not? Feel free to explore multiple other ways there could be heterogeneous effects (e.g., perhaps there are different effects on Sisi supporters), but you only need to report on possible differential effects of the treatments on the “not-accountable” dependent variable.</a></li>
 </ul></li>
+<li class="chapter" data-level="7" data-path="lab-vi-lists-loops-functions-in-r.html"><a href="lab-vi-lists-loops-functions-in-r.html"><i class="fa fa-check"></i><b>7</b> Lab VI: Lists, Loops, &amp; Functions in R</a>
+<ul>
+<li class="chapter" data-level="7.0.1" data-path="lab-vi-lists-loops-functions-in-r.html"><a href="lab-vi-lists-loops-functions-in-r.html#preperation"><i class="fa fa-check"></i><b>7.0.1</b> Preperation</a></li>
+<li class="chapter" data-level="7.1" data-path="lab-vi-lists-loops-functions-in-r.html"><a href="lab-vi-lists-loops-functions-in-r.html#load-data.-stock-price-data-is-in-stocks2020.csv.-presidential-prices-are-in-uspres_2020_price-history-by-market--bulk.xlsx."><i class="fa fa-check"></i><b>7.1</b> Load data. Stock price data is in stocks2020.csv. Presidential prices are in USPres_2020_Price History By Market -Bulk.xlsx.</a></li>
+<li class="chapter" data-level="7.2" data-path="lab-vi-lists-loops-functions-in-r.html"><a href="lab-vi-lists-loops-functions-in-r.html#create-data-frame-with-daily-price-data-for-trump-in-2020"><i class="fa fa-check"></i><b>7.2</b> Create data frame with daily price data for Trump in 2020</a></li>
+<li class="chapter" data-level="7.3" data-path="lab-vi-lists-loops-functions-in-r.html"><a href="lab-vi-lists-loops-functions-in-r.html#merge-the-stock-price-and-trump-price-data"><i class="fa fa-check"></i><b>7.3</b> Merge the stock price and Trump price data</a></li>
+<li class="chapter" data-level="7.4" data-path="lab-vi-lists-loops-functions-in-r.html"><a href="lab-vi-lists-loops-functions-in-r.html#create-a-list-of-stock-ticker-names-do-not-include-dji-as-a-ticker"><i class="fa fa-check"></i><b>7.4</b> Create a list of stock ticker names (do not include DJI as a ticker)</a></li>
+<li class="chapter" data-level="7.5" data-path="lab-vi-lists-loops-functions-in-r.html"><a href="lab-vi-lists-loops-functions-in-r.html#create-a-function-that-calculates-daily-percent-change."><i class="fa fa-check"></i><b>7.5</b> Create a function that calculates daily percent change.</a></li>
+<li class="chapter" data-level="7.6" data-path="lab-vi-lists-loops-functions-in-r.html"><a href="lab-vi-lists-loops-functions-in-r.html#check-that-your-function-worked"><i class="fa fa-check"></i><b>7.6</b> Check that your function worked</a></li>
+<li class="chapter" data-level="7.7" data-path="lab-vi-lists-loops-functions-in-r.html"><a href="lab-vi-lists-loops-functions-in-r.html#loop-thru-list-of-tickers-and-run-regressions-in-which-daily-change-in-stock-price-is-a-function-of-change-in-djia-and-change-in-trump-price.-create-a-data-frame-that-stores-the-coefficient-standard-error-and-t-stat-for-the-trump-variable-for-each-stock.-include-a-column-that-has-the-stock-ticker-in-that-data-frame-as-well.-show-the-first-six-rows-of-the-data-frame-with-the-ticker-and-coefficient-information."><i class="fa fa-check"></i><b>7.7</b> Loop thru list of tickers and run regressions in which daily change in stock price is a function of change in DJIA and change in Trump price. Create a data frame that stores the coefficient, standard error and t-stat for the Trump variable for each stock. Include a column that has the stock ticker in that data frame as well. Show the first six rows of the data frame with the ticker and coefficient information.</a>
+<ul>
+<li class="chapter" data-level="7.7.1" data-path="lab-vi-lists-loops-functions-in-r.html"><a href="lab-vi-lists-loops-functions-in-r.html#if-interested-in-doing-more-not-required-or-for-credit-use-lapply-list-apply-to-regress-stock-price-on-trump-and-dji-for-all-stock-tickers."><i class="fa fa-check"></i><b>7.7.1</b> <em>IF INTERESTED IN DOING MORE (not required or for credit)</em>: Use <code>lapply()</code> (list apply) to regress stock price on Trump and DJI for all stock tickers.</a></li>
+</ul></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -343,13 +357,109 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="lab-v-experiments.html#cb73-1" aria-hidden="true" tabindex="-1"></a>dta <span class="sc">%&gt;%</span></span>
 <span id="cb73-2"><a href="lab-v-experiments.html#cb73-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(gender) <span class="sc">%&gt;%</span></span>
 <span id="cb73-3"><a href="lab-v-experiments.html#cb73-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>()</span></code></pre></div>
-<pre><code>## # A tibble: 3 × 2
-## # Groups:   gender [3]
-##   gender     n
-##    &lt;dbl&gt; &lt;int&gt;
-## 1      1   497
-## 2      2    76
-## 3     NA    10</code></pre>
+<pre><code>##        start_date       end_date consent age younger18 gender education degree news pres_election gov_eval cont_1 cont_2
+## 1  9/5/2016 23:29 9/5/2016 23:37       1   6        NA      1         8      4    2             4        1     NA      1
+## 2  9/5/2016 23:33 9/5/2016 23:38       1  21        NA      1         7      7    1             3        5     NA     NA
+## 3  9/5/2016 23:46 9/5/2016 23:53       1  19        NA      1         5     NA    2             1        3     NA     NA
+## 4   9/6/2016 2:31  9/6/2016 2:35       1   3        NA      1         8     NA    1             3        5      1     NA
+## 5   9/6/2016 2:26  9/6/2016 2:35       1  22        NA      1         5     NA    3             4        3     NA     NA
+## 6   9/6/2016 2:46  9/6/2016 2:50       1   5        NA      1         7     NA    1             1        4     NA     NA
+## 7  9/5/2016 23:02 9/5/2016 23:08       1  23        NA      1         5     NA    1             1        2     NA     NA
+## 8   9/6/2016 3:27  9/6/2016 3:32       1  20        NA      1         8      6    1             1        5     NA     NA
+## 9   9/6/2016 3:28  9/6/2016 3:36       1  23        NA      1         5     NA    2             1        3     NA      1
+## 10  9/6/2016 3:26  9/6/2016 3:36       1   2        NA      1         5     NA    3             4        3     NA     NA
+## 11  9/6/2016 3:50  9/6/2016 3:53       1  23        NA      1         8     NA    1             1        1     NA     NA
+## 12  9/6/2016 5:12  9/6/2016 5:17       1  22        NA      1         7     11    1             4        5      1     NA
+## 13  9/6/2016 5:19  9/6/2016 5:25       1  21        NA      1         7     11    1             3        5     NA     NA
+## 14  9/6/2016 5:23  9/6/2016 5:33       1  23        NA      1         3     NA    2             2        4     NA     NA
+## 15  9/6/2016 5:52  9/6/2016 5:59       1  22        NA      2         5     NA    2             1        2     NA     NA
+## 16  9/6/2016 6:43  9/6/2016 7:00       1  20        NA      1         5     NA    1             1        5     NA     NA
+##    cont_3 treat_11 treat_12 treat_13 treat_21 treat_22 treat_23 treat_31 treat_32 treat_33 justified_1 account_1 cont_b1
+## 1      NA       NA       NA       NA       NA       NA       NA       NA       NA       NA           3         3       0
+## 2      NA       NA       NA       NA       NA        1       NA       NA       NA       NA           5         1       0
+## 3      NA       NA       NA        1       NA       NA       NA       NA       NA       NA           3         3       0
+## 4      NA       NA       NA       NA       NA       NA       NA       NA       NA       NA           5         1       0
+## 5      NA       NA       NA       NA       NA       NA       NA        1       NA       NA           3         1       0
+## 6       1       NA       NA       NA       NA       NA       NA       NA       NA       NA           5         1       0
+## 7       1       NA       NA       NA       NA       NA       NA       NA       NA       NA           1         5       0
+## 8      NA        1       NA       NA       NA       NA       NA       NA       NA       NA           1         1       0
+## 9      NA       NA       NA       NA       NA       NA       NA       NA       NA       NA           2         3       1
+## 10     NA       NA       NA       NA       NA       NA        1       NA       NA       NA           4         2       0
+## 11     NA       NA       NA       NA       NA       NA        1       NA       NA       NA           1         5       0
+## 12     NA       NA       NA       NA       NA       NA       NA       NA       NA       NA           5         1       0
+## 13     NA       NA        1       NA       NA       NA       NA       NA       NA       NA           5         1       1
+## 14     NA        1       NA       NA       NA       NA       NA       NA       NA       NA           5         1       0
+## 15      1       NA       NA       NA       NA       NA       NA       NA       NA       NA           1         5       0
+## 16     NA       NA       NA       NA       NA       NA        1       NA       NA       NA           4         1       0
+##    treat_b1 treat_b2 treat_b3 justified_2 account_scale mb_incite prev_exp income gov priority sisi_term dem debrief
+## 1         1        0        0           3             3         3        3      2  18        2         3   3       1
+## 2         0        1        0           5             1         5        1      2  20        1         1   5       1
+## 3         0        0        1           3             3         3        2      3   9        2         2   3       1
+## 4         1        0        0           3             1         3        1      2  20        1         4   5       1
+## 5         0        1        0           5             1         2        2      2  20        2         4   5       1
+## 6         0        1        0           5             1         3        1      3  16        1         3   5       1
+## 7         1        0        0           1             5         1        1      3  18        2         3   4      NA
+## 8         0        0        1           3             3         1        1      2   1        2         1   3       1
+## 9         0        0        0           3             1         3        2      3  11        2         2   4       1
+## 10        1        0        0           2             2         3        2      2  13        1         3   4       1
+## 11        0        0        1           1             5         1        1      3  15        2         4   1       1
+## 12        1        0        0           4             1         3        2      4  20        2         1   5       1
+## 13        0        0        0           5             1         4        1      3  14        1         1   4       1
+## 14        0        1        0           2             1         1        3      1  20        1         1   5       1
+## 15        0        0        1           1             5         1        2      2  11        2         4   1       1
+## 16        0        0        1           3             1         1        1      2   6        2         2   4       1
+##    survey_num ad_num treatment_exper_main city male age_category just_binary_main just_binary_main_b not_acc_binary_main
+## 1           1      1                    1    0    1            2                0                  1                   0
+## 2           1      1                    2    1    1            6                0                  0                   0
+## 3           1      1                    3    0    1            4                0                  1                   0
+## 4           1      1                    1    1    1            1                0                  1                   0
+## 5           1      1                    2    1    1            7                0                  0                   0
+## 6           1      1                    2    0    1            1                0                  0                   0
+## 7           1      1                    1    0    1            8                1                  1                   1
+## 8           1      1                    3    1    1            5                0                  1                   0
+## 9           1      1                    0    1    1            8                0                  1                   0
+## 10          1      1                    1    0    1            1                1                  1                   0
+## 11          1      1                    3    0    1            8                1                  1                   1
+## 12          1      1                    1    1    1            7                0                  0                   0
+## 13          1      1                    0    0    1            6                0                  0                   0
+## 14          1      1                    2    1    1            8                1                  1                   0
+## 15          1      1                    3    1    0            7                1                  1                   1
+## 16          1      1                    3    0    1            5                0                  1                   0
+##    not_acc_binary_main_b acc_binary_main acc_binary_main_b justified_scale heard college sisi_vote not_voteboycott
+## 1                      1               0                 1               3     0    TRUE     FALSE            TRUE
+## 2                      0               1                 1               1     1    TRUE     FALSE           FALSE
+## 3                      1               0                 1               3     0   FALSE      TRUE           FALSE
+## 4                      0               1                 1               3     1    TRUE     FALSE           FALSE
+## 5                      0               1                 1               1     0   FALSE     FALSE            TRUE
+## 6                      0               1                 1               1     1    TRUE      TRUE           FALSE
+## 7                      1               0                 0               5     1   FALSE      TRUE           FALSE
+## 8                      1               0                 1               3     1    TRUE      TRUE           FALSE
+## 9                      0               1                 1               3     0   FALSE      TRUE           FALSE
+## 10                     0               1                 1               4     0   FALSE     FALSE            TRUE
+## 11                     1               0                 0               5     1    TRUE      TRUE           FALSE
+## 12                     0               1                 1               2     0    TRUE     FALSE            TRUE
+## 13                     0               1                 1               1     1    TRUE     FALSE           FALSE
+## 14                     0               1                 1               4     0   FALSE     FALSE           FALSE
+## 15                     1               0                 0               5     0   FALSE      TRUE           FALSE
+## 16                     0               1                 1               3     1   FALSE      TRUE           FALSE
+##    opposition_vote_boycott age_cat freq
+## 1                    FALSE       1    1
+## 2                     TRUE       2    1
+## 3                    FALSE       1    1
+## 4                     TRUE       1    1
+## 5                    FALSE       2    1
+## 6                    FALSE       1    1
+## 7                    FALSE       3    1
+## 8                    FALSE       2    1
+## 9                    FALSE       3    1
+## 10                   FALSE       1    1
+## 11                   FALSE       3    1
+## 12                   FALSE       2    1
+## 13                    TRUE       2    1
+## 14                    TRUE       3    1
+## 15                   FALSE       2    1
+## 16                   FALSE       2    1
+##  [ reached &#39;max&#39; / getOption(&quot;max.print&quot;) -- omitted 567 rows ]</code></pre>
 </div>
 <div id="what-is-the-effect-of-the-treatments-on-whether-respondents-viewed-the-police-tactics-as-justified-run-one-model-with-only-the-treatment-variables-and-another-that-includes-controls-for-age-category-gender-education-income-voting-for-sisi-and-not-voting-for-non-boycott-reasons." class="section level2 hasAnchor" number="6.4">
 <h2><span class="header-section-number">6.4</span> What is the effect of the treatments on whether respondents viewed the police tactics as justified? Run one model with only the treatment variables and another that includes controls for age category, gender, education, income, voting for Sisi and not voting for non-boycott reasons.<a href="lab-v-experiments.html#what-is-the-effect-of-the-treatments-on-whether-respondents-viewed-the-police-tactics-as-justified-run-one-model-with-only-the-treatment-variables-and-another-that-includes-controls-for-age-category-gender-education-income-voting-for-sisi-and-not-voting-for-non-boycott-reasons." class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -555,7 +665,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   (56 observations deleted due to missingness)
 ## Multiple R-squared:  0.246,  Adjusted R-squared:  0.227 
 ## F-statistic: 12.9 on 13 and 513 DF,  p-value: &lt;2e-16</code></pre>
-
 </div>
 </div>
             </section>
@@ -563,8 +672,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="lab-iv-data-visualization.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="lab-iv-data-visualization.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="lab-vi-lists-loops-functions-in-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

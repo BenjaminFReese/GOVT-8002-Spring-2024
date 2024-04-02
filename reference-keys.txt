@@ -1,4 +1,4 @@
-tab:unnamed-chunk-30
+tab:unnamed-chunk-36
 introduction
 purpose-of-this-site
 loading-data
@@ -42,3 +42,13 @@ what-is-the-effect-of-the-treatments-on-whether-respondents-viewed-the-police-ta
 what-is-the-effect-of-the-treatments-on-whether-respondents-viewed-the-police-tactics-as-justified
 test-whether-the-effects-of-treatment-1-police-favorable-message-are-the-same-as-treatment-3-both-sides-for-each-dependent-variable.-feel-free-to-use-the-linearhypothesis-function-in-the-car-package.
 in-some-political-contexts-messages-have-a-different-effect-on-people-with-less-engagement-in-politics.-are-there-heterogeneous-treatment-effects-by-those-who-did-not-vote-for-reasons-other-than-to-boycott-the-election-and-those-who-did-not-feel-free-to-explore-multiple-other-ways-there-could-be-heterogeneous-effects-e.g.-perhaps-there-are-different-effects-on-sisi-supporters-but-you-only-need-to-report-on-possible-differential-effects-of-the-treatments-on-the-not-accountable-dependent-variable.
+lab-vi-lists-loops-functions-in-r
+preperation
+load-data.-stock-price-data-is-in-stocks2020.csv.-presidential-prices-are-in-uspres_2020_price-history-by-market--bulk.xlsx.
+create-data-frame-with-daily-price-data-for-trump-in-2020
+merge-the-stock-price-and-trump-price-data
+create-a-list-of-stock-ticker-names-do-not-include-dji-as-a-ticker
+create-a-function-that-calculates-daily-percent-change.
+check-that-your-function-worked
+loop-thru-list-of-tickers-and-run-regressions-in-which-daily-change-in-stock-price-is-a-function-of-change-in-djia-and-change-in-trump-price.-create-a-data-frame-that-stores-the-coefficient-standard-error-and-t-stat-for-the-trump-variable-for-each-stock.-include-a-column-that-has-the-stock-ticker-in-that-data-frame-as-well.-show-the-first-six-rows-of-the-data-frame-with-the-ticker-and-coefficient-information.
+if-interested-in-doing-more-not-required-or-for-credit-use-lapply-list-apply-to-regress-stock-price-on-trump-and-dji-for-all-stock-tickers.
