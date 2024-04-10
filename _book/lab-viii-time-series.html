@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>9 Lab VIII: Time Series | GOVT 8002 Shared Working Book</title>
+  <meta name="description" content="9 Lab VIII: Time Series | GOVT 8002 Shared Working Book" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="9 Lab VIII: Time Series | GOVT 8002 Shared Working Book" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="9 Lab VIII: Time Series | GOVT 8002 Shared Working Book" />
+  
+  
+  
+
+<meta name="author" content="Benjamin Reese | bfr11@georgetown.edu" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="lab-vii-regression-discontinuity-designs.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#purpose-of-this-site"><i class="fa fa-check"></i><b>1.1</b> Purpose of This Site</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#loading-data"><i class="fa fa-check"></i><b>1.2</b> Loading Data</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="lab-i-tidyverse.html"><a href="lab-i-tidyverse.html"><i class="fa fa-check"></i><b>2</b> Lab I: Tidyverse</a>
+<ul>
+<li class="chapter" data-level="2.0.1" data-path="lab-i-tidyverse.html"><a href="lab-i-tidyverse.html#preparation"><i class="fa fa-check"></i><b>2.0.1</b> Preparation</a></li>
+<li class="chapter" data-level="2.1" data-path="lab-i-tidyverse.html"><a href="lab-i-tidyverse.html#join-the-data-sets."><i class="fa fa-check"></i><b>2.1</b> Join the data sets.</a></li>
+<li class="chapter" data-level="2.2" data-path="lab-i-tidyverse.html"><a href="lab-i-tidyverse.html#create-and-add-the-following-four-variables-to-your-dataframe-density-based-on-sqmiles-and-pop2019-deaths-per-capita-based-on-new_death-cases-per-capita-based-on-new_case-and-vaccinated-percent-based-on-series_complete_12pluspop_pct."><i class="fa fa-check"></i><b>2.2</b> Create and add the following four variables to your dataframe: density (based on <em>sqMiles</em> and <em>pop2019</em>), deaths per capita (based on <em>new_death</em>), cases per capita (based on <em>new_case</em>) and vaccinated percent (based on <em>Series_Complete_12PlusPop_Pct</em>).</a></li>
+<li class="chapter" data-level="2.3" data-path="lab-i-tidyverse.html"><a href="lab-i-tidyverse.html#estimate-three-regression-models-with-deaths-per-capita-on-your-selected-day-as-the-dependent-variable."><i class="fa fa-check"></i><b>2.3</b> Estimate three regression models with deaths per capita on your selected day as the dependent variable.</a></li>
+<li class="chapter" data-level="2.4" data-path="lab-i-tidyverse.html"><a href="lab-i-tidyverse.html#assess-specific-vaccines"><i class="fa fa-check"></i><b>2.4</b> Assess specific vaccines</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="lab-ii-panel-data.html"><a href="lab-ii-panel-data.html"><i class="fa fa-check"></i><b>3</b> Lab II: Panel Data</a>
+<ul>
+<li class="chapter" data-level="3.0.1" data-path="lab-ii-panel-data.html"><a href="lab-ii-panel-data.html#preparation-1"><i class="fa fa-check"></i><b>3.0.1</b> Preparation</a></li>
+<li class="chapter" data-level="3.1" data-path="lab-ii-panel-data.html"><a href="lab-ii-panel-data.html#load-the-data-from-oxford_covid_data_us_latest.csv"><i class="fa fa-check"></i><b>3.1</b> Load the data from Oxford_Covid_data_US_latest.csv</a></li>
+<li class="chapter" data-level="3.2" data-path="lab-ii-panel-data.html"><a href="lab-ii-panel-data.html#data-organization"><i class="fa fa-check"></i><b>3.2</b> Data Organization</a></li>
+<li class="chapter" data-level="3.3" data-path="lab-ii-panel-data.html"><a href="lab-ii-panel-data.html#use-the-lag-function-in-dplyr-to-create-lagged-variables-for-cases-and-deaths.-also-create-difference-e.g.-dcases-that-is-the-change-in-cases-for-each-state-by-date."><i class="fa fa-check"></i><b>3.3</b> Use the lag function in dplyr to create lagged variables for cases and deaths. Also create “difference” (e.g., dCases) that is the change in cases for each state by date.</a></li>
+<li class="chapter" data-level="3.4" data-path="lab-ii-panel-data.html"><a href="lab-ii-panel-data.html#merge-the-above-data-frame-to-data-in-usstates.xlsx"><i class="fa fa-check"></i><b>3.4</b> Merge the above data frame to data in <em>USstates.xlsx</em></a></li>
+<li class="chapter" data-level="3.5" data-path="lab-ii-panel-data.html"><a href="lab-ii-panel-data.html#estimate-a-pooled-model-of-total-cases-per-capita-as-a-function-of-state-policy.-discuss."><i class="fa fa-check"></i><b>3.5</b> Estimate a pooled model of total cases per capita as a function of state policy. Discuss.</a></li>
+<li class="chapter" data-level="3.6" data-path="lab-ii-panel-data.html"><a href="lab-ii-panel-data.html#estimate-a-one-way-fixed-effect-model-where-the-fixed-effect-is-state.-note-that-state-is-indicated-in-a-variable-called-regionname.-estimate-using-both-lsdv-and-the-de-meaned-version-in-the-plm-package.-can-you-identify-a-source-of-bias"><i class="fa fa-check"></i><b>3.6</b> Estimate a one-way fixed effect model where the fixed effect is state. (Note that state is indicated in a variable called <em>RegionName</em>.) Estimate using both LSDV and the <em>de-meaned</em> version in the plm package. Can you identify a source of bias?</a></li>
+<li class="chapter" data-level="3.7" data-path="lab-ii-panel-data.html"><a href="lab-ii-panel-data.html#estimate-a-two-way-fixed-effect-model-where-the-fixed-effects-are-state-and-date.-estimate-using-both-lsdv-and-the-de-meaned-version-in-the-plm-package.-does-this-model-address-the-source-of-bias-identified-earlier"><i class="fa fa-check"></i><b>3.7</b> Estimate a two-way fixed effect model where the fixed effects are state and date. Estimate using both LSDV and the <em>de-meaned</em> version in the plm package. Does this model address the source of bias identified earlier?</a>
+<ul>
+<li class="chapter" data-level="3.7.1" data-path="lab-ii-panel-data.html"><a href="lab-ii-panel-data.html#this-is-an-initial-analysis.-we-would-also-want-to"><i class="fa fa-check"></i><b>3.7.1</b> This is an initial analysis. We would also want to</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="lab-iii-2sls-instrumental-variables.html"><a href="lab-iii-2sls-instrumental-variables.html"><i class="fa fa-check"></i><b>4</b> Lab III: 2SLS &amp; Instrumental Variables</a>
+<ul>
+<li class="chapter" data-level="4.0.1" data-path="lab-iii-2sls-instrumental-variables.html"><a href="lab-iii-2sls-instrumental-variables.html#preparation-2"><i class="fa fa-check"></i><b>4.0.1</b> Preparation</a></li>
+<li class="chapter" data-level="4.1" data-path="lab-iii-2sls-instrumental-variables.html"><a href="lab-iii-2sls-instrumental-variables.html#estimate-a-basic-ols-model-with-do-others-regard-you-as-religious-as-the-dependent-variable-as-a-function-of-hajj2006.-explain-how-there-might-be-endogeneity."><i class="fa fa-check"></i><b>4.1</b> Estimate a basic OLS model with “Do others regard you as religious” as the dependent variable as a function of Hajj2006. Explain how there might be endogeneity.</a></li>
+<li class="chapter" data-level="4.2" data-path="lab-iii-2sls-instrumental-variables.html"><a href="lab-iii-2sls-instrumental-variables.html#explain-how-the-success-variable-may-satisfy-the-conditions-for-a-instrumental-variable."><i class="fa fa-check"></i><b>4.2</b> Explain how the “success” variable may satisfy the conditions for a instrumental variable.</a></li>
+<li class="chapter" data-level="4.3" data-path="lab-iii-2sls-instrumental-variables.html"><a href="lab-iii-2sls-instrumental-variables.html#estimate-a-2sls-model-religious-as-a-function-of-hajj2006."><i class="fa fa-check"></i><b>4.3</b> Estimate a 2SLS model <em>Religious</em> as a function of Hajj2006.</a></li>
+<li class="chapter" data-level="4.4" data-path="lab-iii-2sls-instrumental-variables.html"><a href="lab-iii-2sls-instrumental-variables.html#show-the-first-stage-from-the-2sls-model-above.-explain-the-implications-of-the-results."><i class="fa fa-check"></i><b>4.4</b> Show the first stage from the 2SLS model above. Explain the implications of the results.</a></li>
+<li class="chapter" data-level="4.5" data-path="lab-iii-2sls-instrumental-variables.html"><a href="lab-iii-2sls-instrumental-variables.html#add-covariates-for-age-literacy-urban-group-size-and-gender-to-the-2sls-model-religious-as-a-function-of-hajj2006.-what-is-different-which-variables-are-included-in-the-first-stage"><i class="fa fa-check"></i><b>4.5</b> Add covariates for age, literacy, urban, group size and gender to the 2SLS model <em>Religious</em> as a function of Hajj2006. What is different? Which variables are included in the first stage?</a></li>
+<li class="chapter" data-level="4.6" data-path="lab-iii-2sls-instrumental-variables.html"><a href="lab-iii-2sls-instrumental-variables.html#run-multiple-2sls-models-with-ossamaincorrect-govtforce-natlinterest-happy-girlsschool-and-jobswomen-variables-as-dependent-variables.-use-the-list-of-covariates-from-earlier.-if-you-want-try-using-a-loop-or-lapply-but-not-necessary."><i class="fa fa-check"></i><b>4.6</b> Run multiple 2SLS models with OssamaIncorrect, GovtForce, NatlInterest, Happy, GirlsSchool and JobsWomen variables as dependent variables. Use the list of covariates from earlier. If you want, try using a loop or lapply (but not necessary).</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="lab-iv-data-visualization.html"><a href="lab-iv-data-visualization.html"><i class="fa fa-check"></i><b>5</b> Lab IV: Data Visualization</a>
+<ul>
+<li class="chapter" data-level="5.0.1" data-path="lab-iv-data-visualization.html"><a href="lab-iv-data-visualization.html#preparation-3"><i class="fa fa-check"></i><b>5.0.1</b> Preparation</a></li>
+<li class="chapter" data-level="5.1" data-path="lab-iv-data-visualization.html"><a href="lab-iv-data-visualization.html#base-r-version"><i class="fa fa-check"></i><b>5.1</b> Base R Version</a></li>
+<li class="chapter" data-level="5.2" data-path="lab-iv-data-visualization.html"><a href="lab-iv-data-visualization.html#base-r-version-2"><i class="fa fa-check"></i><b>5.2</b> Base R Version 2</a></li>
+<li class="chapter" data-level="5.3" data-path="lab-iv-data-visualization.html"><a href="lab-iv-data-visualization.html#libraryggplot-version-1"><i class="fa fa-check"></i><b>5.3</b> <code>library(ggplot)</code> Version 1</a></li>
+<li class="chapter" data-level="5.4" data-path="lab-iv-data-visualization.html"><a href="lab-iv-data-visualization.html#libraryggplot-version-2"><i class="fa fa-check"></i><b>5.4</b> <code>library(ggplot)</code> Version 2</a></li>
+<li class="chapter" data-level="5.5" data-path="lab-iv-data-visualization.html"><a href="lab-iv-data-visualization.html#alternative-plot-of-your-choice"><i class="fa fa-check"></i><b>5.5</b> Alternative Plot of Your Choice</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="lab-v-experiments.html"><a href="lab-v-experiments.html"><i class="fa fa-check"></i><b>6</b> Lab V: Experiments</a>
+<ul>
+<li class="chapter" data-level="6.0.1" data-path="lab-v-experiments.html"><a href="lab-v-experiments.html#preparation-4"><i class="fa fa-check"></i><b>6.0.1</b> Preparation</a></li>
+<li class="chapter" data-level="6.1" data-path="lab-v-experiments.html"><a href="lab-v-experiments.html#why-is-an-experiment-useful-in-this-context"><i class="fa fa-check"></i><b>6.1</b> Why is an experiment useful in this context?</a></li>
+<li class="chapter" data-level="6.2" data-path="lab-v-experiments.html"><a href="lab-v-experiments.html#is-there-evidence-of-balance-in-the-treatment-why-is-this-relevant-check-for-balance-of-each-treatment-with-respect-to-age-category-gender-education-income-voting-for-sisi-and-not-voting-for-non-boycott-reasons."><i class="fa fa-check"></i><b>6.2</b> Is there evidence of balance in the treatment? Why is this relevant? Check for balance of each treatment with respect to age category, gender, education, income, voting for Sisi and not voting for non-boycott reasons.</a></li>
+<li class="chapter" data-level="6.3" data-path="lab-v-experiments.html"><a href="lab-v-experiments.html#is-there-evidence-of-an-overall-unbalanced-sample-look-at-gender-and-discuss-results-in-light-of-your-answer-on-treatment-balance-above."><i class="fa fa-check"></i><b>6.3</b> Is there evidence of an overall unbalanced sample? Look at gender and discuss results in light of your answer on treatment-balance above.</a></li>
+<li class="chapter" data-level="6.4" data-path="lab-v-experiments.html"><a href="lab-v-experiments.html#what-is-the-effect-of-the-treatments-on-whether-respondents-viewed-the-police-tactics-as-justified-run-one-model-with-only-the-treatment-variables-and-another-that-includes-controls-for-age-category-gender-education-income-voting-for-sisi-and-not-voting-for-non-boycott-reasons."><i class="fa fa-check"></i><b>6.4</b> What is the effect of the treatments on whether respondents viewed the police tactics as justified? Run one model with only the treatment variables and another that includes controls for age category, gender, education, income, voting for Sisi and not voting for non-boycott reasons.</a></li>
+<li class="chapter" data-level="6.5" data-path="lab-v-experiments.html"><a href="lab-v-experiments.html#what-is-the-effect-of-the-treatments-on-whether-respondents-viewed-the-police-tactics-as-justified"><i class="fa fa-check"></i><b>6.5</b> What is the effect of the treatments on whether respondents viewed the police tactics as justified?</a></li>
+<li class="chapter" data-level="6.6" data-path="lab-v-experiments.html"><a href="lab-v-experiments.html#test-whether-the-effects-of-treatment-1-police-favorable-message-are-the-same-as-treatment-3-both-sides-for-each-dependent-variable.-feel-free-to-use-the-linearhypothesis-function-in-the-car-package."><i class="fa fa-check"></i><b>6.6</b> Test whether the effects of treatment 1 (police-favorable message) are the same as treatment 3 (both sides) for each dependent variable. Feel free to use the linearHypothesis function in the car package.</a></li>
+<li class="chapter" data-level="6.7" data-path="lab-v-experiments.html"><a href="lab-v-experiments.html#in-some-political-contexts-messages-have-a-different-effect-on-people-with-less-engagement-in-politics.-are-there-heterogeneous-treatment-effects-by-those-who-did-not-vote-for-reasons-other-than-to-boycott-the-election-and-those-who-did-not-feel-free-to-explore-multiple-other-ways-there-could-be-heterogeneous-effects-e.g.-perhaps-there-are-different-effects-on-sisi-supporters-but-you-only-need-to-report-on-possible-differential-effects-of-the-treatments-on-the-not-accountable-dependent-variable."><i class="fa fa-check"></i><b>6.7</b> In some political contexts, messages have a different effect on people with less engagement in politics. Are there heterogeneous treatment effects by those who did not vote for reasons other than to boycott the election and those who did not? Feel free to explore multiple other ways there could be heterogeneous effects (e.g., perhaps there are different effects on Sisi supporters), but you only need to report on possible differential effects of the treatments on the “not-accountable” dependent variable.</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="lab-vi-lists-loops-functions-in-r.html"><a href="lab-vi-lists-loops-functions-in-r.html"><i class="fa fa-check"></i><b>7</b> Lab VI: Lists, Loops, &amp; Functions in R</a>
+<ul>
+<li class="chapter" data-level="7.0.1" data-path="lab-vi-lists-loops-functions-in-r.html"><a href="lab-vi-lists-loops-functions-in-r.html#preperation"><i class="fa fa-check"></i><b>7.0.1</b> Preperation</a></li>
+<li class="chapter" data-level="7.1" data-path="lab-vi-lists-loops-functions-in-r.html"><a href="lab-vi-lists-loops-functions-in-r.html#load-data.-stock-price-data-is-in-stocks2020.csv.-presidential-prices-are-in-uspres_2020_price-history-by-market--bulk.xlsx."><i class="fa fa-check"></i><b>7.1</b> Load data. Stock price data is in stocks2020.csv. Presidential prices are in USPres_2020_Price History By Market -Bulk.xlsx.</a></li>
+<li class="chapter" data-level="7.2" data-path="lab-vi-lists-loops-functions-in-r.html"><a href="lab-vi-lists-loops-functions-in-r.html#create-data-frame-with-daily-price-data-for-trump-in-2020"><i class="fa fa-check"></i><b>7.2</b> Create data frame with daily price data for Trump in 2020</a></li>
+<li class="chapter" data-level="7.3" data-path="lab-vi-lists-loops-functions-in-r.html"><a href="lab-vi-lists-loops-functions-in-r.html#merge-the-stock-price-and-trump-price-data"><i class="fa fa-check"></i><b>7.3</b> Merge the stock price and Trump price data</a></li>
+<li class="chapter" data-level="7.4" data-path="lab-vi-lists-loops-functions-in-r.html"><a href="lab-vi-lists-loops-functions-in-r.html#create-a-list-of-stock-ticker-names-do-not-include-dji-as-a-ticker"><i class="fa fa-check"></i><b>7.4</b> Create a list of stock ticker names (do not include DJI as a ticker)</a></li>
+<li class="chapter" data-level="7.5" data-path="lab-vi-lists-loops-functions-in-r.html"><a href="lab-vi-lists-loops-functions-in-r.html#create-a-function-that-calculates-daily-percent-change."><i class="fa fa-check"></i><b>7.5</b> Create a function that calculates daily percent change.</a></li>
+<li class="chapter" data-level="7.6" data-path="lab-vi-lists-loops-functions-in-r.html"><a href="lab-vi-lists-loops-functions-in-r.html#check-that-your-function-worked"><i class="fa fa-check"></i><b>7.6</b> Check that your function worked</a></li>
+<li class="chapter" data-level="7.7" data-path="lab-vi-lists-loops-functions-in-r.html"><a href="lab-vi-lists-loops-functions-in-r.html#loop-thru-list-of-tickers-and-run-regressions-in-which-daily-change-in-stock-price-is-a-function-of-change-in-djia-and-change-in-trump-price.-create-a-data-frame-that-stores-the-coefficient-standard-error-and-t-stat-for-the-trump-variable-for-each-stock.-include-a-column-that-has-the-stock-ticker-in-that-data-frame-as-well.-show-the-first-six-rows-of-the-data-frame-with-the-ticker-and-coefficient-information."><i class="fa fa-check"></i><b>7.7</b> Loop thru list of tickers and run regressions in which daily change in stock price is a function of change in DJIA and change in Trump price. Create a data frame that stores the coefficient, standard error and t-stat for the Trump variable for each stock. Include a column that has the stock ticker in that data frame as well. Show the first six rows of the data frame with the ticker and coefficient information.</a>
+<ul>
+<li class="chapter" data-level="7.7.1" data-path="lab-vi-lists-loops-functions-in-r.html"><a href="lab-vi-lists-loops-functions-in-r.html#if-interested-in-doing-more-not-required-or-for-credit-use-lapply-list-apply-to-regress-stock-price-on-trump-and-dji-for-all-stock-tickers."><i class="fa fa-check"></i><b>7.7.1</b> <em>IF INTERESTED IN DOING MORE (not required or for credit)</em>: Use <code>lapply()</code> (list apply) to regress stock price on Trump and DJI for all stock tickers.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="lab-vii-regression-discontinuity-designs.html"><a href="lab-vii-regression-discontinuity-designs.html"><i class="fa fa-check"></i><b>8</b> Lab VII: Regression Discontinuity Designs</a>
+<ul>
+<li class="chapter" data-level="8.0.1" data-path="lab-vii-regression-discontinuity-designs.html"><a href="lab-vii-regression-discontinuity-designs.html#preparation-5"><i class="fa fa-check"></i><b>8.0.1</b> Preparation</a></li>
+<li class="chapter" data-level="8.1" data-path="lab-vii-regression-discontinuity-designs.html"><a href="lab-vii-regression-discontinuity-designs.html#replicate-the-main-result-using-the-specification-for-table-1.-in-this-model-the-rd-allows-for-differential-quadratic-models-above-and-below-the-threshold-and-also-has-dummy-variables-for-birthdays.-the-data-is-limited-to-observations-within-2-years-of-21."><i class="fa fa-check"></i><b>8.1</b> Replicate the main result using the specification for Table 1. In this model, the RD allows for differential quadratic models above and below the threshold and also has dummy variables for birthdays. The data is limited to observations within 2 years of 21.</a></li>
+<li class="chapter" data-level="8.2" data-path="lab-vii-regression-discontinuity-designs.html"><a href="lab-vii-regression-discontinuity-designs.html#estimate-a-series-of-models-with-slightly-different-specifications.-first-try-the-above-specification-with-only-linear-age-variable-first-fixing-slope-to-be-the-same-above-and-below-the-threshhold-and-then-allowing-slope-to-vary-above-and-below-the-threshhold."><i class="fa fa-check"></i><b>8.2</b> Estimate a series of models with slightly different specifications. First, try the above specification with only linear age variable, first fixing slope to be the same above and below the threshhold and then allowing slope to vary above and below the threshhold.</a></li>
+<li class="chapter" data-level="8.3" data-path="lab-vii-regression-discontinuity-designs.html"><a href="lab-vii-regression-discontinuity-designs.html#now-see-what-happens-when-you-use-a-different-window-sizes.-feel-free-to-experiment-but-only-need-to-report-one-specification."><i class="fa fa-check"></i><b>8.3</b> Now see what happens when you use a different window sizes. Feel free to experiment (but only need to report one specification.)</a></li>
+<li class="chapter" data-level="8.4" data-path="lab-vii-regression-discontinuity-designs.html"><a href="lab-vii-regression-discontinuity-designs.html#to-figure-out-what-is-going-on-lets-create-some-figures.-first-lets-re-create-figure-1-in-the-paper.-i-provide-the-code-to-create-a-binned-graph-for-the-alcohol-arrest-rate.-your-task-is-to-add-another-arrest-category-to-the-plot."><i class="fa fa-check"></i><b>8.4</b> To figure out what is going on, let’s create some figures. First, let’s re-create Figure 1 in the paper. I provide the code to create a binned graph for the alcohol arrest rate. Your task is to add another arrest category to the plot.</a></li>
+<li class="chapter" data-level="8.5" data-path="lab-vii-regression-discontinuity-designs.html"><a href="lab-vii-regression-discontinuity-designs.html#now-create-a-figure-based-on-a-linear-model.-you-can-try-different-window-sizes-but-need-only-report-one.-do-this-for-alcohol-and-feel-free-to-add-other-crimes-but-not-required."><i class="fa fa-check"></i><b>8.5</b> Now create a figure based on a linear model. You can try different window sizes but need only report one. Do this for alcohol (and feel free to add other crimes, but not required.)</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="lab-viii-time-series.html"><a href="lab-viii-time-series.html"><i class="fa fa-check"></i><b>9</b> Lab VIII: Time Series</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="lab-viii-time-series.html"><a href="lab-viii-time-series.html#preparation-6"><i class="fa fa-check"></i><b>9.1</b> Preparation</a></li>
+<li class="chapter" data-level="9.2" data-path="lab-viii-time-series.html"><a href="lab-viii-time-series.html#data-description"><i class="fa fa-check"></i><b>9.2</b> Data description:</a></li>
+<li class="chapter" data-level="9.3" data-path="lab-viii-time-series.html"><a href="lab-viii-time-series.html#estimate-a-model-with-the-log-of-miles-driven-use-the-unadjusted-data-logmilesna-as-a-function-of-log-gas-prices-unemployment-and-log-of-population.-dont-account-for-autocorrelation.-is-the-effect-of-gas-statistically-significant"><i class="fa fa-check"></i><b>9.3</b> Estimate a model with the log of miles driven (use the unadjusted data: logMilesNA) as a function of log gas prices, unemployment and log of population. (Don’t account for autocorrelation.) Is the effect of gas statistically significant?</a></li>
+<li class="chapter" data-level="9.4" data-path="lab-viii-time-series.html"><a href="lab-viii-time-series.html#do-you-think-there-is-seasonality-in-driving-test-by-adding-dummy-variables-for-month-to-the-above-model.-is-there-evidence-of-monthly-variation-is-the-effect-of-gas-statistically-significant-now-create-a-categorical-variable-for-seasons-and-run-the-model-without-the-month-dummy-variable."><i class="fa fa-check"></i><b>9.4</b> Do you think there is seasonality in driving? Test by adding dummy variables for month to the above model. Is there evidence of monthly variation? Is the effect of gas statistically significant? Now create a categorical variable for seasons and run the model without the month dummy variable.</a></li>
+<li class="chapter" data-level="9.5" data-path="lab-viii-time-series.html"><a href="lab-viii-time-series.html#briefly-explain-why-there-might-be-autocorrelation."><i class="fa fa-check"></i><b>9.5</b> Briefly explain why there might be autocorrelation.</a></li>
+<li class="chapter" data-level="9.6" data-path="lab-viii-time-series.html"><a href="lab-viii-time-series.html#create-a-figure-that-is-useful-to-assess-whether-there-is-autocorrelation-you-have-two-choices-here.-draw-a-sketch-here."><i class="fa fa-check"></i><b>9.6</b> Create a figure that is useful to assess whether there is autocorrelation (you have two choices here). Draw a sketch here.</a></li>
+<li class="chapter" data-level="9.7" data-path="lab-viii-time-series.html"><a href="lab-viii-time-series.html#test-whether-there-is-first-order-autocorrelation.-report-the-key-statistic-from-this-test.-what-would-a-coefficient-of-1-indicate"><i class="fa fa-check"></i><b>9.7</b> Test whether there is first order autocorrelation. Report the key statistic from this test. What would a coefficient of 1 indicate?</a></li>
+<li class="chapter" data-level="9.8" data-path="lab-viii-time-series.html"><a href="lab-viii-time-series.html#use-newey-west-standard-errors-to-account-for-autocorrelation.-use-the-same-variables-as-in-part-b.-determine-the-t-stats-and-describe-the-similarities-and-difference-with-earlier-results."><i class="fa fa-check"></i><b>9.8</b> Use Newey-West standard errors to account for autocorrelation. Use the same variables as in part (b). Determine the t-stats and describe the similarities and difference with earlier results.</a></li>
+<li class="chapter" data-level="9.9" data-path="lab-viii-time-series.html"><a href="lab-viii-time-series.html#estimate-a-model-that-adjusts-for-autocorrelation.-use-the-same-variables-as-in-part-b.-describe-similarities-and-difference-with-earlier-results."><i class="fa fa-check"></i><b>9.9</b> Estimate a model that adjusts for autocorrelation. Use the same variables as in part (b). Describe similarities and difference with earlier results.</a></li>
+<li class="chapter" data-level="9.10" data-path="lab-viii-time-series.html"><a href="lab-viii-time-series.html#estimate-a-dynamic-model-of-miles-driven-using-control-variables-from-above.-discuss-key-differences."><i class="fa fa-check"></i><b>9.10</b> Estimate a dynamic model of miles driven using control variables from above. Discuss key differences.</a></li>
+<li class="chapter" data-level="9.11" data-path="lab-viii-time-series.html"><a href="lab-viii-time-series.html#run-an-augmented-dickey-fuller-test-on-logmilesna."><i class="fa fa-check"></i><b>9.11</b> Run an Augmented Dickey-Fuller Test on logMilesNA.</a></li>
+<li class="chapter" data-level="9.12" data-path="lab-viii-time-series.html"><a href="lab-viii-time-series.html#optional-question-conduct-the-same-analysis-from-a-b-d-and-g-using-light-truck-sales-as-the-dependent-variable.-light-truck-sales-use-more-gas-than-cars-so-the-question-is-whether-gas-prices-affect-the-kind-of-car-people-buy-which-will-affect-gas-consumption-for-the-life-of-the-car."><i class="fa fa-check"></i><b>9.12</b> OPTIONAL QUESTION: Conduct the same analysis from a, b, d, and g using light truck sales as the dependent variable. (Light truck sales use more gas than cars, so the question is whether gas prices affect the kind of car people buy which will affect gas consumption for the life of the car.)</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">GOVT 8002 Shared Working Book</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="lab-viii-time-series" class="section level1 hasAnchor" number="9">
+<h1><span class="header-section-number">9</span> Lab VIII: Time Series<a href="lab-viii-time-series.html#lab-viii-time-series" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><img src="Images/image_8.png" width="600" /></p>
+<div id="preparation-6" class="section level2 hasAnchor" number="9.1">
+<h2><span class="header-section-number">9.1</span> Preparation<a href="lab-viii-time-series.html#preparation-6" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="lab-viii-time-series.html#cb133-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Setup Options</span></span>
+<span id="cb133-2"><a href="lab-viii-time-series.html#cb133-2" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">digits =</span> <span class="dv">3</span>)</span>
+<span id="cb133-3"><a href="lab-viii-time-series.html#cb133-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb133-4"><a href="lab-viii-time-series.html#cb133-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Packages</span></span>
+<span id="cb133-5"><a href="lab-viii-time-series.html#cb133-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
+<span id="cb133-6"><a href="lab-viii-time-series.html#cb133-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(AER)</span>
+<span id="cb133-7"><a href="lab-viii-time-series.html#cb133-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(orcutt)</span>
+<span id="cb133-8"><a href="lab-viii-time-series.html#cb133-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb133-9"><a href="lab-viii-time-series.html#cb133-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb133-10"><a href="lab-viii-time-series.html#cb133-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmtest)</span>
+<span id="cb133-11"><a href="lab-viii-time-series.html#cb133-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sandwich)</span>
+<span id="cb133-12"><a href="lab-viii-time-series.html#cb133-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb133-13"><a href="lab-viii-time-series.html#cb133-13" aria-hidden="true" tabindex="-1"></a><span class="do">## Loading Data</span></span>
+<span id="cb133-14"><a href="lab-viii-time-series.html#cb133-14" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;~/GOVT8002/Spring 2023/Lab IX/Ch13_Lab_GasPrices.RData&quot;</span>)</span></code></pre></div>
+</div>
+<div id="data-description" class="section level2 hasAnchor" number="9.2">
+<h2><span class="header-section-number">9.2</span> Data description:<a href="lab-viii-time-series.html#data-description" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<table>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>year</td>
+<td>Year</td>
+</tr>
+<tr class="even">
+<td>month</td>
+<td>Month</td>
+</tr>
+<tr class="odd">
+<td>time</td>
+<td>Time identifier (1 for first observation, etc)</td>
+</tr>
+<tr class="even">
+<td>logMilesNA</td>
+<td>Log of vehicle miles traveled (in millions) in the U.S., not seasonally adjusted</td>
+</tr>
+<tr class="odd">
+<td>logLightTruckSales</td>
+<td>Log of retail sales of light weight trucks in the U.S. (in thousands)</td>
+</tr>
+<tr class="even">
+<td>logGasReal</td>
+<td>Log of real price of gas</td>
+</tr>
+<tr class="odd">
+<td>unem</td>
+<td>Unemployment rate</td>
+</tr>
+<tr class="even">
+<td>logPop</td>
+<td>Log of U.S. population (in thousands)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="estimate-a-model-with-the-log-of-miles-driven-use-the-unadjusted-data-logmilesna-as-a-function-of-log-gas-prices-unemployment-and-log-of-population.-dont-account-for-autocorrelation.-is-the-effect-of-gas-statistically-significant" class="section level2 hasAnchor" number="9.3">
+<h2><span class="header-section-number">9.3</span> Estimate a model with the log of miles driven (use the unadjusted data: logMilesNA) as a function of log gas prices, unemployment and log of population. (Don’t account for autocorrelation.) Is the effect of gas statistically significant?<a href="lab-viii-time-series.html#estimate-a-model-with-the-log-of-miles-driven-use-the-unadjusted-data-logmilesna-as-a-function-of-log-gas-prices-unemployment-and-log-of-population.-dont-account-for-autocorrelation.-is-the-effect-of-gas-statistically-significant" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="lab-viii-time-series.html#cb134-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Model 1</span></span>
+<span id="cb134-2"><a href="lab-viii-time-series.html#cb134-2" aria-hidden="true" tabindex="-1"></a>reg<span class="fl">.1</span> <span class="ot">&lt;-</span> dta <span class="sc">%&gt;%</span></span>
+<span id="cb134-3"><a href="lab-viii-time-series.html#cb134-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(logMilesNA <span class="sc">~</span> logGasReal <span class="sc">+</span> unem <span class="sc">+</span> logPop, <span class="at">data =</span> .)</span>
+<span id="cb134-4"><a href="lab-viii-time-series.html#cb134-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb134-5"><a href="lab-viii-time-series.html#cb134-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Summary Output</span></span>
+<span id="cb134-6"><a href="lab-viii-time-series.html#cb134-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reg<span class="fl">.1</span>)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = logMilesNA ~ logGasReal + unem + logPop, data = .)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.19523 -0.04573  0.00491  0.05196  0.13648 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) -5.91875    1.06539   -5.56  6.1e-08 ***
+## logGasReal   0.03039    0.02115    1.44     0.15    
+## unem        -0.01979    0.00265   -7.46  9.7e-13 ***
+## logPop       1.46174    0.08459   17.28  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.0683 on 300 degrees of freedom
+##   (260 observations deleted due to missingness)
+## Multiple R-squared:  0.724,  Adjusted R-squared:  0.722 
+## F-statistic:  263 on 3 and 300 DF,  p-value: &lt;2e-16</code></pre>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="lab-viii-time-series.html#cb136-1" aria-hidden="true" tabindex="-1"></a><span class="do">## 95% CI</span></span>
+<span id="cb136-2"><a href="lab-viii-time-series.html#cb136-2" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(reg<span class="fl">.1</span>)</span></code></pre></div>
+<pre><code>##               2.5 %  97.5 %
+## (Intercept) -8.0153 -3.8222
+## logGasReal  -0.0112  0.0720
+## unem        -0.0250 -0.0146
+## logPop       1.2953  1.6282</code></pre>
+</div>
+<div id="do-you-think-there-is-seasonality-in-driving-test-by-adding-dummy-variables-for-month-to-the-above-model.-is-there-evidence-of-monthly-variation-is-the-effect-of-gas-statistically-significant-now-create-a-categorical-variable-for-seasons-and-run-the-model-without-the-month-dummy-variable." class="section level2 hasAnchor" number="9.4">
+<h2><span class="header-section-number">9.4</span> Do you think there is seasonality in driving? Test by adding dummy variables for month to the above model. Is there evidence of monthly variation? Is the effect of gas statistically significant? Now create a categorical variable for seasons and run the model without the month dummy variable.<a href="lab-viii-time-series.html#do-you-think-there-is-seasonality-in-driving-test-by-adding-dummy-variables-for-month-to-the-above-model.-is-there-evidence-of-monthly-variation-is-the-effect-of-gas-statistically-significant-now-create-a-categorical-variable-for-seasons-and-run-the-model-without-the-month-dummy-variable." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="lab-viii-time-series.html#cb138-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Removing NAs</span></span>
+<span id="cb138-2"><a href="lab-viii-time-series.html#cb138-2" aria-hidden="true" tabindex="-1"></a>dta <span class="ot">&lt;-</span> dta <span class="sc">%&gt;%</span></span>
+<span id="cb138-3"><a href="lab-viii-time-series.html#cb138-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>()</span>
+<span id="cb138-4"><a href="lab-viii-time-series.html#cb138-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb138-5"><a href="lab-viii-time-series.html#cb138-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Creating a variable for seasons</span></span>
+<span id="cb138-6"><a href="lab-viii-time-series.html#cb138-6" aria-hidden="true" tabindex="-1"></a>dta <span class="ot">&lt;-</span> dta <span class="sc">%&gt;%</span></span>
+<span id="cb138-7"><a href="lab-viii-time-series.html#cb138-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">season =</span> <span class="fu">case_when</span>(</span>
+<span id="cb138-8"><a href="lab-viii-time-series.html#cb138-8" aria-hidden="true" tabindex="-1"></a>    month <span class="sc">==</span> <span class="dv">1</span> <span class="sc">|</span> month <span class="sc">==</span> <span class="dv">2</span> <span class="sc">|</span> month <span class="sc">==</span> <span class="dv">3</span> <span class="sc">~</span> <span class="st">&quot;Winter&quot;</span>,</span>
+<span id="cb138-9"><a href="lab-viii-time-series.html#cb138-9" aria-hidden="true" tabindex="-1"></a>    month <span class="sc">==</span> <span class="dv">4</span> <span class="sc">|</span> month <span class="sc">==</span> <span class="dv">5</span> <span class="sc">|</span> month <span class="sc">==</span> <span class="dv">6</span> <span class="sc">~</span> <span class="st">&quot;Spring&quot;</span>,</span>
+<span id="cb138-10"><a href="lab-viii-time-series.html#cb138-10" aria-hidden="true" tabindex="-1"></a>    month <span class="sc">==</span> <span class="dv">7</span> <span class="sc">|</span> month <span class="sc">==</span> <span class="dv">8</span> <span class="sc">|</span> month <span class="sc">==</span> <span class="dv">9</span> <span class="sc">~</span> <span class="st">&quot;Summer&quot;</span>,</span>
+<span id="cb138-11"><a href="lab-viii-time-series.html#cb138-11" aria-hidden="true" tabindex="-1"></a>    month <span class="sc">==</span> <span class="dv">10</span> <span class="sc">|</span> month <span class="sc">==</span> <span class="dv">11</span> <span class="sc">|</span> month <span class="sc">==</span> <span class="dv">12</span> <span class="sc">~</span> <span class="st">&quot;Fall&quot;</span>)</span>
+<span id="cb138-12"><a href="lab-viii-time-series.html#cb138-12" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb138-13"><a href="lab-viii-time-series.html#cb138-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb138-14"><a href="lab-viii-time-series.html#cb138-14" aria-hidden="true" tabindex="-1"></a><span class="do">## Model 2 Months</span></span>
+<span id="cb138-15"><a href="lab-viii-time-series.html#cb138-15" aria-hidden="true" tabindex="-1"></a>reg<span class="fl">.2</span>a <span class="ot">&lt;-</span> dta <span class="sc">%&gt;%</span></span>
+<span id="cb138-16"><a href="lab-viii-time-series.html#cb138-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(logMilesNA <span class="sc">~</span> logGasReal <span class="sc">+</span> unem <span class="sc">+</span> logPop <span class="sc">+</span> <span class="fu">factor</span>(month), <span class="at">data =</span> .)</span>
+<span id="cb138-17"><a href="lab-viii-time-series.html#cb138-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb138-18"><a href="lab-viii-time-series.html#cb138-18" aria-hidden="true" tabindex="-1"></a><span class="do">## Summary Output</span></span>
+<span id="cb138-19"><a href="lab-viii-time-series.html#cb138-19" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reg<span class="fl">.2</span>a)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = logMilesNA ~ logGasReal + unem + logPop + factor(month), 
+##     data = .)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.07837 -0.01709  0.00095  0.01992  0.05803 
+## 
+## Coefficients:
+##                 Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)     -8.43243    0.44362  -19.01  &lt; 2e-16 ***
+## logGasReal      -0.04211    0.00896   -4.70  4.0e-06 ***
+## unem            -0.01414    0.00112  -12.60  &lt; 2e-16 ***
+## logPop           1.65186    0.03517   46.97  &lt; 2e-16 ***
+## factor(month)2  -0.04746    0.00791   -6.00  5.8e-09 ***
+## factor(month)3   0.09982    0.00793   12.58  &lt; 2e-16 ***
+## factor(month)4   0.09338    0.00803   11.63  &lt; 2e-16 ***
+## factor(month)5   0.14264    0.00806   17.69  &lt; 2e-16 ***
+## factor(month)6   0.14402    0.00800   18.00  &lt; 2e-16 ***
+## factor(month)7   0.16943    0.00798   21.23  &lt; 2e-16 ***
+## factor(month)8   0.16520    0.00801   20.63  &lt; 2e-16 ***
+## factor(month)9   0.07426    0.00798    9.31  &lt; 2e-16 ***
+## factor(month)10  0.11323    0.00796   14.22  &lt; 2e-16 ***
+## factor(month)11  0.04218    0.00791    5.33  2.0e-07 ***
+## factor(month)12  0.05098    0.00789    6.46  4.4e-10 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.0279 on 289 degrees of freedom
+## Multiple R-squared:  0.956,  Adjusted R-squared:  0.953 
+## F-statistic:  444 on 14 and 289 DF,  p-value: &lt;2e-16</code></pre>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="lab-viii-time-series.html#cb140-1" aria-hidden="true" tabindex="-1"></a><span class="do">## 95% CI</span></span>
+<span id="cb140-2"><a href="lab-viii-time-series.html#cb140-2" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(reg<span class="fl">.2</span>a)</span></code></pre></div>
+<pre><code>##                   2.5 %  97.5 %
+## (Intercept)     -9.3056 -7.5593
+## logGasReal      -0.0598 -0.0245
+## unem            -0.0163 -0.0119
+## logPop           1.5826  1.7211
+## factor(month)2  -0.0630 -0.0319
+## factor(month)3   0.0842  0.1154
+## factor(month)4   0.0776  0.1092
+## factor(month)5   0.1268  0.1585
+## factor(month)6   0.1283  0.1598
+## factor(month)7   0.1537  0.1851
+## factor(month)8   0.1494  0.1810
+## factor(month)9   0.0586  0.0900
+## factor(month)10  0.0976  0.1289
+## factor(month)11  0.0266  0.0578
+## factor(month)12  0.0354  0.0665</code></pre>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="lab-viii-time-series.html#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Model 2 Seasons</span></span>
+<span id="cb142-2"><a href="lab-viii-time-series.html#cb142-2" aria-hidden="true" tabindex="-1"></a>reg<span class="fl">.2</span>b <span class="ot">&lt;-</span> dta <span class="sc">%&gt;%</span></span>
+<span id="cb142-3"><a href="lab-viii-time-series.html#cb142-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(logMilesNA <span class="sc">~</span> logGasReal <span class="sc">+</span> unem <span class="sc">+</span> logPop <span class="sc">+</span> <span class="fu">factor</span>(season), <span class="at">data =</span> .)</span>
+<span id="cb142-4"><a href="lab-viii-time-series.html#cb142-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb142-5"><a href="lab-viii-time-series.html#cb142-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Summary Output</span></span>
+<span id="cb142-6"><a href="lab-viii-time-series.html#cb142-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reg<span class="fl">.2</span>b)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = logMilesNA ~ logGasReal + unem + logPop + factor(season), 
+##     data = .)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.13922 -0.04079  0.00449  0.03595  0.14090 
+## 
+## Coefficients:
+##                      Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)          -7.83213    0.80624   -9.71  &lt; 2e-16 ***
+## logGasReal           -0.02693    0.01624   -1.66    0.098 .  
+## unem                 -0.01451    0.00203   -7.14  7.3e-12 ***
+## logPop                1.60983    0.06396   25.17  &lt; 2e-16 ***
+## factor(season)Spring  0.05684    0.00834    6.82  5.1e-11 ***
+## factor(season)Summer  0.06578    0.00829    7.93  4.5e-14 ***
+## factor(season)Winter -0.05089    0.00842   -6.04  4.6e-09 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.051 on 297 degrees of freedom
+## Multiple R-squared:  0.848,  Adjusted R-squared:  0.845 
+## F-statistic:  275 on 6 and 297 DF,  p-value: &lt;2e-16</code></pre>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="lab-viii-time-series.html#cb144-1" aria-hidden="true" tabindex="-1"></a><span class="do">## 95% CI</span></span>
+<span id="cb144-2"><a href="lab-viii-time-series.html#cb144-2" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(reg<span class="fl">.2</span>b)</span></code></pre></div>
+<pre><code>##                        2.5 %   97.5 %
+## (Intercept)          -9.4188 -6.24546
+## logGasReal           -0.0589  0.00502
+## unem                 -0.0185 -0.01051
+## logPop                1.4839  1.73571
+## factor(season)Spring  0.0404  0.07324
+## factor(season)Summer  0.0495  0.08211
+## factor(season)Winter -0.0675 -0.03432</code></pre>
+</div>
+<div id="briefly-explain-why-there-might-be-autocorrelation." class="section level2 hasAnchor" number="9.5">
+<h2><span class="header-section-number">9.5</span> Briefly explain why there might be autocorrelation.<a href="lab-viii-time-series.html#briefly-explain-why-there-might-be-autocorrelation." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>With 50 years of data, there are certainly time trends and we can reasonably expect the error term of one year to be correlated with the error term of the previous year. For example, if more people began longer commutes in the 1990s, the longer commutes (more miles driven) will continue into the 2000s so the errors will be correlated year by year.</p>
+</div>
+<div id="create-a-figure-that-is-useful-to-assess-whether-there-is-autocorrelation-you-have-two-choices-here.-draw-a-sketch-here." class="section level2 hasAnchor" number="9.6">
+<h2><span class="header-section-number">9.6</span> Create a figure that is useful to assess whether there is autocorrelation (you have two choices here). Draw a sketch here.<a href="lab-viii-time-series.html#create-a-figure-that-is-useful-to-assess-whether-there-is-autocorrelation-you-have-two-choices-here.-draw-a-sketch-here." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="lab-viii-time-series.html#cb146-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Saving the Residuals</span></span>
+<span id="cb146-2"><a href="lab-viii-time-series.html#cb146-2" aria-hidden="true" tabindex="-1"></a>dta<span class="sc">$</span>residual_errors  <span class="ot">&lt;-</span> <span class="fu">resid</span>(reg<span class="fl">.2</span>a)</span>
+<span id="cb146-3"><a href="lab-viii-time-series.html#cb146-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb146-4"><a href="lab-viii-time-series.html#cb146-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Regressing Residuals</span></span>
+<span id="cb146-5"><a href="lab-viii-time-series.html#cb146-5" aria-hidden="true" tabindex="-1"></a>lag_err <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">NA</span>, dta<span class="sc">$</span>residual_errors[<span class="dv">1</span><span class="sc">:</span>(<span class="fu">length</span>(dta<span class="sc">$</span>residual_errors)<span class="sc">-</span><span class="dv">1</span>)])</span>
+<span id="cb146-6"><a href="lab-viii-time-series.html#cb146-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb146-7"><a href="lab-viii-time-series.html#cb146-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lag_err, dta<span class="sc">$</span>residual_errors, <span class="at">pch=</span><span class="dv">20</span>, <span class="at">xlab =</span> <span class="st">&quot;Lagged Residuals&quot;</span>, </span>
+<span id="cb146-8"><a href="lab-viii-time-series.html#cb146-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Residuals&quot;</span>, <span class="at">bty=</span><span class="st">&quot;n&quot;</span>, <span class="at">col=</span><span class="st">&quot;dark blue&quot;</span>, <span class="at">las=</span><span class="dv">1</span>)</span>
+<span id="cb146-9"><a href="lab-viii-time-series.html#cb146-9" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="fu">lm</span>(dta<span class="sc">$</span>residual_errors <span class="sc">~</span> lag_err), <span class="at">lwd=</span><span class="dv">2</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-66-1.png" width="672" /></p>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="lab-viii-time-series.html#cb147-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Plotting Over Time</span></span>
+<span id="cb147-2"><a href="lab-viii-time-series.html#cb147-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(dta<span class="sc">$</span>residual_errors, <span class="at">pch=</span><span class="dv">20</span>, <span class="at">xlab =</span> <span class="st">&quot;Time&quot;</span>, <span class="at">las=</span><span class="dv">1</span>, </span>
+<span id="cb147-3"><a href="lab-viii-time-series.html#cb147-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Residuals&quot;</span>, <span class="at">bty=</span><span class="st">&quot;n&quot;</span>, <span class="at">col=</span><span class="st">&quot;dark blue&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-66-2.png" width="672" /></p>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="lab-viii-time-series.html#cb148-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating season category and plotting residual error</span></span>
+<span id="cb148-2"><a href="lab-viii-time-series.html#cb148-2" aria-hidden="true" tabindex="-1"></a>dta <span class="sc">%&gt;%</span> </span>
+<span id="cb148-3"><a href="lab-viii-time-series.html#cb148-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb148-4"><a href="lab-viii-time-series.html#cb148-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">as.Date</span>(date), <span class="at">y=</span>residual_errors, <span class="at">col=</span>season), <span class="at">size=</span>.<span class="dv">8</span>) <span class="sc">+</span></span>
+<span id="cb148-5"><a href="lab-viii-time-series.html#cb148-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">&quot;orange&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;darkblue&quot;</span>))<span class="sc">+</span></span>
+<span id="cb148-6"><a href="lab-viii-time-series.html#cb148-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Date&quot;</span>, <span class="at">y=</span><span class="st">&quot;Residual Errors&quot;</span>) <span class="sc">+</span></span>
+<span id="cb148-7"><a href="lab-viii-time-series.html#cb148-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb148-8"><a href="lab-viii-time-series.html#cb148-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major.y=</span><span class="fu">element_line</span>(<span class="at">color=</span><span class="st">&quot;darkgrey&quot;</span>, <span class="at">linetype=</span><span class="st">&quot;dotted&quot;</span>), <span class="at">panel.grid.minor.y=</span><span class="fu">element_line</span>(<span class="at">color=</span><span class="st">&quot;darkgrey&quot;</span>, <span class="at">linetype=</span><span class="st">&quot;dotted&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb148-9"><a href="lab-viii-time-series.html#cb148-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">col=</span><span class="st">&quot;Season&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-66-3.png" width="672" /></p>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="lab-viii-time-series.html#cb149-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating season category and plotting residual error</span></span>
+<span id="cb149-2"><a href="lab-viii-time-series.html#cb149-2" aria-hidden="true" tabindex="-1"></a>dta <span class="sc">%&gt;%</span> </span>
+<span id="cb149-3"><a href="lab-viii-time-series.html#cb149-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb149-4"><a href="lab-viii-time-series.html#cb149-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">as.Date</span>(date), <span class="at">y=</span>residual_errors, <span class="at">col=</span>season)) <span class="sc">+</span></span>
+<span id="cb149-5"><a href="lab-viii-time-series.html#cb149-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">&quot;orange&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;darkblue&quot;</span>))<span class="sc">+</span></span>
+<span id="cb149-6"><a href="lab-viii-time-series.html#cb149-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Date&quot;</span>, <span class="at">y=</span><span class="st">&quot;Residual Errors&quot;</span>) <span class="sc">+</span></span>
+<span id="cb149-7"><a href="lab-viii-time-series.html#cb149-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb149-8"><a href="lab-viii-time-series.html#cb149-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major.y=</span><span class="fu">element_line</span>(<span class="at">color=</span><span class="st">&quot;darkgrey&quot;</span>, <span class="at">linetype=</span><span class="st">&quot;dotted&quot;</span>), <span class="at">panel.grid.minor.y=</span><span class="fu">element_line</span>(<span class="at">color=</span><span class="st">&quot;darkgrey&quot;</span>, <span class="at">linetype=</span><span class="st">&quot;dotted&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb149-9"><a href="lab-viii-time-series.html#cb149-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">col=</span><span class="st">&quot;Season&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-66-4.png" width="672" /></p>
+</div>
+<div id="test-whether-there-is-first-order-autocorrelation.-report-the-key-statistic-from-this-test.-what-would-a-coefficient-of-1-indicate" class="section level2 hasAnchor" number="9.7">
+<h2><span class="header-section-number">9.7</span> Test whether there is first order autocorrelation. Report the key statistic from this test. What would a coefficient of 1 indicate?<a href="lab-viii-time-series.html#test-whether-there-is-first-order-autocorrelation.-report-the-key-statistic-from-this-test.-what-would-a-coefficient-of-1-indicate" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="lab-viii-time-series.html#cb150-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Error on Lagged Error Regression</span></span>
+<span id="cb150-2"><a href="lab-viii-time-series.html#cb150-2" aria-hidden="true" tabindex="-1"></a>reg.lag <span class="ot">&lt;-</span> <span class="fu">lm</span>(dta<span class="sc">$</span>residual_errors <span class="sc">~</span> lag_err)</span>
+<span id="cb150-3"><a href="lab-viii-time-series.html#cb150-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reg.lag)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = dta$residual_errors ~ lag_err)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.07419 -0.01022  0.00114  0.01039  0.06575 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) -4.06e-05   8.99e-04   -0.05     0.96    
+## lag_err      8.21e-01   3.30e-02   24.89   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.0157 on 301 degrees of freedom
+##   (1 observation deleted due to missingness)
+## Multiple R-squared:  0.673,  Adjusted R-squared:  0.672 
+## F-statistic:  620 on 1 and 301 DF,  p-value: &lt;2e-16</code></pre>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="lab-viii-time-series.html#cb152-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Durbin-Watson</span></span>
+<span id="cb152-2"><a href="lab-viii-time-series.html#cb152-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dwtest</span>(reg<span class="fl">.2</span>a)</span></code></pre></div>
+<pre><code>## 
+##  Durbin-Watson test
+## 
+## data:  reg.2a
+## DW = 0.4, p-value &lt;2e-16
+## alternative hypothesis: true autocorrelation is greater than 0</code></pre>
+</div>
+<div id="use-newey-west-standard-errors-to-account-for-autocorrelation.-use-the-same-variables-as-in-part-b.-determine-the-t-stats-and-describe-the-similarities-and-difference-with-earlier-results." class="section level2 hasAnchor" number="9.8">
+<h2><span class="header-section-number">9.8</span> Use Newey-West standard errors to account for autocorrelation. Use the same variables as in part (b). Determine the t-stats and describe the similarities and difference with earlier results.<a href="lab-viii-time-series.html#use-newey-west-standard-errors-to-account-for-autocorrelation.-use-the-same-variables-as-in-part-b.-determine-the-t-stats-and-describe-the-similarities-and-difference-with-earlier-results." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="lab-viii-time-series.html#cb154-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Calculating Newey West Standard Errors</span></span>
+<span id="cb154-2"><a href="lab-viii-time-series.html#cb154-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">diag</span>(<span class="fu">NeweyWest</span>(reg<span class="fl">.2</span>a, <span class="at">lag=</span><span class="dv">4</span>, <span class="at">prewhite=</span><span class="cn">FALSE</span>, <span class="at">adjust=</span><span class="cn">TRUE</span>)))</span></code></pre></div>
+<pre><code>##     (Intercept)      logGasReal            unem          logPop  factor(month)2  factor(month)3  factor(month)4 
+##         1.03863         0.01780         0.00185         0.08261         0.00595         0.00699         0.00812 
+##  factor(month)5  factor(month)6  factor(month)7  factor(month)8  factor(month)9 factor(month)10 factor(month)11 
+##         0.00830         0.00873         0.00872         0.00893         0.00868         0.00799         0.00764 
+## factor(month)12 
+##         0.00648</code></pre>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="lab-viii-time-series.html#cb156-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Checking t-stats</span></span>
+<span id="cb156-2"><a href="lab-viii-time-series.html#cb156-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(reg<span class="fl">.2</span>a) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">diag</span>(<span class="fu">NeweyWest</span>(reg<span class="fl">.2</span>a, <span class="at">lag=</span><span class="dv">4</span>, <span class="at">prewhite=</span><span class="cn">FALSE</span>, <span class="at">adjust=</span><span class="cn">TRUE</span>)))</span></code></pre></div>
+<pre><code>##     (Intercept)      logGasReal            unem          logPop  factor(month)2  factor(month)3  factor(month)4 
+##           -8.12           -2.37           -7.63           20.00           -7.97           14.28           11.50 
+##  factor(month)5  factor(month)6  factor(month)7  factor(month)8  factor(month)9 factor(month)10 factor(month)11 
+##           17.19           16.49           19.43           18.51            8.56           14.16            5.52 
+## factor(month)12 
+##            7.87</code></pre>
+</div>
+<div id="estimate-a-model-that-adjusts-for-autocorrelation.-use-the-same-variables-as-in-part-b.-describe-similarities-and-difference-with-earlier-results." class="section level2 hasAnchor" number="9.9">
+<h2><span class="header-section-number">9.9</span> Estimate a model that adjusts for autocorrelation. Use the same variables as in part (b). Describe similarities and difference with earlier results.<a href="lab-viii-time-series.html#estimate-a-model-that-adjusts-for-autocorrelation.-use-the-same-variables-as-in-part-b.-describe-similarities-and-difference-with-earlier-results." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="lab-viii-time-series.html#cb158-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Cochrane-Orcutt Model</span></span>
+<span id="cb158-2"><a href="lab-viii-time-series.html#cb158-2" aria-hidden="true" tabindex="-1"></a>reg.orc <span class="ot">&lt;-</span> <span class="fu">cochrane.orcutt</span>(reg<span class="fl">.2</span>a)</span>
+<span id="cb158-3"><a href="lab-viii-time-series.html#cb158-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reg.orc)</span></code></pre></div>
+<pre><code>## Call:
+## lm(formula = logMilesNA ~ logGasReal + unem + logPop + factor(month), 
+##     data = .)
+## 
+##                 Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)     -8.56609    1.16030   -7.38  1.7e-12 ***
+## logGasReal      -0.05457    0.01653   -3.30  0.00108 ** 
+## unem            -0.01067    0.00302   -3.53  0.00049 ***
+## logPop           1.66049    0.09229   17.99  &lt; 2e-16 ***
+## factor(month)2  -0.04674    0.00333  -14.05  &lt; 2e-16 ***
+## factor(month)3   0.10185    0.00461   22.09  &lt; 2e-16 ***
+## factor(month)4   0.09775    0.00594   16.46  &lt; 2e-16 ***
+## factor(month)5   0.14735    0.00642   22.97  &lt; 2e-16 ***
+## factor(month)6   0.14733    0.00620   23.75  &lt; 2e-16 ***
+## factor(month)7   0.17257    0.00617   27.97  &lt; 2e-16 ***
+## factor(month)8   0.16921    0.00628   26.93  &lt; 2e-16 ***
+## factor(month)9   0.07941    0.00631   12.58  &lt; 2e-16 ***
+## factor(month)10  0.11843    0.00600   19.74  &lt; 2e-16 ***
+## factor(month)11  0.04669    0.00521    8.96  &lt; 2e-16 ***
+## factor(month)12  0.05494    0.00422   13.02  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.0157 on 298 degrees of freedom
+## Multiple R-squared:  0.937 ,  Adjusted R-squared:  0.936
+## F-statistic: 305 on 4 and 298 DF,  p-value: &lt; 1.79e-163
+## 
+## Durbin-Watson statistic 
+## (original):    0.35861 , p-value: 5.127e-46
+## (transformed): 2.58848 , p-value: 1e+00</code></pre>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="lab-viii-time-series.html#cb160-1" aria-hidden="true" tabindex="-1"></a><span class="do">## &quot;By Hand&quot;</span></span>
+<span id="cb160-2"><a href="lab-viii-time-series.html#cb160-2" aria-hidden="true" tabindex="-1"></a>reg<span class="fl">.2</span>a <span class="ot">&lt;-</span> dta <span class="sc">%&gt;%</span></span>
+<span id="cb160-3"><a href="lab-viii-time-series.html#cb160-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(logMilesNA <span class="sc">~</span> logGasReal <span class="sc">+</span> unem <span class="sc">+</span> logPop <span class="sc">+</span> <span class="fu">factor</span>(month), <span class="at">data =</span> .)</span>
+<span id="cb160-4"><a href="lab-viii-time-series.html#cb160-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb160-5"><a href="lab-viii-time-series.html#cb160-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Error on Lagged Error Regression</span></span>
+<span id="cb160-6"><a href="lab-viii-time-series.html#cb160-6" aria-hidden="true" tabindex="-1"></a>reg.lag <span class="ot">&lt;-</span> <span class="fu">lm</span>(dta<span class="sc">$</span>residual_errors <span class="sc">~</span> lag_err)</span>
+<span id="cb160-7"><a href="lab-viii-time-series.html#cb160-7" aria-hidden="true" tabindex="-1"></a>rho <span class="ot">&lt;-</span> <span class="fu">summary</span>(reg.lag)<span class="sc">$</span>coef[<span class="dv">2</span>]</span>
+<span id="cb160-8"><a href="lab-viii-time-series.html#cb160-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb160-9"><a href="lab-viii-time-series.html#cb160-9" aria-hidden="true" tabindex="-1"></a><span class="do">## Lagging Each Variable</span></span>
+<span id="cb160-10"><a href="lab-viii-time-series.html#cb160-10" aria-hidden="true" tabindex="-1"></a>dta<span class="sc">$</span>lagmile <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">lag</span>(dta<span class="sc">$</span>logMilesNA)</span>
+<span id="cb160-11"><a href="lab-viii-time-series.html#cb160-11" aria-hidden="true" tabindex="-1"></a>dta<span class="sc">$</span>lag_gas <span class="ot">&lt;-</span> <span class="fu">lag</span>(dta<span class="sc">$</span>logGasReal)</span>
+<span id="cb160-12"><a href="lab-viii-time-series.html#cb160-12" aria-hidden="true" tabindex="-1"></a>dta<span class="sc">$</span>lag_unem <span class="ot">&lt;-</span> <span class="fu">lag</span>(dta<span class="sc">$</span>unem)</span>
+<span id="cb160-13"><a href="lab-viii-time-series.html#cb160-13" aria-hidden="true" tabindex="-1"></a>dta<span class="sc">$</span>lag_pop <span class="ot">&lt;-</span> <span class="fu">lag</span>(dta<span class="sc">$</span>logPop)</span>
+<span id="cb160-14"><a href="lab-viii-time-series.html#cb160-14" aria-hidden="true" tabindex="-1"></a>dta<span class="sc">$</span>lag_month <span class="ot">&lt;-</span> <span class="fu">lag</span>(dta<span class="sc">$</span>month)</span>
+<span id="cb160-15"><a href="lab-viii-time-series.html#cb160-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb160-16"><a href="lab-viii-time-series.html#cb160-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Rho-transforming</span></span>
+<span id="cb160-17"><a href="lab-viii-time-series.html#cb160-17" aria-hidden="true" tabindex="-1"></a>rho_mile <span class="ot">&lt;-</span> dta<span class="sc">$</span>logMilesNA <span class="sc">-</span> rho<span class="sc">*</span>dta<span class="sc">$</span>lagmile</span>
+<span id="cb160-18"><a href="lab-viii-time-series.html#cb160-18" aria-hidden="true" tabindex="-1"></a>rho_gas <span class="ot">&lt;-</span> dta<span class="sc">$</span>logGasReal <span class="sc">-</span> rho<span class="sc">*</span>dta<span class="sc">$</span>lag_gas</span>
+<span id="cb160-19"><a href="lab-viii-time-series.html#cb160-19" aria-hidden="true" tabindex="-1"></a>rho_unem <span class="ot">&lt;-</span> dta<span class="sc">$</span>unem <span class="sc">-</span> rho<span class="sc">*</span>dta<span class="sc">$</span>lag_unem</span>
+<span id="cb160-20"><a href="lab-viii-time-series.html#cb160-20" aria-hidden="true" tabindex="-1"></a>rho_pop <span class="ot">&lt;-</span> dta<span class="sc">$</span>logPop <span class="sc">-</span> rho<span class="sc">*</span>dta<span class="sc">$</span>lag_pop</span>
+<span id="cb160-21"><a href="lab-viii-time-series.html#cb160-21" aria-hidden="true" tabindex="-1"></a>rho_month <span class="ot">&lt;-</span> dta<span class="sc">$</span>month <span class="sc">-</span> rho<span class="sc">*</span>dta<span class="sc">$</span>lag_month</span>
+<span id="cb160-22"><a href="lab-viii-time-series.html#cb160-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb160-23"><a href="lab-viii-time-series.html#cb160-23" aria-hidden="true" tabindex="-1"></a><span class="do">## Running rho-transformed model</span></span>
+<span id="cb160-24"><a href="lab-viii-time-series.html#cb160-24" aria-hidden="true" tabindex="-1"></a>rho_trans_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(rho_mile <span class="sc">~</span> rho_gas <span class="sc">+</span> rho_unem <span class="sc">+</span> rho_pop <span class="sc">+</span> <span class="fu">factor</span>(rho_month))</span>
+<span id="cb160-25"><a href="lab-viii-time-series.html#cb160-25" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(rho_trans_model)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = rho_mile ~ rho_gas + rho_unem + rho_pop + factor(rho_month))
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.07137 -0.00993  0.00082  0.01017  0.06405 
+## 
+## Coefficients:
+##                                    Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)                        -1.78822    0.25546   -7.00  1.8e-11 ***
+## rho_gas                            -0.08278    0.02873   -2.88  0.00425 ** 
+## rho_unem                           -0.01297    0.00357   -3.63  0.00033 ***
+## rho_pop                             1.75410    0.11344   15.46  &lt; 2e-16 ***
+## factor(rho_month)0.357014851611262  0.00606    0.00449    1.35  0.17854    
+## factor(rho_month)0.535522277416893  0.19274    0.00451   42.77  &lt; 2e-16 ***
+## factor(rho_month)0.714029703222524  0.06925    0.00456   15.18  &lt; 2e-16 ***
+## factor(rho_month)0.892537129028154  0.11809    0.00458   25.77  &lt; 2e-16 ***
+## factor(rho_month)1.07104455483379   0.07534    0.00455   16.57  &lt; 2e-16 ***
+## factor(rho_month)1.24955198063942   0.10503    0.00453   23.16  &lt; 2e-16 ***
+## factor(rho_month)1.42805940644505   0.08256    0.00455   18.15  &lt; 2e-16 ***
+## factor(rho_month)1.60656683225068  -0.00474    0.00457   -1.04  0.29980    
+## factor(rho_month)1.78507425805631   0.10822    0.00452   23.93  &lt; 2e-16 ***
+## factor(rho_month)1.96358168386194   0.00279    0.00450    0.62  0.53575    
+## factor(rho_month)2.14208910966757   0.07001    0.00448   15.61  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.0159 on 288 degrees of freedom
+##   (1 observation deleted due to missingness)
+## Multiple R-squared:  0.938,  Adjusted R-squared:  0.935 
+## F-statistic:  310 on 14 and 288 DF,  p-value: &lt;2e-16</code></pre>
+</div>
+<div id="estimate-a-dynamic-model-of-miles-driven-using-control-variables-from-above.-discuss-key-differences." class="section level2 hasAnchor" number="9.10">
+<h2><span class="header-section-number">9.10</span> Estimate a dynamic model of miles driven using control variables from above. Discuss key differences.<a href="lab-viii-time-series.html#estimate-a-dynamic-model-of-miles-driven-using-control-variables-from-above.-discuss-key-differences." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="lab-viii-time-series.html#cb162-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Distributed Lag Model</span></span>
+<span id="cb162-2"><a href="lab-viii-time-series.html#cb162-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Creating lagged miles variable</span></span>
+<span id="cb162-3"><a href="lab-viii-time-series.html#cb162-3" aria-hidden="true" tabindex="-1"></a>reg.<span class="fl">2.</span>dyn <span class="ot">&lt;-</span> <span class="fu">lm</span>(logMilesNA <span class="sc">~</span> lagmile <span class="sc">+</span> logGasReal <span class="sc">+</span> unem <span class="sc">+</span> logPop <span class="sc">+</span> <span class="fu">factor</span>(month) , <span class="at">data=</span>dta)</span>
+<span id="cb162-4"><a href="lab-viii-time-series.html#cb162-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reg.<span class="fl">2.</span>dyn)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = logMilesNA ~ lagmile + logGasReal + unem + logPop + 
+##     factor(month), data = dta)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.07062 -0.01014  0.00093  0.01042  0.06385 
+## 
+## Coefficients:
+##                  Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)     -1.909804   0.367611   -5.20  3.9e-07 ***
+## lagmile          0.806402   0.032767   24.61  &lt; 2e-16 ***
+## logGasReal      -0.015273   0.005246   -2.91   0.0039 ** 
+## unem            -0.002533   0.000794   -3.19   0.0016 ** 
+## logPop           0.337675   0.057044    5.92  9.2e-09 ***
+## factor(month)2   0.005074   0.004979    1.02   0.3090    
+## factor(month)3   0.191034   0.005840   32.71  &lt; 2e-16 ***
+## factor(month)4   0.069694   0.004669   14.93  &lt; 2e-16 ***
+## factor(month)5   0.118536   0.004691   25.27  &lt; 2e-16 ***
+## factor(month)6   0.076598   0.005313   14.42  &lt; 2e-16 ***
+## factor(month)7   0.106210   0.005216   20.36  &lt; 2e-16 ***
+## factor(month)8   0.084078   0.005622   14.96  &lt; 2e-16 ***
+## factor(month)9  -0.003285   0.005560   -0.59   0.5552    
+## factor(month)10  0.108316   0.004533   23.89  &lt; 2e-16 ***
+## factor(month)11  0.003511   0.004769    0.74   0.4622    
+## factor(month)12  0.069662   0.004554   15.30  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.0159 on 287 degrees of freedom
+##   (1 observation deleted due to missingness)
+## Multiple R-squared:  0.986,  Adjusted R-squared:  0.985 
+## F-statistic: 1.31e+03 on 15 and 287 DF,  p-value: &lt;2e-16</code></pre>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="lab-viii-time-series.html#cb164-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Saving the Residuals</span></span>
+<span id="cb164-2"><a href="lab-viii-time-series.html#cb164-2" aria-hidden="true" tabindex="-1"></a>residual_errors  <span class="ot">&lt;-</span> <span class="fu">resid</span>(reg.<span class="fl">2.</span>dyn)</span>
+<span id="cb164-3"><a href="lab-viii-time-series.html#cb164-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb164-4"><a href="lab-viii-time-series.html#cb164-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Regressing Residuals</span></span>
+<span id="cb164-5"><a href="lab-viii-time-series.html#cb164-5" aria-hidden="true" tabindex="-1"></a>lag_err <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">NA</span>, residual_errors[<span class="dv">1</span><span class="sc">:</span>(<span class="fu">length</span>(residual_errors)<span class="sc">-</span><span class="dv">1</span>)])</span>
+<span id="cb164-6"><a href="lab-viii-time-series.html#cb164-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb164-7"><a href="lab-viii-time-series.html#cb164-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Residuals from Dynamic Model</span></span>
+<span id="cb164-8"><a href="lab-viii-time-series.html#cb164-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lag_err, residual_errors, <span class="at">pch=</span><span class="dv">20</span>, <span class="at">xlab =</span> <span class="st">&quot;Lagged Residuals&quot;</span>, </span>
+<span id="cb164-9"><a href="lab-viii-time-series.html#cb164-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Residuals&quot;</span>, <span class="at">bty=</span><span class="st">&quot;n&quot;</span>, <span class="at">col=</span><span class="st">&quot;dark blue&quot;</span>, <span class="at">las=</span><span class="dv">1</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-70-1.png" width="672" /></p>
+</div>
+<div id="run-an-augmented-dickey-fuller-test-on-logmilesna." class="section level2 hasAnchor" number="9.11">
+<h2><span class="header-section-number">9.11</span> Run an Augmented Dickey-Fuller Test on logMilesNA.<a href="lab-viii-time-series.html#run-an-augmented-dickey-fuller-test-on-logmilesna." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="lab-viii-time-series.html#cb165-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Change in miles</span></span>
+<span id="cb165-2"><a href="lab-viii-time-series.html#cb165-2" aria-hidden="true" tabindex="-1"></a>delta_miles <span class="ot">&lt;-</span> dta<span class="sc">$</span>logMilesNA <span class="sc">-</span> dta<span class="sc">$</span>lagmile</span>
+<span id="cb165-3"><a href="lab-viii-time-series.html#cb165-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb165-4"><a href="lab-viii-time-series.html#cb165-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Lagged Change in Miles</span></span>
+<span id="cb165-5"><a href="lab-viii-time-series.html#cb165-5" aria-hidden="true" tabindex="-1"></a>lag_delta_miles <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">NA</span>, delta_miles[<span class="dv">1</span><span class="sc">:</span>(<span class="fu">length</span>(dta<span class="sc">$</span>lagmile)<span class="sc">-</span><span class="dv">1</span>)])</span>
+<span id="cb165-6"><a href="lab-viii-time-series.html#cb165-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb165-7"><a href="lab-viii-time-series.html#cb165-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Augmented Dickey-Fuller Test</span></span>
+<span id="cb165-8"><a href="lab-viii-time-series.html#cb165-8" aria-hidden="true" tabindex="-1"></a>aug_dickey_fuller <span class="ot">&lt;-</span> <span class="fu">lm</span>(delta_miles <span class="sc">~</span> dta<span class="sc">$</span>lagmile <span class="sc">+</span> dta<span class="sc">$</span>year <span class="sc">+</span> lag_delta_miles)</span>
+<span id="cb165-9"><a href="lab-viii-time-series.html#cb165-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(aug_dickey_fuller)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = delta_miles ~ dta$lagmile + dta$year + lag_delta_miles)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -0.1406 -0.0549  0.0122  0.0375  0.1330 
+## 
+## Coefficients:
+##                  Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)     -4.294973   1.160772   -3.70  0.00026 ***
+## dta$lagmile     -0.280021   0.045474   -6.16  2.4e-09 ***
+## dta$year         0.003870   0.000782    4.95  1.3e-06 ***
+## lag_delta_miles -0.145002   0.056904   -2.55  0.01133 *  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.058 on 298 degrees of freedom
+##   (2 observations deleted due to missingness)
+## Multiple R-squared:  0.183,  Adjusted R-squared:  0.175 
+## F-statistic: 22.3 on 3 and 298 DF,  p-value: 4.71e-13</code></pre>
+</div>
+<div id="optional-question-conduct-the-same-analysis-from-a-b-d-and-g-using-light-truck-sales-as-the-dependent-variable.-light-truck-sales-use-more-gas-than-cars-so-the-question-is-whether-gas-prices-affect-the-kind-of-car-people-buy-which-will-affect-gas-consumption-for-the-life-of-the-car." class="section level2 hasAnchor" number="9.12">
+<h2><span class="header-section-number">9.12</span> OPTIONAL QUESTION: Conduct the same analysis from a, b, d, and g using light truck sales as the dependent variable. (Light truck sales use more gas than cars, so the question is whether gas prices affect the kind of car people buy which will affect gas consumption for the life of the car.)<a href="lab-viii-time-series.html#optional-question-conduct-the-same-analysis-from-a-b-d-and-g-using-light-truck-sales-as-the-dependent-variable.-light-truck-sales-use-more-gas-than-cars-so-the-question-is-whether-gas-prices-affect-the-kind-of-car-people-buy-which-will-affect-gas-consumption-for-the-life-of-the-car." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="lab-viii-time-series.html#cb167-1" aria-hidden="true" tabindex="-1"></a><span class="do">## The Model</span></span>
+<span id="cb167-2"><a href="lab-viii-time-series.html#cb167-2" aria-hidden="true" tabindex="-1"></a>reg.lt <span class="ot">&lt;-</span> <span class="fu">lm</span>(lttrucksales<span class="sc">~</span>logGasReal <span class="sc">+</span> unem <span class="sc">+</span> logPop <span class="sc">+</span> <span class="fu">factor</span>(month) , <span class="at">data=</span>dta)</span>
+<span id="cb167-3"><a href="lab-viii-time-series.html#cb167-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reg.lt)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = lttrucksales ~ logGasReal + unem + logPop + factor(month), 
+##     data = dta)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -226.0  -44.3    1.0   37.4  360.2 
+## 
+## Coefficients:
+##                  Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)     -21060.03    1197.03  -17.59  &lt; 2e-16 ***
+## logGasReal        -137.90      24.18   -5.70  2.9e-08 ***
+## unem               -58.14       3.03  -19.21  &lt; 2e-16 ***
+## logPop            1744.24      94.89   18.38  &lt; 2e-16 ***
+## factor(month)2      60.00      21.34    2.81   0.0053 ** 
+## factor(month)3     164.63      21.41    7.69  2.3e-13 ***
+## factor(month)4      87.06      21.67    4.02  7.5e-05 ***
+## factor(month)5     148.80      21.76    6.84  4.8e-11 ***
+## factor(month)6     160.84      21.59    7.45  1.1e-12 ***
+## factor(month)7     142.04      21.54    6.60  2.0e-10 ***
+## factor(month)8     137.30      21.60    6.36  8.1e-10 ***
+## factor(month)9      56.15      21.52    2.61   0.0096 ** 
+## factor(month)10     53.67      21.48    2.50   0.0130 *  
+## factor(month)11     19.99      21.36    0.94   0.3500    
+## factor(month)12    108.29      21.30    5.08  6.6e-07 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 75.4 on 289 degrees of freedom
+## Multiple R-squared:  0.772,  Adjusted R-squared:  0.761 
+## F-statistic:   70 on 14 and 289 DF,  p-value: &lt;2e-16</code></pre>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="lab-viii-time-series.html#cb169-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Saving the Residuals</span></span>
+<span id="cb169-2"><a href="lab-viii-time-series.html#cb169-2" aria-hidden="true" tabindex="-1"></a>dta<span class="sc">$</span>residual_errors  <span class="ot">&lt;-</span> <span class="fu">resid</span>(reg.lt)</span>
+<span id="cb169-3"><a href="lab-viii-time-series.html#cb169-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb169-4"><a href="lab-viii-time-series.html#cb169-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Regressing Residuals</span></span>
+<span id="cb169-5"><a href="lab-viii-time-series.html#cb169-5" aria-hidden="true" tabindex="-1"></a>lag_err <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">NA</span>, dta<span class="sc">$</span>residual_errors[<span class="dv">1</span><span class="sc">:</span>(<span class="fu">length</span>(dta<span class="sc">$</span>residual_errors)<span class="sc">-</span><span class="dv">1</span>)])</span>
+<span id="cb169-6"><a href="lab-viii-time-series.html#cb169-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb169-7"><a href="lab-viii-time-series.html#cb169-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lag_err, dta<span class="sc">$</span>residual_errors, <span class="at">pch=</span><span class="dv">20</span>, <span class="at">xlab =</span> <span class="st">&quot;Lagged Residuals&quot;</span>, </span>
+<span id="cb169-8"><a href="lab-viii-time-series.html#cb169-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Residuals&quot;</span>, <span class="at">bty=</span><span class="st">&quot;n&quot;</span>, <span class="at">col=</span><span class="st">&quot;dark blue&quot;</span>, <span class="at">las=</span><span class="dv">1</span>)</span>
+<span id="cb169-9"><a href="lab-viii-time-series.html#cb169-9" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="fu">lm</span>(dta<span class="sc">$</span>residual_errors <span class="sc">~</span> lag_err), <span class="at">lwd=</span><span class="dv">2</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-72-1.png" width="672" /></p>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="lab-viii-time-series.html#cb170-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Plotting Over Time</span></span>
+<span id="cb170-2"><a href="lab-viii-time-series.html#cb170-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(dta<span class="sc">$</span>residual_errors, <span class="at">pch=</span><span class="dv">20</span>, <span class="at">xlab =</span> <span class="st">&quot;Time&quot;</span>, <span class="at">las=</span><span class="dv">1</span>, </span>
+<span id="cb170-3"><a href="lab-viii-time-series.html#cb170-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Residuals&quot;</span>, <span class="at">bty=</span><span class="st">&quot;n&quot;</span>, <span class="at">col=</span><span class="st">&quot;dark blue&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-72-2.png" width="672" /></p>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="lab-viii-time-series.html#cb171-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating season category and plotting residual error</span></span>
+<span id="cb171-2"><a href="lab-viii-time-series.html#cb171-2" aria-hidden="true" tabindex="-1"></a>dta <span class="sc">%&gt;%</span> </span>
+<span id="cb171-3"><a href="lab-viii-time-series.html#cb171-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb171-4"><a href="lab-viii-time-series.html#cb171-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">as.Date</span>(date), <span class="at">y=</span>residual_errors, <span class="at">col=</span>season), <span class="at">size=</span>.<span class="dv">8</span>) <span class="sc">+</span></span>
+<span id="cb171-5"><a href="lab-viii-time-series.html#cb171-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">&quot;orange&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;darkblue&quot;</span>))<span class="sc">+</span></span>
+<span id="cb171-6"><a href="lab-viii-time-series.html#cb171-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Date&quot;</span>, <span class="at">y=</span><span class="st">&quot;Residual Errors&quot;</span>) <span class="sc">+</span></span>
+<span id="cb171-7"><a href="lab-viii-time-series.html#cb171-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb171-8"><a href="lab-viii-time-series.html#cb171-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major.y=</span><span class="fu">element_line</span>(<span class="at">color=</span><span class="st">&quot;darkgrey&quot;</span>, <span class="at">linetype=</span><span class="st">&quot;dotted&quot;</span>), <span class="at">panel.grid.minor.y=</span><span class="fu">element_line</span>(<span class="at">color=</span><span class="st">&quot;darkgrey&quot;</span>, <span class="at">linetype=</span><span class="st">&quot;dotted&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb171-9"><a href="lab-viii-time-series.html#cb171-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">col=</span><span class="st">&quot;Season&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-72-3.png" width="672" /></p>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="lab-viii-time-series.html#cb172-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating season category and plotting residual error</span></span>
+<span id="cb172-2"><a href="lab-viii-time-series.html#cb172-2" aria-hidden="true" tabindex="-1"></a>dta <span class="sc">%&gt;%</span> </span>
+<span id="cb172-3"><a href="lab-viii-time-series.html#cb172-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb172-4"><a href="lab-viii-time-series.html#cb172-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">as.Date</span>(date), <span class="at">y=</span>residual_errors, <span class="at">col=</span>season)) <span class="sc">+</span></span>
+<span id="cb172-5"><a href="lab-viii-time-series.html#cb172-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">&quot;orange&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;darkblue&quot;</span>))<span class="sc">+</span></span>
+<span id="cb172-6"><a href="lab-viii-time-series.html#cb172-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Date&quot;</span>, <span class="at">y=</span><span class="st">&quot;Residual Errors&quot;</span>) <span class="sc">+</span></span>
+<span id="cb172-7"><a href="lab-viii-time-series.html#cb172-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb172-8"><a href="lab-viii-time-series.html#cb172-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major.y=</span><span class="fu">element_line</span>(<span class="at">color=</span><span class="st">&quot;darkgrey&quot;</span>, <span class="at">linetype=</span><span class="st">&quot;dotted&quot;</span>), <span class="at">panel.grid.minor.y=</span><span class="fu">element_line</span>(<span class="at">color=</span><span class="st">&quot;darkgrey&quot;</span>, <span class="at">linetype=</span><span class="st">&quot;dotted&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb172-9"><a href="lab-viii-time-series.html#cb172-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">col=</span><span class="st">&quot;Season&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-72-4.png" width="672" /></p>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="lab-viii-time-series.html#cb173-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Cochrane-Orcutt Model</span></span>
+<span id="cb173-2"><a href="lab-viii-time-series.html#cb173-2" aria-hidden="true" tabindex="-1"></a>reg.orc2 <span class="ot">&lt;-</span> <span class="fu">cochrane.orcutt</span>(reg.lt)</span>
+<span id="cb173-3"><a href="lab-viii-time-series.html#cb173-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reg.orc2)</span></code></pre></div>
+<pre><code>## Call:
+## lm(formula = lttrucksales ~ logGasReal + unem + logPop + factor(month), 
+##     data = dta)
+## 
+##                 Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)     -21271.5     2398.4   -8.87  &lt; 2e-16 ***
+## logGasReal        -148.4       44.3   -3.35  0.00092 ***
+## unem               -52.5        6.2   -8.47  1.3e-15 ***
+## logPop            1758.2      190.3    9.24  &lt; 2e-16 ***
+## factor(month)2      60.0       12.9    4.66  4.8e-06 ***
+## factor(month)3     165.7       16.8    9.87  &lt; 2e-16 ***
+## factor(month)4      91.0       19.7    4.61  6.0e-06 ***
+## factor(month)5     152.7       21.0    7.26  3.6e-12 ***
+## factor(month)6     162.2       20.9    7.76  1.4e-13 ***
+## factor(month)7     143.1       20.8    6.87  3.9e-11 ***
+## factor(month)8     139.7       20.9    6.67  1.3e-10 ***
+## factor(month)9      60.0       20.8    2.89  0.00409 ** 
+## factor(month)10     57.9       19.7    2.94  0.00351 ** 
+## factor(month)11     23.4       17.4    1.34  0.18114    
+## factor(month)12    111.1       13.9    7.98  3.5e-14 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 57.3 on 298 degrees of freedom
+## Multiple R-squared:  0.631 ,  Adjusted R-squared:  0.626
+## F-statistic: 35.1 on 4 and 298 DF,  p-value: &lt; 4.603e-54
+## 
+## Durbin-Watson statistic 
+## (original):    0.72932 , p-value: 1.646e-28
+## (transformed): 2.33482 , p-value: 9.971e-01</code></pre>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="lab-vii-regression-discontinuity-designs.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

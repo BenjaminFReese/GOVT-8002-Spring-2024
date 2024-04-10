@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>8 Lab VII: Regression Discontinuity Designs | GOVT 8002 Shared Working Book</title>
+  <meta name="description" content="8 Lab VII: Regression Discontinuity Designs | GOVT 8002 Shared Working Book" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="8 Lab VII: Regression Discontinuity Designs | GOVT 8002 Shared Working Book" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="8 Lab VII: Regression Discontinuity Designs | GOVT 8002 Shared Working Book" />
+  
+  
+  
+
+<meta name="author" content="Benjamin Reese | bfr11@georgetown.edu" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="lab-vi-lists-loops-functions-in-r.html"/>
+<link rel="next" href="lab-viii-time-series.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#purpose-of-this-site"><i class="fa fa-check"></i><b>1.1</b> Purpose of This Site</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#loading-data"><i class="fa fa-check"></i><b>1.2</b> Loading Data</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="lab-i-tidyverse.html"><a href="lab-i-tidyverse.html"><i class="fa fa-check"></i><b>2</b> Lab I: Tidyverse</a>
+<ul>
+<li class="chapter" data-level="2.0.1" data-path="lab-i-tidyverse.html"><a href="lab-i-tidyverse.html#preparation"><i class="fa fa-check"></i><b>2.0.1</b> Preparation</a></li>
+<li class="chapter" data-level="2.1" data-path="lab-i-tidyverse.html"><a href="lab-i-tidyverse.html#join-the-data-sets."><i class="fa fa-check"></i><b>2.1</b> Join the data sets.</a></li>
+<li class="chapter" data-level="2.2" data-path="lab-i-tidyverse.html"><a href="lab-i-tidyverse.html#create-and-add-the-following-four-variables-to-your-dataframe-density-based-on-sqmiles-and-pop2019-deaths-per-capita-based-on-new_death-cases-per-capita-based-on-new_case-and-vaccinated-percent-based-on-series_complete_12pluspop_pct."><i class="fa fa-check"></i><b>2.2</b> Create and add the following four variables to your dataframe: density (based on <em>sqMiles</em> and <em>pop2019</em>), deaths per capita (based on <em>new_death</em>), cases per capita (based on <em>new_case</em>) and vaccinated percent (based on <em>Series_Complete_12PlusPop_Pct</em>).</a></li>
+<li class="chapter" data-level="2.3" data-path="lab-i-tidyverse.html"><a href="lab-i-tidyverse.html#estimate-three-regression-models-with-deaths-per-capita-on-your-selected-day-as-the-dependent-variable."><i class="fa fa-check"></i><b>2.3</b> Estimate three regression models with deaths per capita on your selected day as the dependent variable.</a></li>
+<li class="chapter" data-level="2.4" data-path="lab-i-tidyverse.html"><a href="lab-i-tidyverse.html#assess-specific-vaccines"><i class="fa fa-check"></i><b>2.4</b> Assess specific vaccines</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="lab-ii-panel-data.html"><a href="lab-ii-panel-data.html"><i class="fa fa-check"></i><b>3</b> Lab II: Panel Data</a>
+<ul>
+<li class="chapter" data-level="3.0.1" data-path="lab-ii-panel-data.html"><a href="lab-ii-panel-data.html#preparation-1"><i class="fa fa-check"></i><b>3.0.1</b> Preparation</a></li>
+<li class="chapter" data-level="3.1" data-path="lab-ii-panel-data.html"><a href="lab-ii-panel-data.html#load-the-data-from-oxford_covid_data_us_latest.csv"><i class="fa fa-check"></i><b>3.1</b> Load the data from Oxford_Covid_data_US_latest.csv</a></li>
+<li class="chapter" data-level="3.2" data-path="lab-ii-panel-data.html"><a href="lab-ii-panel-data.html#data-organization"><i class="fa fa-check"></i><b>3.2</b> Data Organization</a></li>
+<li class="chapter" data-level="3.3" data-path="lab-ii-panel-data.html"><a href="lab-ii-panel-data.html#use-the-lag-function-in-dplyr-to-create-lagged-variables-for-cases-and-deaths.-also-create-difference-e.g.-dcases-that-is-the-change-in-cases-for-each-state-by-date."><i class="fa fa-check"></i><b>3.3</b> Use the lag function in dplyr to create lagged variables for cases and deaths. Also create “difference” (e.g., dCases) that is the change in cases for each state by date.</a></li>
+<li class="chapter" data-level="3.4" data-path="lab-ii-panel-data.html"><a href="lab-ii-panel-data.html#merge-the-above-data-frame-to-data-in-usstates.xlsx"><i class="fa fa-check"></i><b>3.4</b> Merge the above data frame to data in <em>USstates.xlsx</em></a></li>
+<li class="chapter" data-level="3.5" data-path="lab-ii-panel-data.html"><a href="lab-ii-panel-data.html#estimate-a-pooled-model-of-total-cases-per-capita-as-a-function-of-state-policy.-discuss."><i class="fa fa-check"></i><b>3.5</b> Estimate a pooled model of total cases per capita as a function of state policy. Discuss.</a></li>
+<li class="chapter" data-level="3.6" data-path="lab-ii-panel-data.html"><a href="lab-ii-panel-data.html#estimate-a-one-way-fixed-effect-model-where-the-fixed-effect-is-state.-note-that-state-is-indicated-in-a-variable-called-regionname.-estimate-using-both-lsdv-and-the-de-meaned-version-in-the-plm-package.-can-you-identify-a-source-of-bias"><i class="fa fa-check"></i><b>3.6</b> Estimate a one-way fixed effect model where the fixed effect is state. (Note that state is indicated in a variable called <em>RegionName</em>.) Estimate using both LSDV and the <em>de-meaned</em> version in the plm package. Can you identify a source of bias?</a></li>
+<li class="chapter" data-level="3.7" data-path="lab-ii-panel-data.html"><a href="lab-ii-panel-data.html#estimate-a-two-way-fixed-effect-model-where-the-fixed-effects-are-state-and-date.-estimate-using-both-lsdv-and-the-de-meaned-version-in-the-plm-package.-does-this-model-address-the-source-of-bias-identified-earlier"><i class="fa fa-check"></i><b>3.7</b> Estimate a two-way fixed effect model where the fixed effects are state and date. Estimate using both LSDV and the <em>de-meaned</em> version in the plm package. Does this model address the source of bias identified earlier?</a>
+<ul>
+<li class="chapter" data-level="3.7.1" data-path="lab-ii-panel-data.html"><a href="lab-ii-panel-data.html#this-is-an-initial-analysis.-we-would-also-want-to"><i class="fa fa-check"></i><b>3.7.1</b> This is an initial analysis. We would also want to</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="lab-iii-2sls-instrumental-variables.html"><a href="lab-iii-2sls-instrumental-variables.html"><i class="fa fa-check"></i><b>4</b> Lab III: 2SLS &amp; Instrumental Variables</a>
+<ul>
+<li class="chapter" data-level="4.0.1" data-path="lab-iii-2sls-instrumental-variables.html"><a href="lab-iii-2sls-instrumental-variables.html#preparation-2"><i class="fa fa-check"></i><b>4.0.1</b> Preparation</a></li>
+<li class="chapter" data-level="4.1" data-path="lab-iii-2sls-instrumental-variables.html"><a href="lab-iii-2sls-instrumental-variables.html#estimate-a-basic-ols-model-with-do-others-regard-you-as-religious-as-the-dependent-variable-as-a-function-of-hajj2006.-explain-how-there-might-be-endogeneity."><i class="fa fa-check"></i><b>4.1</b> Estimate a basic OLS model with “Do others regard you as religious” as the dependent variable as a function of Hajj2006. Explain how there might be endogeneity.</a></li>
+<li class="chapter" data-level="4.2" data-path="lab-iii-2sls-instrumental-variables.html"><a href="lab-iii-2sls-instrumental-variables.html#explain-how-the-success-variable-may-satisfy-the-conditions-for-a-instrumental-variable."><i class="fa fa-check"></i><b>4.2</b> Explain how the “success” variable may satisfy the conditions for a instrumental variable.</a></li>
+<li class="chapter" data-level="4.3" data-path="lab-iii-2sls-instrumental-variables.html"><a href="lab-iii-2sls-instrumental-variables.html#estimate-a-2sls-model-religious-as-a-function-of-hajj2006."><i class="fa fa-check"></i><b>4.3</b> Estimate a 2SLS model <em>Religious</em> as a function of Hajj2006.</a></li>
+<li class="chapter" data-level="4.4" data-path="lab-iii-2sls-instrumental-variables.html"><a href="lab-iii-2sls-instrumental-variables.html#show-the-first-stage-from-the-2sls-model-above.-explain-the-implications-of-the-results."><i class="fa fa-check"></i><b>4.4</b> Show the first stage from the 2SLS model above. Explain the implications of the results.</a></li>
+<li class="chapter" data-level="4.5" data-path="lab-iii-2sls-instrumental-variables.html"><a href="lab-iii-2sls-instrumental-variables.html#add-covariates-for-age-literacy-urban-group-size-and-gender-to-the-2sls-model-religious-as-a-function-of-hajj2006.-what-is-different-which-variables-are-included-in-the-first-stage"><i class="fa fa-check"></i><b>4.5</b> Add covariates for age, literacy, urban, group size and gender to the 2SLS model <em>Religious</em> as a function of Hajj2006. What is different? Which variables are included in the first stage?</a></li>
+<li class="chapter" data-level="4.6" data-path="lab-iii-2sls-instrumental-variables.html"><a href="lab-iii-2sls-instrumental-variables.html#run-multiple-2sls-models-with-ossamaincorrect-govtforce-natlinterest-happy-girlsschool-and-jobswomen-variables-as-dependent-variables.-use-the-list-of-covariates-from-earlier.-if-you-want-try-using-a-loop-or-lapply-but-not-necessary."><i class="fa fa-check"></i><b>4.6</b> Run multiple 2SLS models with OssamaIncorrect, GovtForce, NatlInterest, Happy, GirlsSchool and JobsWomen variables as dependent variables. Use the list of covariates from earlier. If you want, try using a loop or lapply (but not necessary).</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="lab-iv-data-visualization.html"><a href="lab-iv-data-visualization.html"><i class="fa fa-check"></i><b>5</b> Lab IV: Data Visualization</a>
+<ul>
+<li class="chapter" data-level="5.0.1" data-path="lab-iv-data-visualization.html"><a href="lab-iv-data-visualization.html#preparation-3"><i class="fa fa-check"></i><b>5.0.1</b> Preparation</a></li>
+<li class="chapter" data-level="5.1" data-path="lab-iv-data-visualization.html"><a href="lab-iv-data-visualization.html#base-r-version"><i class="fa fa-check"></i><b>5.1</b> Base R Version</a></li>
+<li class="chapter" data-level="5.2" data-path="lab-iv-data-visualization.html"><a href="lab-iv-data-visualization.html#base-r-version-2"><i class="fa fa-check"></i><b>5.2</b> Base R Version 2</a></li>
+<li class="chapter" data-level="5.3" data-path="lab-iv-data-visualization.html"><a href="lab-iv-data-visualization.html#libraryggplot-version-1"><i class="fa fa-check"></i><b>5.3</b> <code>library(ggplot)</code> Version 1</a></li>
+<li class="chapter" data-level="5.4" data-path="lab-iv-data-visualization.html"><a href="lab-iv-data-visualization.html#libraryggplot-version-2"><i class="fa fa-check"></i><b>5.4</b> <code>library(ggplot)</code> Version 2</a></li>
+<li class="chapter" data-level="5.5" data-path="lab-iv-data-visualization.html"><a href="lab-iv-data-visualization.html#alternative-plot-of-your-choice"><i class="fa fa-check"></i><b>5.5</b> Alternative Plot of Your Choice</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="lab-v-experiments.html"><a href="lab-v-experiments.html"><i class="fa fa-check"></i><b>6</b> Lab V: Experiments</a>
+<ul>
+<li class="chapter" data-level="6.0.1" data-path="lab-v-experiments.html"><a href="lab-v-experiments.html#preparation-4"><i class="fa fa-check"></i><b>6.0.1</b> Preparation</a></li>
+<li class="chapter" data-level="6.1" data-path="lab-v-experiments.html"><a href="lab-v-experiments.html#why-is-an-experiment-useful-in-this-context"><i class="fa fa-check"></i><b>6.1</b> Why is an experiment useful in this context?</a></li>
+<li class="chapter" data-level="6.2" data-path="lab-v-experiments.html"><a href="lab-v-experiments.html#is-there-evidence-of-balance-in-the-treatment-why-is-this-relevant-check-for-balance-of-each-treatment-with-respect-to-age-category-gender-education-income-voting-for-sisi-and-not-voting-for-non-boycott-reasons."><i class="fa fa-check"></i><b>6.2</b> Is there evidence of balance in the treatment? Why is this relevant? Check for balance of each treatment with respect to age category, gender, education, income, voting for Sisi and not voting for non-boycott reasons.</a></li>
+<li class="chapter" data-level="6.3" data-path="lab-v-experiments.html"><a href="lab-v-experiments.html#is-there-evidence-of-an-overall-unbalanced-sample-look-at-gender-and-discuss-results-in-light-of-your-answer-on-treatment-balance-above."><i class="fa fa-check"></i><b>6.3</b> Is there evidence of an overall unbalanced sample? Look at gender and discuss results in light of your answer on treatment-balance above.</a></li>
+<li class="chapter" data-level="6.4" data-path="lab-v-experiments.html"><a href="lab-v-experiments.html#what-is-the-effect-of-the-treatments-on-whether-respondents-viewed-the-police-tactics-as-justified-run-one-model-with-only-the-treatment-variables-and-another-that-includes-controls-for-age-category-gender-education-income-voting-for-sisi-and-not-voting-for-non-boycott-reasons."><i class="fa fa-check"></i><b>6.4</b> What is the effect of the treatments on whether respondents viewed the police tactics as justified? Run one model with only the treatment variables and another that includes controls for age category, gender, education, income, voting for Sisi and not voting for non-boycott reasons.</a></li>
+<li class="chapter" data-level="6.5" data-path="lab-v-experiments.html"><a href="lab-v-experiments.html#what-is-the-effect-of-the-treatments-on-whether-respondents-viewed-the-police-tactics-as-justified"><i class="fa fa-check"></i><b>6.5</b> What is the effect of the treatments on whether respondents viewed the police tactics as justified?</a></li>
+<li class="chapter" data-level="6.6" data-path="lab-v-experiments.html"><a href="lab-v-experiments.html#test-whether-the-effects-of-treatment-1-police-favorable-message-are-the-same-as-treatment-3-both-sides-for-each-dependent-variable.-feel-free-to-use-the-linearhypothesis-function-in-the-car-package."><i class="fa fa-check"></i><b>6.6</b> Test whether the effects of treatment 1 (police-favorable message) are the same as treatment 3 (both sides) for each dependent variable. Feel free to use the linearHypothesis function in the car package.</a></li>
+<li class="chapter" data-level="6.7" data-path="lab-v-experiments.html"><a href="lab-v-experiments.html#in-some-political-contexts-messages-have-a-different-effect-on-people-with-less-engagement-in-politics.-are-there-heterogeneous-treatment-effects-by-those-who-did-not-vote-for-reasons-other-than-to-boycott-the-election-and-those-who-did-not-feel-free-to-explore-multiple-other-ways-there-could-be-heterogeneous-effects-e.g.-perhaps-there-are-different-effects-on-sisi-supporters-but-you-only-need-to-report-on-possible-differential-effects-of-the-treatments-on-the-not-accountable-dependent-variable."><i class="fa fa-check"></i><b>6.7</b> In some political contexts, messages have a different effect on people with less engagement in politics. Are there heterogeneous treatment effects by those who did not vote for reasons other than to boycott the election and those who did not? Feel free to explore multiple other ways there could be heterogeneous effects (e.g., perhaps there are different effects on Sisi supporters), but you only need to report on possible differential effects of the treatments on the “not-accountable” dependent variable.</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="lab-vi-lists-loops-functions-in-r.html"><a href="lab-vi-lists-loops-functions-in-r.html"><i class="fa fa-check"></i><b>7</b> Lab VI: Lists, Loops, &amp; Functions in R</a>
+<ul>
+<li class="chapter" data-level="7.0.1" data-path="lab-vi-lists-loops-functions-in-r.html"><a href="lab-vi-lists-loops-functions-in-r.html#preperation"><i class="fa fa-check"></i><b>7.0.1</b> Preperation</a></li>
+<li class="chapter" data-level="7.1" data-path="lab-vi-lists-loops-functions-in-r.html"><a href="lab-vi-lists-loops-functions-in-r.html#load-data.-stock-price-data-is-in-stocks2020.csv.-presidential-prices-are-in-uspres_2020_price-history-by-market--bulk.xlsx."><i class="fa fa-check"></i><b>7.1</b> Load data. Stock price data is in stocks2020.csv. Presidential prices are in USPres_2020_Price History By Market -Bulk.xlsx.</a></li>
+<li class="chapter" data-level="7.2" data-path="lab-vi-lists-loops-functions-in-r.html"><a href="lab-vi-lists-loops-functions-in-r.html#create-data-frame-with-daily-price-data-for-trump-in-2020"><i class="fa fa-check"></i><b>7.2</b> Create data frame with daily price data for Trump in 2020</a></li>
+<li class="chapter" data-level="7.3" data-path="lab-vi-lists-loops-functions-in-r.html"><a href="lab-vi-lists-loops-functions-in-r.html#merge-the-stock-price-and-trump-price-data"><i class="fa fa-check"></i><b>7.3</b> Merge the stock price and Trump price data</a></li>
+<li class="chapter" data-level="7.4" data-path="lab-vi-lists-loops-functions-in-r.html"><a href="lab-vi-lists-loops-functions-in-r.html#create-a-list-of-stock-ticker-names-do-not-include-dji-as-a-ticker"><i class="fa fa-check"></i><b>7.4</b> Create a list of stock ticker names (do not include DJI as a ticker)</a></li>
+<li class="chapter" data-level="7.5" data-path="lab-vi-lists-loops-functions-in-r.html"><a href="lab-vi-lists-loops-functions-in-r.html#create-a-function-that-calculates-daily-percent-change."><i class="fa fa-check"></i><b>7.5</b> Create a function that calculates daily percent change.</a></li>
+<li class="chapter" data-level="7.6" data-path="lab-vi-lists-loops-functions-in-r.html"><a href="lab-vi-lists-loops-functions-in-r.html#check-that-your-function-worked"><i class="fa fa-check"></i><b>7.6</b> Check that your function worked</a></li>
+<li class="chapter" data-level="7.7" data-path="lab-vi-lists-loops-functions-in-r.html"><a href="lab-vi-lists-loops-functions-in-r.html#loop-thru-list-of-tickers-and-run-regressions-in-which-daily-change-in-stock-price-is-a-function-of-change-in-djia-and-change-in-trump-price.-create-a-data-frame-that-stores-the-coefficient-standard-error-and-t-stat-for-the-trump-variable-for-each-stock.-include-a-column-that-has-the-stock-ticker-in-that-data-frame-as-well.-show-the-first-six-rows-of-the-data-frame-with-the-ticker-and-coefficient-information."><i class="fa fa-check"></i><b>7.7</b> Loop thru list of tickers and run regressions in which daily change in stock price is a function of change in DJIA and change in Trump price. Create a data frame that stores the coefficient, standard error and t-stat for the Trump variable for each stock. Include a column that has the stock ticker in that data frame as well. Show the first six rows of the data frame with the ticker and coefficient information.</a>
+<ul>
+<li class="chapter" data-level="7.7.1" data-path="lab-vi-lists-loops-functions-in-r.html"><a href="lab-vi-lists-loops-functions-in-r.html#if-interested-in-doing-more-not-required-or-for-credit-use-lapply-list-apply-to-regress-stock-price-on-trump-and-dji-for-all-stock-tickers."><i class="fa fa-check"></i><b>7.7.1</b> <em>IF INTERESTED IN DOING MORE (not required or for credit)</em>: Use <code>lapply()</code> (list apply) to regress stock price on Trump and DJI for all stock tickers.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="lab-vii-regression-discontinuity-designs.html"><a href="lab-vii-regression-discontinuity-designs.html"><i class="fa fa-check"></i><b>8</b> Lab VII: Regression Discontinuity Designs</a>
+<ul>
+<li class="chapter" data-level="8.0.1" data-path="lab-vii-regression-discontinuity-designs.html"><a href="lab-vii-regression-discontinuity-designs.html#preparation-5"><i class="fa fa-check"></i><b>8.0.1</b> Preparation</a></li>
+<li class="chapter" data-level="8.1" data-path="lab-vii-regression-discontinuity-designs.html"><a href="lab-vii-regression-discontinuity-designs.html#replicate-the-main-result-using-the-specification-for-table-1.-in-this-model-the-rd-allows-for-differential-quadratic-models-above-and-below-the-threshold-and-also-has-dummy-variables-for-birthdays.-the-data-is-limited-to-observations-within-2-years-of-21."><i class="fa fa-check"></i><b>8.1</b> Replicate the main result using the specification for Table 1. In this model, the RD allows for differential quadratic models above and below the threshold and also has dummy variables for birthdays. The data is limited to observations within 2 years of 21.</a></li>
+<li class="chapter" data-level="8.2" data-path="lab-vii-regression-discontinuity-designs.html"><a href="lab-vii-regression-discontinuity-designs.html#estimate-a-series-of-models-with-slightly-different-specifications.-first-try-the-above-specification-with-only-linear-age-variable-first-fixing-slope-to-be-the-same-above-and-below-the-threshhold-and-then-allowing-slope-to-vary-above-and-below-the-threshhold."><i class="fa fa-check"></i><b>8.2</b> Estimate a series of models with slightly different specifications. First, try the above specification with only linear age variable, first fixing slope to be the same above and below the threshhold and then allowing slope to vary above and below the threshhold.</a></li>
+<li class="chapter" data-level="8.3" data-path="lab-vii-regression-discontinuity-designs.html"><a href="lab-vii-regression-discontinuity-designs.html#now-see-what-happens-when-you-use-a-different-window-sizes.-feel-free-to-experiment-but-only-need-to-report-one-specification."><i class="fa fa-check"></i><b>8.3</b> Now see what happens when you use a different window sizes. Feel free to experiment (but only need to report one specification.)</a></li>
+<li class="chapter" data-level="8.4" data-path="lab-vii-regression-discontinuity-designs.html"><a href="lab-vii-regression-discontinuity-designs.html#to-figure-out-what-is-going-on-lets-create-some-figures.-first-lets-re-create-figure-1-in-the-paper.-i-provide-the-code-to-create-a-binned-graph-for-the-alcohol-arrest-rate.-your-task-is-to-add-another-arrest-category-to-the-plot."><i class="fa fa-check"></i><b>8.4</b> To figure out what is going on, let’s create some figures. First, let’s re-create Figure 1 in the paper. I provide the code to create a binned graph for the alcohol arrest rate. Your task is to add another arrest category to the plot.</a></li>
+<li class="chapter" data-level="8.5" data-path="lab-vii-regression-discontinuity-designs.html"><a href="lab-vii-regression-discontinuity-designs.html#now-create-a-figure-based-on-a-linear-model.-you-can-try-different-window-sizes-but-need-only-report-one.-do-this-for-alcohol-and-feel-free-to-add-other-crimes-but-not-required."><i class="fa fa-check"></i><b>8.5</b> Now create a figure based on a linear model. You can try different window sizes but need only report one. Do this for alcohol (and feel free to add other crimes, but not required.)</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="lab-viii-time-series.html"><a href="lab-viii-time-series.html"><i class="fa fa-check"></i><b>9</b> Lab VIII: Time Series</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="lab-viii-time-series.html"><a href="lab-viii-time-series.html#preparation-6"><i class="fa fa-check"></i><b>9.1</b> Preparation</a></li>
+<li class="chapter" data-level="9.2" data-path="lab-viii-time-series.html"><a href="lab-viii-time-series.html#data-description"><i class="fa fa-check"></i><b>9.2</b> Data description:</a></li>
+<li class="chapter" data-level="9.3" data-path="lab-viii-time-series.html"><a href="lab-viii-time-series.html#estimate-a-model-with-the-log-of-miles-driven-use-the-unadjusted-data-logmilesna-as-a-function-of-log-gas-prices-unemployment-and-log-of-population.-dont-account-for-autocorrelation.-is-the-effect-of-gas-statistically-significant"><i class="fa fa-check"></i><b>9.3</b> Estimate a model with the log of miles driven (use the unadjusted data: logMilesNA) as a function of log gas prices, unemployment and log of population. (Don’t account for autocorrelation.) Is the effect of gas statistically significant?</a></li>
+<li class="chapter" data-level="9.4" data-path="lab-viii-time-series.html"><a href="lab-viii-time-series.html#do-you-think-there-is-seasonality-in-driving-test-by-adding-dummy-variables-for-month-to-the-above-model.-is-there-evidence-of-monthly-variation-is-the-effect-of-gas-statistically-significant-now-create-a-categorical-variable-for-seasons-and-run-the-model-without-the-month-dummy-variable."><i class="fa fa-check"></i><b>9.4</b> Do you think there is seasonality in driving? Test by adding dummy variables for month to the above model. Is there evidence of monthly variation? Is the effect of gas statistically significant? Now create a categorical variable for seasons and run the model without the month dummy variable.</a></li>
+<li class="chapter" data-level="9.5" data-path="lab-viii-time-series.html"><a href="lab-viii-time-series.html#briefly-explain-why-there-might-be-autocorrelation."><i class="fa fa-check"></i><b>9.5</b> Briefly explain why there might be autocorrelation.</a></li>
+<li class="chapter" data-level="9.6" data-path="lab-viii-time-series.html"><a href="lab-viii-time-series.html#create-a-figure-that-is-useful-to-assess-whether-there-is-autocorrelation-you-have-two-choices-here.-draw-a-sketch-here."><i class="fa fa-check"></i><b>9.6</b> Create a figure that is useful to assess whether there is autocorrelation (you have two choices here). Draw a sketch here.</a></li>
+<li class="chapter" data-level="9.7" data-path="lab-viii-time-series.html"><a href="lab-viii-time-series.html#test-whether-there-is-first-order-autocorrelation.-report-the-key-statistic-from-this-test.-what-would-a-coefficient-of-1-indicate"><i class="fa fa-check"></i><b>9.7</b> Test whether there is first order autocorrelation. Report the key statistic from this test. What would a coefficient of 1 indicate?</a></li>
+<li class="chapter" data-level="9.8" data-path="lab-viii-time-series.html"><a href="lab-viii-time-series.html#use-newey-west-standard-errors-to-account-for-autocorrelation.-use-the-same-variables-as-in-part-b.-determine-the-t-stats-and-describe-the-similarities-and-difference-with-earlier-results."><i class="fa fa-check"></i><b>9.8</b> Use Newey-West standard errors to account for autocorrelation. Use the same variables as in part (b). Determine the t-stats and describe the similarities and difference with earlier results.</a></li>
+<li class="chapter" data-level="9.9" data-path="lab-viii-time-series.html"><a href="lab-viii-time-series.html#estimate-a-model-that-adjusts-for-autocorrelation.-use-the-same-variables-as-in-part-b.-describe-similarities-and-difference-with-earlier-results."><i class="fa fa-check"></i><b>9.9</b> Estimate a model that adjusts for autocorrelation. Use the same variables as in part (b). Describe similarities and difference with earlier results.</a></li>
+<li class="chapter" data-level="9.10" data-path="lab-viii-time-series.html"><a href="lab-viii-time-series.html#estimate-a-dynamic-model-of-miles-driven-using-control-variables-from-above.-discuss-key-differences."><i class="fa fa-check"></i><b>9.10</b> Estimate a dynamic model of miles driven using control variables from above. Discuss key differences.</a></li>
+<li class="chapter" data-level="9.11" data-path="lab-viii-time-series.html"><a href="lab-viii-time-series.html#run-an-augmented-dickey-fuller-test-on-logmilesna."><i class="fa fa-check"></i><b>9.11</b> Run an Augmented Dickey-Fuller Test on logMilesNA.</a></li>
+<li class="chapter" data-level="9.12" data-path="lab-viii-time-series.html"><a href="lab-viii-time-series.html#optional-question-conduct-the-same-analysis-from-a-b-d-and-g-using-light-truck-sales-as-the-dependent-variable.-light-truck-sales-use-more-gas-than-cars-so-the-question-is-whether-gas-prices-affect-the-kind-of-car-people-buy-which-will-affect-gas-consumption-for-the-life-of-the-car."><i class="fa fa-check"></i><b>9.12</b> OPTIONAL QUESTION: Conduct the same analysis from a, b, d, and g using light truck sales as the dependent variable. (Light truck sales use more gas than cars, so the question is whether gas prices affect the kind of car people buy which will affect gas consumption for the life of the car.)</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">GOVT 8002 Shared Working Book</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="lab-vii-regression-discontinuity-designs" class="section level1 hasAnchor" number="8">
+<h1><span class="header-section-number">8</span> Lab VII: Regression Discontinuity Designs<a href="lab-vii-regression-discontinuity-designs.html#lab-vii-regression-discontinuity-designs" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><img src="Images/image_7.jpg" width="700" /></p>
+<div id="preparation-5" class="section level3 hasAnchor" number="8.0.1">
+<h3><span class="header-section-number">8.0.1</span> Preparation<a href="lab-vii-regression-discontinuity-designs.html#preparation-5" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="lab-vii-regression-discontinuity-designs.html#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Packages</span></span>
+<span id="cb101-2"><a href="lab-vii-regression-discontinuity-designs.html#cb101-2" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(knitr)</span>
+<span id="cb101-3"><a href="lab-vii-regression-discontinuity-designs.html#cb101-3" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(haven)</span>
+<span id="cb101-4"><a href="lab-vii-regression-discontinuity-designs.html#cb101-4" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(dplyr)</span>
+<span id="cb101-5"><a href="lab-vii-regression-discontinuity-designs.html#cb101-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rdrobust)</span>
+<span id="cb101-6"><a href="lab-vii-regression-discontinuity-designs.html#cb101-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb101-7"><a href="lab-vii-regression-discontinuity-designs.html#cb101-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data: data saved as object named &quot;dta&quot;</span></span>
+<span id="cb101-8"><a href="lab-vii-regression-discontinuity-designs.html#cb101-8" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;~/GOVT8002/Spring 2023/Lab VIII/Ch11_Lab_AlcoholCrime.RData&quot;</span>)</span></code></pre></div>
+<p>Carpenter and Dobkin (2015) analyzes the relationship between alcohol and crime using a regression discontinuity design.</p>
+<p>In this lab we will replicate the results and then explore different specifications. As you will see, some reasonable alternative specifications yield quite different results. The goal here will be to see if we can make any progress in explaining why the results vary as we vary the specification.</p>
+<p>From the codebook: “The individual level arrest records are collapsed into arrest counts by age in days for each crime type in the SAS program”P01 Estimate Age Profile of Crime Rates.sas”. This program uses populations estimated from the census in “P00 Estimate Population Denominators.sas” to compute arrest rates per 10,000.”</p>
+<p>The main variables are</p>
+<ul>
+<li><em>all_r</em>: number of arrrests across all categories. Our main dependent variable. Arrest data is also broken down for <em>violent_r</em>, <em>property_r</em>, <em>ill_drugs_r</em> and <em>alcohol_r</em></li>
+<li><em>post</em> a dumm variable indicating the individual is over 21 years of age</li>
+<li><em>linear</em>: the number of years from being age 21 (that is, <em>linear</em> = 1.0 indicates 22 year olds. Negative values means the individual is under 21 and positive values indicate the individual is over than 21.</li>
+<li><em>square</em>: the squared value of linear</li>
+<li><em>linear_post</em>: interaction of linear and post</li>
+<li><em>square_post</em>: interaction of square and post</li>
+<li>birthday dummies: e.g., birthday_19 is a dummy for a person’s 19th birthday and birthday_19_1 is a dummy for the day after a person’s 19th birthday. Use this code in your formula: + birthday_19 + birthday_19_1 + birthday_20 + birthday_20_1 + birthday_21 + birthday_21_1 + birthday_22 + birthday_22_1 + birthday_23 + birthday_23_1</li>
+</ul>
+<p>See Carpenter, Christopher and Carlos Dobkin. 2015. The Minimum Legal Drinking Age and Crime. <em>The Review of Economics and Statistics.</em> 97:2, 521-524.</p>
+</div>
+<div id="replicate-the-main-result-using-the-specification-for-table-1.-in-this-model-the-rd-allows-for-differential-quadratic-models-above-and-below-the-threshold-and-also-has-dummy-variables-for-birthdays.-the-data-is-limited-to-observations-within-2-years-of-21." class="section level2 hasAnchor" number="8.1">
+<h2><span class="header-section-number">8.1</span> Replicate the main result using the specification for Table 1. In this model, the RD allows for differential quadratic models above and below the threshold and also has dummy variables for birthdays. The data is limited to observations within 2 years of 21.<a href="lab-vii-regression-discontinuity-designs.html#replicate-the-main-result-using-the-specification-for-table-1.-in-this-model-the-rd-allows-for-differential-quadratic-models-above-and-below-the-threshold-and-also-has-dummy-variables-for-birthdays.-the-data-is-limited-to-observations-within-2-years-of-21." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="lab-vii-regression-discontinuity-designs.html#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Basic RD model</span></span>
+<span id="cb102-2"><a href="lab-vii-regression-discontinuity-designs.html#cb102-2" aria-hidden="true" tabindex="-1"></a>rd_basic <span class="ot">&lt;-</span> <span class="fu">lm</span>(all_r <span class="sc">~</span> post <span class="sc">+</span> linear,  <span class="at">data=</span>dta[<span class="fu">abs</span>(dta<span class="sc">$</span>linear) <span class="sc">&lt;=</span> <span class="dv">2</span>, ])</span>
+<span id="cb102-3"><a href="lab-vii-regression-discontinuity-designs.html#cb102-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(rd_basic)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = all_r ~ post + linear, data = dta[abs(dta$linear) &lt;= 
+##     2, ])
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+##  -89.9  -22.3   -2.3   16.9  695.7 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  1534.91       2.54   605.0   &lt;2e-16 ***
+## post           76.89       4.54    16.9   &lt;2e-16 ***
+## linear        -48.79       1.96   -24.9   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 43 on 1458 degrees of freedom
+## Multiple R-squared:  0.325,  Adjusted R-squared:  0.324 
+## F-statistic:  351 on 2 and 1458 DF,  p-value: &lt;2e-16</code></pre>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="lab-vii-regression-discontinuity-designs.html#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Differing Slopes</span></span>
+<span id="cb104-2"><a href="lab-vii-regression-discontinuity-designs.html#cb104-2" aria-hidden="true" tabindex="-1"></a>rd_basic <span class="ot">&lt;-</span> <span class="fu">lm</span>(all_r <span class="sc">~</span> post<span class="sc">*</span>linear,  <span class="at">data=</span>dta[<span class="fu">abs</span>(dta<span class="sc">$</span>linear) <span class="sc">&lt;=</span> <span class="dv">2</span>, ])</span>
+<span id="cb104-3"><a href="lab-vii-regression-discontinuity-designs.html#cb104-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(rd_basic)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = all_r ~ post * linear, data = dta[abs(dta$linear) &lt;= 
+##     2, ])
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+##  -89.8  -19.5   -2.8   14.9  671.8 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  1559.03       3.04  512.29   &lt;2e-16 ***
+## post           76.76       4.30   17.86   &lt;2e-16 ***
+## linear        -24.71       2.63   -9.39   &lt;2e-16 ***
+## post:linear   -48.06       3.72  -12.92   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 41 on 1457 degrees of freedom
+## Multiple R-squared:  0.394,  Adjusted R-squared:  0.393 
+## F-statistic:  316 on 3 and 1457 DF,  p-value: &lt;2e-16</code></pre>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="lab-vii-regression-discontinuity-designs.html#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Model with covariates and vary</span></span>
+<span id="cb106-2"><a href="lab-vii-regression-discontinuity-designs.html#cb106-2" aria-hidden="true" tabindex="-1"></a>rd_replicate <span class="ot">&lt;-</span> <span class="fu">lm</span>(all_r <span class="sc">~</span> post <span class="sc">+</span> linear <span class="sc">+</span> square <span class="sc">+</span> linear_post <span class="sc">+</span> square_post <span class="sc">+</span> birthday_19  <span class="sc">+</span> birthday_20  <span class="sc">+</span> birthday_20_1 <span class="sc">+</span> birthday_21  <span class="sc">+</span> birthday_21_1 <span class="sc">+</span> birthday_22 <span class="sc">+</span> birthday_22_1,  <span class="at">data=</span>dta[<span class="fu">abs</span>(dta<span class="sc">$</span>linear) <span class="sc">&lt;=</span> <span class="dv">2</span>, ])</span>
+<span id="cb106-3"><a href="lab-vii-regression-discontinuity-designs.html#cb106-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(rd_replicate)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = all_r ~ post + linear + square + linear_post + square_post + 
+##     birthday_19 + birthday_20 + birthday_20_1 + birthday_21 + 
+##     birthday_21_1 + birthday_22 + birthday_22_1, data = dta[abs(dta$linear) &lt;= 
+##     2, ])
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+##  -83.0  -17.6   -0.8   15.9  216.1 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)    1543.07       2.92  527.74  &lt; 2e-16 ***
+## post             91.21       4.15   22.00  &lt; 2e-16 ***
+## linear          -71.06       6.76  -10.51  &lt; 2e-16 ***
+## square          -23.73       3.27   -7.25  6.9e-13 ***
+## linear_post     -16.26       9.57   -1.70     0.09 .  
+## square_post      33.67       4.63    7.27  5.8e-13 ***
+## birthday_19     287.42      26.40   10.89  &lt; 2e-16 ***
+## birthday_20     408.59      26.27   15.55  &lt; 2e-16 ***
+## birthday_20_1   217.60      26.27    8.28  2.7e-16 ***
+## birthday_21     633.83      26.40   24.01  &lt; 2e-16 ***
+## birthday_21_1   673.30      26.40   25.51  &lt; 2e-16 ***
+## birthday_22     347.87      26.27   13.24  &lt; 2e-16 ***
+## birthday_22_1   382.07      26.27   14.54  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 26 on 1448 degrees of freedom
+## Multiple R-squared:  0.754,  Adjusted R-squared:  0.752 
+## F-statistic:  371 on 12 and 1448 DF,  p-value: &lt;2e-16</code></pre>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="lab-vii-regression-discontinuity-designs.html#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Diagnostic plot</span></span>
+<span id="cb108-2"><a href="lab-vii-regression-discontinuity-designs.html#cb108-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(dta<span class="sc">$</span>linear, <span class="at">main =</span> <span class="st">&quot;Diagnostic Plot&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;Age&quot;</span>, <span class="at">las=</span><span class="dv">1</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-57-1.png" width="672" /></p>
+</div>
+<div id="estimate-a-series-of-models-with-slightly-different-specifications.-first-try-the-above-specification-with-only-linear-age-variable-first-fixing-slope-to-be-the-same-above-and-below-the-threshhold-and-then-allowing-slope-to-vary-above-and-below-the-threshhold." class="section level2 hasAnchor" number="8.2">
+<h2><span class="header-section-number">8.2</span> Estimate a series of models with slightly different specifications. First, try the above specification with only linear age variable, first fixing slope to be the same above and below the threshhold and then allowing slope to vary above and below the threshhold.<a href="lab-vii-regression-discontinuity-designs.html#estimate-a-series-of-models-with-slightly-different-specifications.-first-try-the-above-specification-with-only-linear-age-variable-first-fixing-slope-to-be-the-same-above-and-below-the-threshhold-and-then-allowing-slope-to-vary-above-and-below-the-threshhold." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="lab-vii-regression-discontinuity-designs.html#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Additional Models</span></span>
+<span id="cb109-2"><a href="lab-vii-regression-discontinuity-designs.html#cb109-2" aria-hidden="true" tabindex="-1"></a>RD<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">lm</span>(all_r <span class="sc">~</span> post <span class="sc">+</span> linear <span class="sc">+</span> birthday_19  <span class="sc">+</span> birthday_20  <span class="sc">+</span> birthday_20_1 <span class="sc">+</span> birthday_21  <span class="sc">+</span> birthday_21_1 <span class="sc">+</span> birthday_22 <span class="sc">+</span> birthday_22_1,  <span class="at">data=</span>dta[<span class="fu">abs</span>(dta<span class="sc">$</span>linear) <span class="sc">&lt;=</span> <span class="dv">2</span>, ])</span>
+<span id="cb109-3"><a href="lab-vii-regression-discontinuity-designs.html#cb109-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(RD<span class="fl">.1</span>)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = all_r ~ post + linear + birthday_19 + birthday_20 + 
+##     birthday_20_1 + birthday_21 + birthday_21_1 + birthday_22 + 
+##     birthday_22_1, data = dta[abs(dta$linear) &lt;= 2, ])
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -86.03 -20.19  -0.52  18.63 200.85 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)    1537.00       1.74  885.50  &lt; 2e-16 ***
+## post             68.66       3.11   22.09  &lt; 2e-16 ***
+## linear          -45.49       1.34  -33.84  &lt; 2e-16 ***
+## birthday_19     249.71      29.65    8.42  &lt; 2e-16 ***
+## birthday_20     416.50      29.62   14.06  &lt; 2e-16 ***
+## birthday_20_1   225.57      29.62    7.62  4.7e-14 ***
+## birthday_21     662.46      29.65   22.34  &lt; 2e-16 ***
+## birthday_21_1   701.82      29.65   23.67  &lt; 2e-16 ***
+## birthday_22     344.62      29.62   11.63  &lt; 2e-16 ***
+## birthday_22_1   378.75      29.62   12.79  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 30 on 1451 degrees of freedom
+## Multiple R-squared:  0.687,  Adjusted R-squared:  0.685 
+## F-statistic:  353 on 9 and 1451 DF,  p-value: &lt;2e-16</code></pre>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="lab-vii-regression-discontinuity-designs.html#cb111-1" aria-hidden="true" tabindex="-1"></a>RD<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">lm</span>(all_r <span class="sc">~</span> post <span class="sc">+</span> linear <span class="sc">+</span> linear_post <span class="sc">+</span> birthday_19  <span class="sc">+</span> birthday_20  <span class="sc">+</span> birthday_20_1 <span class="sc">+</span> birthday_21  <span class="sc">+</span> birthday_21_1 <span class="sc">+</span> birthday_22 <span class="sc">+</span> birthday_22_1,  <span class="at">data=</span>dta[<span class="fu">abs</span>(dta<span class="sc">$</span>linear) <span class="sc">&lt;=</span> <span class="dv">2</span>, ])</span>
+<span id="cb111-2"><a href="lab-vii-regression-discontinuity-designs.html#cb111-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(RD<span class="fl">.2</span>)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = all_r ~ post + linear + linear_post + birthday_19 + 
+##     birthday_20 + birthday_20_1 + birthday_21 + birthday_21_1 + 
+##     birthday_22 + birthday_22_1, data = dta[abs(dta$linear) &lt;= 
+##     2, ])
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -85.70 -17.55  -0.79  15.90 222.68 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)    1558.89       1.99  785.09   &lt;2e-16 ***
+## post             68.72       2.81   24.45   &lt;2e-16 ***
+## linear          -23.60       1.72  -13.73   &lt;2e-16 ***
+## linear_post     -43.78       2.43  -18.00   &lt;2e-16 ***
+## birthday_19     271.60      26.84   10.12   &lt;2e-16 ***
+## birthday_20     416.50      26.79   15.55   &lt;2e-16 ***
+## birthday_20_1   225.51      26.79    8.42   &lt;2e-16 ***
+## birthday_21     640.51      26.84   23.86   &lt;2e-16 ***
+## birthday_21_1   679.93      26.84   25.33   &lt;2e-16 ***
+## birthday_22     344.56      26.79   12.86   &lt;2e-16 ***
+## birthday_22_1   378.75      26.79   14.14   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 27 on 1450 degrees of freedom
+## Multiple R-squared:  0.744,  Adjusted R-squared:  0.742 
+## F-statistic:  421 on 10 and 1450 DF,  p-value: &lt;2e-16</code></pre>
+</div>
+<div id="now-see-what-happens-when-you-use-a-different-window-sizes.-feel-free-to-experiment-but-only-need-to-report-one-specification." class="section level2 hasAnchor" number="8.3">
+<h2><span class="header-section-number">8.3</span> Now see what happens when you use a different window sizes. Feel free to experiment (but only need to report one specification.)<a href="lab-vii-regression-discontinuity-designs.html#now-see-what-happens-when-you-use-a-different-window-sizes.-feel-free-to-experiment-but-only-need-to-report-one-specification." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="lab-vii-regression-discontinuity-designs.html#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Different window sizes</span></span>
+<span id="cb113-2"><a href="lab-vii-regression-discontinuity-designs.html#cb113-2" aria-hidden="true" tabindex="-1"></a>RD<span class="fl">.3</span> <span class="ot">&lt;-</span> <span class="fu">lm</span>(all_r <span class="sc">~</span> post <span class="sc">+</span> linear <span class="sc">+</span> linear_post,  <span class="at">data=</span>dta[<span class="fu">abs</span>(dta<span class="sc">$</span>linear) <span class="sc">&lt;=</span> <span class="dv">1</span>, ])</span>
+<span id="cb113-3"><a href="lab-vii-regression-discontinuity-designs.html#cb113-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(RD<span class="fl">.3</span>)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = all_r ~ post + linear + linear_post, data = dta[abs(dta$linear) &lt;= 
+##     1, ])
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+##  -85.2  -21.4   -3.2   15.4  665.3 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  1543.85       4.97  310.46  &lt; 2e-16 ***
+## post           98.44       7.01   14.04  &lt; 2e-16 ***
+## linear        -53.88       8.60   -6.27  6.2e-10 ***
+## linear_post   -33.66      12.13   -2.77   0.0057 ** 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 47 on 727 degrees of freedom
+## Multiple R-squared:  0.221,  Adjusted R-squared:  0.218 
+## F-statistic: 68.7 on 3 and 727 DF,  p-value: &lt;2e-16</code></pre>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="lab-vii-regression-discontinuity-designs.html#cb115-1" aria-hidden="true" tabindex="-1"></a>RD<span class="fl">.4</span> <span class="ot">&lt;-</span> <span class="fu">lm</span>(all_r <span class="sc">~</span> post <span class="sc">+</span> linear <span class="sc">+</span> linear_post,  <span class="at">data=</span>dta[<span class="fu">abs</span>(dta<span class="sc">$</span>linear) <span class="sc">&lt;=</span> <span class="dv">3</span>, ])</span>
+<span id="cb115-2"><a href="lab-vii-regression-discontinuity-designs.html#cb115-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(RD<span class="fl">.4</span>)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = all_r ~ post + linear + linear_post, data = dta[abs(dta$linear) &lt;= 
+##     3, ])
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -256.5  -26.5    1.3   30.7  671.7 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  1629.58       3.64  448.25   &lt;2e-16 ***
+## post            6.25       5.14    1.22     0.22    
+## linear         54.93       2.10   26.19   &lt;2e-16 ***
+## linear_post  -127.40       2.96  -42.98   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 60 on 2187 degrees of freedom
+## Multiple R-squared:  0.471,  Adjusted R-squared:  0.47 
+## F-statistic:  648 on 3 and 2187 DF,  p-value: &lt;2e-16</code></pre>
+</div>
+<div id="to-figure-out-what-is-going-on-lets-create-some-figures.-first-lets-re-create-figure-1-in-the-paper.-i-provide-the-code-to-create-a-binned-graph-for-the-alcohol-arrest-rate.-your-task-is-to-add-another-arrest-category-to-the-plot." class="section level2 hasAnchor" number="8.4">
+<h2><span class="header-section-number">8.4</span> To figure out what is going on, let’s create some figures. First, let’s re-create Figure 1 in the paper. I provide the code to create a binned graph for the alcohol arrest rate. Your task is to add another arrest category to the plot.<a href="lab-vii-regression-discontinuity-designs.html#to-figure-out-what-is-going-on-lets-create-some-figures.-first-lets-re-create-figure-1-in-the-paper.-i-provide-the-code-to-create-a-binned-graph-for-the-alcohol-arrest-rate.-your-task-is-to-add-another-arrest-category-to-the-plot." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="lab-vii-regression-discontinuity-designs.html#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The original paper used 2 week intervals for bins, using the following to </span></span>
+<span id="cb117-2"><a href="lab-vii-regression-discontinuity-designs.html#cb117-2" aria-hidden="true" tabindex="-1"></a><span class="co"># generate a number indicating age in years grouped into 2 week intervals</span></span>
+<span id="cb117-3"><a href="lab-vii-regression-discontinuity-designs.html#cb117-3" aria-hidden="true" tabindex="-1"></a>dta<span class="sc">$</span>age_fortnight <span class="ot">=</span> <span class="dv">21</span> <span class="sc">+</span> (<span class="dv">14</span><span class="sc">*</span><span class="fu">floor</span>(dta<span class="sc">$</span>days_to_21<span class="sc">/</span><span class="dv">14</span>))<span class="sc">/</span><span class="dv">365</span></span>
+<span id="cb117-4"><a href="lab-vii-regression-discontinuity-designs.html#cb117-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb117-5"><a href="lab-vii-regression-discontinuity-designs.html#cb117-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a variable placing each observation in a &quot;bin&quot;</span></span>
+<span id="cb117-6"><a href="lab-vii-regression-discontinuity-designs.html#cb117-6" aria-hidden="true" tabindex="-1"></a>dta<span class="sc">$</span>bin  <span class="ot">=</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(<span class="fu">unique</span>(dta<span class="sc">$</span>age_fortnight)), <span class="fu">table</span>(dta<span class="sc">$</span>age_fortnight))</span>
+<span id="cb117-7"><a href="lab-vii-regression-discontinuity-designs.html#cb117-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb117-8"><a href="lab-vii-regression-discontinuity-designs.html#cb117-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Use &quot;window&quot; to set how wide the window is above and below 21; e.g. window = 2</span></span>
+<span id="cb117-9"><a href="lab-vii-regression-discontinuity-designs.html#cb117-9" aria-hidden="true" tabindex="-1"></a><span class="co"># limits years 19 to 23</span></span>
+<span id="cb117-10"><a href="lab-vii-regression-discontinuity-designs.html#cb117-10" aria-hidden="true" tabindex="-1"></a>window <span class="ot">=</span> <span class="dv">2</span></span>
+<span id="cb117-11"><a href="lab-vii-regression-discontinuity-designs.html#cb117-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb117-12"><a href="lab-vii-regression-discontinuity-designs.html#cb117-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a dataframe that contains average crime rates grouped by bin</span></span>
+<span id="cb117-13"><a href="lab-vii-regression-discontinuity-designs.html#cb117-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the dplyr package to simplify data organization</span></span>
+<span id="cb117-14"><a href="lab-vii-regression-discontinuity-designs.html#cb117-14" aria-hidden="true" tabindex="-1"></a>dta_bin <span class="ot">&lt;-</span>  dta <span class="sc">%&gt;%</span> </span>
+<span id="cb117-15"><a href="lab-vii-regression-discontinuity-designs.html#cb117-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(days_to_21, all_r, property_r, age_fortnight, alcohol_r, bin) <span class="sc">%&gt;%</span></span>
+<span id="cb117-16"><a href="lab-vii-regression-discontinuity-designs.html#cb117-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(bin) <span class="sc">%&gt;%</span></span>
+<span id="cb117-17"><a href="lab-vii-regression-discontinuity-designs.html#cb117-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">property_r_bin =</span> <span class="fu">mean</span>(property_r), </span>
+<span id="cb117-18"><a href="lab-vii-regression-discontinuity-designs.html#cb117-18" aria-hidden="true" tabindex="-1"></a>            <span class="at">all_r_bin =</span> <span class="fu">mean</span>(all_r), </span>
+<span id="cb117-19"><a href="lab-vii-regression-discontinuity-designs.html#cb117-19" aria-hidden="true" tabindex="-1"></a>            <span class="at">alcohol_r_bin =</span> <span class="fu">mean</span>(alcohol_r), </span>
+<span id="cb117-20"><a href="lab-vii-regression-discontinuity-designs.html#cb117-20" aria-hidden="true" tabindex="-1"></a>            <span class="at">age_fortnight_bin =</span> <span class="fu">mean</span>(age_fortnight)) <span class="sc">%&gt;%</span></span>
+<span id="cb117-21"><a href="lab-vii-regression-discontinuity-designs.html#cb117-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(age_fortnight_bin <span class="sc">&gt;=</span> <span class="dv">21</span><span class="sc">-</span> window <span class="sc">&amp;</span> age_fortnight_bin <span class="sc">&lt;=</span> <span class="dv">21</span> <span class="sc">+</span> window)</span>
+<span id="cb117-22"><a href="lab-vii-regression-discontinuity-designs.html#cb117-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb117-23"><a href="lab-vii-regression-discontinuity-designs.html#cb117-23" aria-hidden="true" tabindex="-1"></a><span class="do">## With rdrobust</span></span>
+<span id="cb117-24"><a href="lab-vii-regression-discontinuity-designs.html#cb117-24" aria-hidden="true" tabindex="-1"></a><span class="fu">rdplot</span>(dta<span class="sc">$</span>all_r , dta<span class="sc">$</span>linear, <span class="at">c=</span><span class="dv">0</span>, <span class="at">kernel =</span> <span class="st">&quot;triangular&quot;</span>, <span class="at">x.label =</span> <span class="st">&quot;Year from Age Cutoff&quot;</span>, y.label</span>
+<span id="cb117-25"><a href="lab-vii-regression-discontinuity-designs.html#cb117-25" aria-hidden="true" tabindex="-1"></a><span class="ot">=</span> <span class="st">&quot;Arrest Rate&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Effect of Alcohol on Crime&quot;</span>, <span class="at">binselect =</span> <span class="st">&quot;es&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-60-1.png" width="672" /></p>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="lab-vii-regression-discontinuity-designs.html#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a dataframe that contains average crime rates grouped by bin, limited to the </span></span>
+<span id="cb118-2"><a href="lab-vii-regression-discontinuity-designs.html#cb118-2" aria-hidden="true" tabindex="-1"></a><span class="co"># window set by the window parameter</span></span>
+<span id="cb118-3"><a href="lab-vii-regression-discontinuity-designs.html#cb118-3" aria-hidden="true" tabindex="-1"></a>dta<span class="sc">$</span>age_fortnight <span class="ot">=</span> <span class="dv">21</span> <span class="sc">+</span> (<span class="dv">14</span><span class="sc">*</span><span class="fu">floor</span>(dta<span class="sc">$</span>days_to_21<span class="sc">/</span><span class="dv">14</span>))<span class="sc">/</span><span class="dv">365</span></span>
+<span id="cb118-4"><a href="lab-vii-regression-discontinuity-designs.html#cb118-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-5"><a href="lab-vii-regression-discontinuity-designs.html#cb118-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a variable placing each observation in a &quot;bin&quot;</span></span>
+<span id="cb118-6"><a href="lab-vii-regression-discontinuity-designs.html#cb118-6" aria-hidden="true" tabindex="-1"></a>dta<span class="sc">$</span>bin  <span class="ot">=</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(<span class="fu">unique</span>(dta<span class="sc">$</span>age_fortnight)), <span class="fu">table</span>(dta<span class="sc">$</span>age_fortnight))</span>
+<span id="cb118-7"><a href="lab-vii-regression-discontinuity-designs.html#cb118-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-8"><a href="lab-vii-regression-discontinuity-designs.html#cb118-8" aria-hidden="true" tabindex="-1"></a>window <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb118-9"><a href="lab-vii-regression-discontinuity-designs.html#cb118-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-10"><a href="lab-vii-regression-discontinuity-designs.html#cb118-10" aria-hidden="true" tabindex="-1"></a>dta_bin <span class="ot">&lt;-</span>  dta <span class="sc">%&gt;%</span> </span>
+<span id="cb118-11"><a href="lab-vii-regression-discontinuity-designs.html#cb118-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(days_to_21, all_r, property_r, age_fortnight, alcohol_r, bin) <span class="sc">%&gt;%</span></span>
+<span id="cb118-12"><a href="lab-vii-regression-discontinuity-designs.html#cb118-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(bin) <span class="sc">%&gt;%</span></span>
+<span id="cb118-13"><a href="lab-vii-regression-discontinuity-designs.html#cb118-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">property_r_bin =</span> <span class="fu">mean</span>(property_r), </span>
+<span id="cb118-14"><a href="lab-vii-regression-discontinuity-designs.html#cb118-14" aria-hidden="true" tabindex="-1"></a>            <span class="at">all_r_bin =</span> <span class="fu">mean</span>(all_r), </span>
+<span id="cb118-15"><a href="lab-vii-regression-discontinuity-designs.html#cb118-15" aria-hidden="true" tabindex="-1"></a>            <span class="at">alcohol_r_bin =</span> <span class="fu">mean</span>(alcohol_r), </span>
+<span id="cb118-16"><a href="lab-vii-regression-discontinuity-designs.html#cb118-16" aria-hidden="true" tabindex="-1"></a>            <span class="at">age_fortnight_bin =</span> <span class="fu">mean</span>(age_fortnight)) <span class="sc">%&gt;%</span></span>
+<span id="cb118-17"><a href="lab-vii-regression-discontinuity-designs.html#cb118-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(age_fortnight_bin <span class="sc">&gt;=</span> <span class="dv">21</span><span class="sc">-</span> window <span class="sc">&amp;</span> age_fortnight_bin <span class="sc">&lt;=</span> <span class="dv">21</span> <span class="sc">+</span> window)</span>
+<span id="cb118-18"><a href="lab-vii-regression-discontinuity-designs.html#cb118-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-19"><a href="lab-vii-regression-discontinuity-designs.html#cb118-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Linear model with varying slopes below and above threshhold</span></span>
+<span id="cb118-20"><a href="lab-vii-regression-discontinuity-designs.html#cb118-20" aria-hidden="true" tabindex="-1"></a><span class="co"># ALCOHOL ARREST RATES</span></span>
+<span id="cb118-21"><a href="lab-vii-regression-discontinuity-designs.html#cb118-21" aria-hidden="true" tabindex="-1"></a>rd_linear_left <span class="ot">&lt;-</span> <span class="fu">lm</span>(all_r <span class="sc">~</span> linear, dta[dta<span class="sc">$</span>linear <span class="sc">&gt;</span> <span class="sc">-</span>window <span class="sc">&amp;</span> dta<span class="sc">$</span>linear <span class="sc">&lt;</span><span class="dv">0</span>, ])</span>
+<span id="cb118-22"><a href="lab-vii-regression-discontinuity-designs.html#cb118-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-23"><a href="lab-vii-regression-discontinuity-designs.html#cb118-23" aria-hidden="true" tabindex="-1"></a>rd_linear_right <span class="ot">&lt;-</span> <span class="fu">lm</span>(all_r <span class="sc">~</span> linear, dta[dta<span class="sc">$</span>linear  <span class="sc">&lt;</span> window <span class="sc">&amp;</span> dta<span class="sc">$</span>linear <span class="sc">&gt;</span><span class="dv">0</span>, ])</span>
+<span id="cb118-24"><a href="lab-vii-regression-discontinuity-designs.html#cb118-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-25"><a href="lab-vii-regression-discontinuity-designs.html#cb118-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a scatter plot</span></span>
+<span id="cb118-26"><a href="lab-vii-regression-discontinuity-designs.html#cb118-26" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(dta_bin<span class="sc">$</span>age_fortnight_bin, dta_bin<span class="sc">$</span>all_r_bin,  <span class="at">type =</span> <span class="st">&quot;p&quot;</span>, <span class="at">pch =</span> <span class="dv">1</span>, <span class="at">cex =</span> <span class="fl">0.5</span>, </span>
+<span id="cb118-27"><a href="lab-vii-regression-discontinuity-designs.html#cb118-27" aria-hidden="true" tabindex="-1"></a>     <span class="at">cex.main =</span> <span class="fl">0.8</span>, <span class="at">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;&quot;</span>, <span class="at">xaxt=</span><span class="st">&#39;n&#39;</span>, <span class="at">yaxt=</span><span class="st">&#39;n&#39;</span>)</span>
+<span id="cb118-28"><a href="lab-vii-regression-discontinuity-designs.html#cb118-28" aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="dv">2</span>, <span class="at">las =</span> <span class="dv">1</span>, <span class="at">tick =</span> T, <span class="at">cex.axis =</span> .<span class="dv">8</span>, <span class="at">mgp =</span> <span class="fu">c</span>(<span class="dv">2</span>,.<span class="dv">7</span>,<span class="dv">0</span>))</span>
+<span id="cb118-29"><a href="lab-vii-regression-discontinuity-designs.html#cb118-29" aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="dv">1</span>, <span class="at">tick =</span> T, <span class="at">at=</span> <span class="fu">seq</span>(<span class="dv">17</span>, <span class="dv">25</span>, <span class="at">by=</span><span class="dv">1</span>), <span class="at">labels =</span><span class="fu">seq</span>(<span class="dv">17</span>, <span class="dv">25</span>, <span class="at">by=</span><span class="dv">1</span>),<span class="at">cex.axis =</span> .<span class="dv">8</span>, <span class="at">mgp =</span> <span class="fu">c</span>(<span class="dv">2</span>,.<span class="dv">3</span>,<span class="dv">0</span>))</span>
+<span id="cb118-30"><a href="lab-vii-regression-discontinuity-designs.html#cb118-30" aria-hidden="true" tabindex="-1"></a><span class="fu">mtext</span>(<span class="st">&quot;Arrest rate&quot;</span>,    <span class="at">las =</span> <span class="dv">1</span>, <span class="at">side =</span> <span class="dv">2</span>, <span class="at">at =</span> <span class="dv">520</span>, <span class="at">line =</span> <span class="sc">-</span><span class="fl">0.2</span>, <span class="at">cex =</span> <span class="dv">1</span>)</span>
+<span id="cb118-31"><a href="lab-vii-regression-discontinuity-designs.html#cb118-31" aria-hidden="true" tabindex="-1"></a><span class="fu">mtext</span>(<span class="st">&quot;Age at time of arrest&quot;</span>,  <span class="at">side =</span> <span class="dv">1</span>, <span class="at">line =</span> <span class="fl">1.</span>, <span class="at">cex =</span> <span class="fl">0.8</span>)</span>
+<span id="cb118-32"><a href="lab-vii-regression-discontinuity-designs.html#cb118-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-33"><a href="lab-vii-regression-discontinuity-designs.html#cb118-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Add fitted lines from &quot;left&quot; and &quot;right&quot; models</span></span>
+<span id="cb118-34"><a href="lab-vii-regression-discontinuity-designs.html#cb118-34" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="fu">seq</span>(<span class="dv">21</span> <span class="sc">-</span> window, <span class="dv">21</span>, <span class="at">by =</span> <span class="fl">0.1</span>), <span class="fu">coef</span>(rd_linear_left) [<span class="dv">1</span>] <span class="sc">+</span> </span>
+<span id="cb118-35"><a href="lab-vii-regression-discontinuity-designs.html#cb118-35" aria-hidden="true" tabindex="-1"></a>         <span class="fu">coef</span>(rd_linear_left) [<span class="dv">2</span>]<span class="sc">*</span><span class="fu">seq</span>(<span class="sc">-</span>window, <span class="dv">0</span>, <span class="at">by =</span> <span class="fl">0.1</span>), <span class="at">lwd =</span> <span class="dv">2</span>, </span>
+<span id="cb118-36"><a href="lab-vii-regression-discontinuity-designs.html#cb118-36" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="st">&quot;darkblue&quot;</span>, <span class="at">type =</span> <span class="st">&#39;l&#39;</span>)</span>
+<span id="cb118-37"><a href="lab-vii-regression-discontinuity-designs.html#cb118-37" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="fu">seq</span>(<span class="dv">21</span>, <span class="dv">21</span> <span class="sc">+</span> window, <span class="at">by =</span> <span class="fl">0.1</span>), <span class="fu">coef</span>(rd_linear_right)[<span class="dv">1</span>] <span class="sc">+</span> </span>
+<span id="cb118-38"><a href="lab-vii-regression-discontinuity-designs.html#cb118-38" aria-hidden="true" tabindex="-1"></a>         <span class="fu">coef</span>(rd_linear_right)[<span class="dv">2</span>]<span class="sc">*</span><span class="fu">seq</span>(<span class="dv">0</span>, window , <span class="at">by =</span> <span class="fl">0.1</span>), <span class="at">lwd =</span> <span class="dv">2</span>, </span>
+<span id="cb118-39"><a href="lab-vii-regression-discontinuity-designs.html#cb118-39" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="st">&quot;darkblue&quot;</span>, <span class="at">type =</span> <span class="st">&#39;l&#39;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-60-2.png" width="672" /></p>
+</div>
+<div id="now-create-a-figure-based-on-a-linear-model.-you-can-try-different-window-sizes-but-need-only-report-one.-do-this-for-alcohol-and-feel-free-to-add-other-crimes-but-not-required." class="section level2 hasAnchor" number="8.5">
+<h2><span class="header-section-number">8.5</span> Now create a figure based on a linear model. You can try different window sizes but need only report one. Do this for alcohol (and feel free to add other crimes, but not required.)<a href="lab-vii-regression-discontinuity-designs.html#now-create-a-figure-based-on-a-linear-model.-you-can-try-different-window-sizes-but-need-only-report-one.-do-this-for-alcohol-and-feel-free-to-add-other-crimes-but-not-required." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="lab-vii-regression-discontinuity-designs.html#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a dataframe that contains average crime rates grouped by bin, limited to the </span></span>
+<span id="cb119-2"><a href="lab-vii-regression-discontinuity-designs.html#cb119-2" aria-hidden="true" tabindex="-1"></a><span class="co"># window set by the window parameter</span></span>
+<span id="cb119-3"><a href="lab-vii-regression-discontinuity-designs.html#cb119-3" aria-hidden="true" tabindex="-1"></a>window <span class="ot">=</span> <span class="dv">4</span></span>
+<span id="cb119-4"><a href="lab-vii-regression-discontinuity-designs.html#cb119-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb119-5"><a href="lab-vii-regression-discontinuity-designs.html#cb119-5" aria-hidden="true" tabindex="-1"></a>dta_bin <span class="ot">&lt;-</span>  dta <span class="sc">%&gt;%</span> </span>
+<span id="cb119-6"><a href="lab-vii-regression-discontinuity-designs.html#cb119-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(days_to_21, all_r, property_r, age_fortnight, alcohol_r, bin) <span class="sc">%&gt;%</span></span>
+<span id="cb119-7"><a href="lab-vii-regression-discontinuity-designs.html#cb119-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(bin) <span class="sc">%&gt;%</span></span>
+<span id="cb119-8"><a href="lab-vii-regression-discontinuity-designs.html#cb119-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">property_r_bin =</span> <span class="fu">mean</span>(property_r), </span>
+<span id="cb119-9"><a href="lab-vii-regression-discontinuity-designs.html#cb119-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">all_r_bin =</span> <span class="fu">mean</span>(all_r), </span>
+<span id="cb119-10"><a href="lab-vii-regression-discontinuity-designs.html#cb119-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">alcohol_r_bin =</span> <span class="fu">mean</span>(alcohol_r), </span>
+<span id="cb119-11"><a href="lab-vii-regression-discontinuity-designs.html#cb119-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">age_fortnight_bin =</span> <span class="fu">mean</span>(age_fortnight)) <span class="sc">%&gt;%</span></span>
+<span id="cb119-12"><a href="lab-vii-regression-discontinuity-designs.html#cb119-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(age_fortnight_bin <span class="sc">&gt;=</span> <span class="dv">21</span><span class="sc">-</span> window <span class="sc">&amp;</span> age_fortnight_bin <span class="sc">&lt;=</span> <span class="dv">21</span> <span class="sc">+</span> window)</span>
+<span id="cb119-13"><a href="lab-vii-regression-discontinuity-designs.html#cb119-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb119-14"><a href="lab-vii-regression-discontinuity-designs.html#cb119-14" aria-hidden="true" tabindex="-1"></a><span class="co"># The original paper used 2 week intervals for bins, using the following to </span></span>
+<span id="cb119-15"><a href="lab-vii-regression-discontinuity-designs.html#cb119-15" aria-hidden="true" tabindex="-1"></a><span class="co"># generate a number indicating age in years grouped into 2 week intervals</span></span>
+<span id="cb119-16"><a href="lab-vii-regression-discontinuity-designs.html#cb119-16" aria-hidden="true" tabindex="-1"></a>dta<span class="sc">$</span>age_fortnight <span class="ot">=</span> <span class="dv">21</span> <span class="sc">+</span> (<span class="dv">14</span><span class="sc">*</span><span class="fu">floor</span>(dta<span class="sc">$</span>days_to_21<span class="sc">/</span><span class="dv">14</span>))<span class="sc">/</span><span class="dv">365</span></span>
+<span id="cb119-17"><a href="lab-vii-regression-discontinuity-designs.html#cb119-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb119-18"><a href="lab-vii-regression-discontinuity-designs.html#cb119-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a variable placing each observation in a &quot;bin&quot;</span></span>
+<span id="cb119-19"><a href="lab-vii-regression-discontinuity-designs.html#cb119-19" aria-hidden="true" tabindex="-1"></a>dta<span class="sc">$</span>bin  <span class="ot">=</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(<span class="fu">unique</span>(dta<span class="sc">$</span>age_fortnight)), <span class="fu">table</span>(dta<span class="sc">$</span>age_fortnight))</span>
+<span id="cb119-20"><a href="lab-vii-regression-discontinuity-designs.html#cb119-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb119-21"><a href="lab-vii-regression-discontinuity-designs.html#cb119-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Use &quot;window&quot; to set how wide the window is above and below 21; e.g. window = 2</span></span>
+<span id="cb119-22"><a href="lab-vii-regression-discontinuity-designs.html#cb119-22" aria-hidden="true" tabindex="-1"></a><span class="co"># limits years 19 to 23</span></span>
+<span id="cb119-23"><a href="lab-vii-regression-discontinuity-designs.html#cb119-23" aria-hidden="true" tabindex="-1"></a>window <span class="ot">=</span> <span class="dv">2</span></span>
+<span id="cb119-24"><a href="lab-vii-regression-discontinuity-designs.html#cb119-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb119-25"><a href="lab-vii-regression-discontinuity-designs.html#cb119-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb119-26"><a href="lab-vii-regression-discontinuity-designs.html#cb119-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a dataframe that contains average crime rates grouped by bin</span></span>
+<span id="cb119-27"><a href="lab-vii-regression-discontinuity-designs.html#cb119-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the dplyr package to simplify data organization</span></span>
+<span id="cb119-28"><a href="lab-vii-regression-discontinuity-designs.html#cb119-28" aria-hidden="true" tabindex="-1"></a>dta_bin <span class="ot">&lt;-</span>  dta <span class="sc">%&gt;%</span> </span>
+<span id="cb119-29"><a href="lab-vii-regression-discontinuity-designs.html#cb119-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(days_to_21, all_r, property_r, age_fortnight, alcohol_r, bin) <span class="sc">%&gt;%</span></span>
+<span id="cb119-30"><a href="lab-vii-regression-discontinuity-designs.html#cb119-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(bin) <span class="sc">%&gt;%</span></span>
+<span id="cb119-31"><a href="lab-vii-regression-discontinuity-designs.html#cb119-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">property_r_bin =</span> <span class="fu">mean</span>(property_r), </span>
+<span id="cb119-32"><a href="lab-vii-regression-discontinuity-designs.html#cb119-32" aria-hidden="true" tabindex="-1"></a>            <span class="at">all_r_bin =</span> <span class="fu">mean</span>(all_r), </span>
+<span id="cb119-33"><a href="lab-vii-regression-discontinuity-designs.html#cb119-33" aria-hidden="true" tabindex="-1"></a>            <span class="at">alcohol_r_bin =</span> <span class="fu">mean</span>(alcohol_r), </span>
+<span id="cb119-34"><a href="lab-vii-regression-discontinuity-designs.html#cb119-34" aria-hidden="true" tabindex="-1"></a>            <span class="at">age_fortnight_bin =</span> <span class="fu">mean</span>(age_fortnight)) <span class="sc">%&gt;%</span></span>
+<span id="cb119-35"><a href="lab-vii-regression-discontinuity-designs.html#cb119-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(age_fortnight_bin <span class="sc">&gt;=</span> <span class="dv">21</span><span class="sc">-</span> window <span class="sc">&amp;</span> age_fortnight_bin <span class="sc">&lt;=</span> <span class="dv">21</span> <span class="sc">+</span> window)</span>
+<span id="cb119-36"><a href="lab-vii-regression-discontinuity-designs.html#cb119-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb119-37"><a href="lab-vii-regression-discontinuity-designs.html#cb119-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Quadratic model with varying parameters below and above threshhold</span></span>
+<span id="cb119-38"><a href="lab-vii-regression-discontinuity-designs.html#cb119-38" aria-hidden="true" tabindex="-1"></a><span class="co"># ALCOHOL ARREST RATES</span></span>
+<span id="cb119-39"><a href="lab-vii-regression-discontinuity-designs.html#cb119-39" aria-hidden="true" tabindex="-1"></a>Alc.RD.Replicate.left <span class="ot">=</span> <span class="fu">lm</span>(alcohol_r <span class="sc">~</span> linear <span class="sc">+</span> square, dta[dta<span class="sc">$</span>linear <span class="sc">&gt;</span> <span class="sc">-</span>window <span class="sc">&amp;</span> dta<span class="sc">$</span>linear <span class="sc">&lt;</span><span class="dv">0</span>, ])</span>
+<span id="cb119-40"><a href="lab-vii-regression-discontinuity-designs.html#cb119-40" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Alc.RD.Replicate.left)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = alcohol_r ~ linear + square, data = dta[dta$linear &gt; 
+##     -window &amp; dta$linear &lt; 0, ])
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -45.57  -8.20  -1.26   7.19 204.45 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   394.19       1.67  236.50  &lt; 2e-16 ***
+## linear         -8.54       3.85   -2.22    0.027 *  
+## square        -11.46       1.86   -6.15  1.3e-09 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 15 on 726 degrees of freedom
+## Multiple R-squared:  0.265,  Adjusted R-squared:  0.263 
+## F-statistic:  131 on 2 and 726 DF,  p-value: &lt;2e-16</code></pre>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="lab-vii-regression-discontinuity-designs.html#cb121-1" aria-hidden="true" tabindex="-1"></a>Alc.RD.Replicate.right <span class="ot">=</span> <span class="fu">lm</span>(alcohol_r <span class="sc">~</span> linear <span class="sc">+</span> square, dta[dta<span class="sc">$</span>linear  <span class="sc">&lt;</span> window <span class="sc">&amp;</span> dta<span class="sc">$</span>linear <span class="sc">&gt;</span><span class="dv">0</span>, ])</span>
+<span id="cb121-2"><a href="lab-vii-regression-discontinuity-designs.html#cb121-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Alc.RD.Replicate.right)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = alcohol_r ~ linear + square, data = dta[dta$linear &lt; 
+##     window &amp; dta$linear &gt; 0, ])
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+##  -38.9  -10.0   -0.8    7.2  486.1 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   418.34       2.68  156.34  &lt; 2e-16 ***
+## linear        -22.03       6.18   -3.57  0.00039 ***
+## square          7.14       2.99    2.39  0.01724 *  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 24 on 726 degrees of freedom
+## Multiple R-squared:  0.0409, Adjusted R-squared:  0.0382 
+## F-statistic: 15.5 on 2 and 726 DF,  p-value: 2.65e-07</code></pre>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="lab-vii-regression-discontinuity-designs.html#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Quadratic model with varying parameters below and above threshhold</span></span>
+<span id="cb123-2"><a href="lab-vii-regression-discontinuity-designs.html#cb123-2" aria-hidden="true" tabindex="-1"></a><span class="co"># PROPERTY ARREST RATES</span></span>
+<span id="cb123-3"><a href="lab-vii-regression-discontinuity-designs.html#cb123-3" aria-hidden="true" tabindex="-1"></a>Prop.RD.Replicate.left <span class="ot">=</span> <span class="fu">lm</span>(property_r <span class="sc">~</span> linear <span class="sc">+</span> square, dta[dta<span class="sc">$</span>linear <span class="sc">&gt;</span> <span class="sc">-</span>window <span class="sc">&amp;</span> dta<span class="sc">$</span>linear <span class="sc">&lt;</span><span class="dv">0</span>, ])</span>
+<span id="cb123-4"><a href="lab-vii-regression-discontinuity-designs.html#cb123-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Prop.RD.Replicate.left)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = property_r ~ linear + square, data = dta[dta$linear &gt; 
+##     -window &amp; dta$linear &lt; 0, ])
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -28.50  -6.08  -0.02   5.92  28.63 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   224.35       1.01  222.52  &lt; 2e-16 ***
+## linear        -30.71       2.33  -13.19  &lt; 2e-16 ***
+## square          8.66       1.13    7.68  5.1e-14 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 9.1 on 726 degrees of freedom
+## Multiple R-squared:  0.905,  Adjusted R-squared:  0.904 
+## F-statistic: 3.44e+03 on 2 and 726 DF,  p-value: &lt;2e-16</code></pre>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="lab-vii-regression-discontinuity-designs.html#cb125-1" aria-hidden="true" tabindex="-1"></a>Prop.RD.Replicate.right <span class="ot">=</span> <span class="fu">lm</span>(property_r <span class="sc">~</span> linear <span class="sc">+</span> square, dta[dta<span class="sc">$</span>linear  <span class="sc">&lt;</span> window <span class="sc">&amp;</span> dta<span class="sc">$</span>linear <span class="sc">&gt;</span><span class="dv">0</span>, ])</span>
+<span id="cb125-2"><a href="lab-vii-regression-discontinuity-designs.html#cb125-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Prop.RD.Replicate.right)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = property_r ~ linear + square, data = dta[dta$linear &lt; 
+##     window &amp; dta$linear &gt; 0, ])
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -22.56  -5.28  -0.03   4.94  25.22 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  229.351      0.861  266.44  &lt; 2e-16 ***
+## linear       -29.618      1.988  -14.90  &lt; 2e-16 ***
+## square         3.668      0.962    3.81  0.00015 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 7.7 on 726 degrees of freedom
+## Multiple R-squared:  0.737,  Adjusted R-squared:  0.736 
+## F-statistic: 1.02e+03 on 2 and 726 DF,  p-value: &lt;2e-16</code></pre>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="lab-vii-regression-discontinuity-designs.html#cb127-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a # scatter plot</span></span>
+<span id="cb127-2"><a href="lab-vii-regression-discontinuity-designs.html#cb127-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(dta_bin<span class="sc">$</span>age_fortnight_bin, dta_bin<span class="sc">$</span>alcohol_r_bin,  <span class="at">type =</span> <span class="st">&quot;p&quot;</span>, <span class="at">pch =</span> <span class="dv">1</span>, <span class="at">cex =</span> <span class="fl">0.5</span>, <span class="at">cex.main =</span> <span class="fl">0.8</span>, <span class="at">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;&quot;</span>, <span class="at">xaxt=</span><span class="st">&#39;n&#39;</span>, <span class="at">yaxt=</span><span class="st">&#39;n&#39;</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">180</span>, <span class="dv">480</span>))</span>
+<span id="cb127-3"><a href="lab-vii-regression-discontinuity-designs.html#cb127-3" aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="dv">2</span>, <span class="at">las =</span> <span class="dv">1</span>, <span class="at">tick =</span> T, <span class="at">cex.axis =</span> .<span class="dv">8</span>, <span class="at">mgp =</span> <span class="fu">c</span>(<span class="dv">2</span>,.<span class="dv">7</span>,<span class="dv">0</span>))</span>
+<span id="cb127-4"><a href="lab-vii-regression-discontinuity-designs.html#cb127-4" aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="dv">1</span>, <span class="at">tick =</span> T, <span class="at">at=</span> <span class="fu">seq</span>(<span class="dv">17</span>, <span class="dv">25</span>, <span class="at">by=</span><span class="dv">1</span>), <span class="at">labels =</span><span class="fu">seq</span>(<span class="dv">17</span>, <span class="dv">25</span>, <span class="at">by=</span><span class="dv">1</span>),<span class="at">cex.axis =</span> .<span class="dv">8</span>, <span class="at">mgp =</span> <span class="fu">c</span>(<span class="dv">2</span>,.<span class="dv">3</span>,<span class="dv">0</span>))</span>
+<span id="cb127-5"><a href="lab-vii-regression-discontinuity-designs.html#cb127-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mtext</span>(<span class="st">&quot;Arrest rate&quot;</span>,    <span class="at">las =</span> <span class="dv">1</span>, <span class="at">side =</span> <span class="dv">2</span>, <span class="at">at =</span> <span class="dv">510</span>, <span class="at">line =</span> <span class="sc">-</span><span class="fl">0.2</span>, <span class="at">cex =</span> <span class="dv">1</span>)  </span>
+<span id="cb127-6"><a href="lab-vii-regression-discontinuity-designs.html#cb127-6" aria-hidden="true" tabindex="-1"></a><span class="fu">mtext</span>(<span class="st">&quot;Age at time of arrest&quot;</span>,  <span class="at">side =</span> <span class="dv">1</span>, <span class="at">line =</span> <span class="fl">1.</span>, <span class="at">cex =</span> <span class="dv">1</span>)</span>
+<span id="cb127-7"><a href="lab-vii-regression-discontinuity-designs.html#cb127-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb127-8"><a href="lab-vii-regression-discontinuity-designs.html#cb127-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Add fitted lines from &quot;left&quot; and &quot;right&quot; models</span></span>
+<span id="cb127-9"><a href="lab-vii-regression-discontinuity-designs.html#cb127-9" aria-hidden="true" tabindex="-1"></a><span class="co"># ALCOHOL</span></span>
+<span id="cb127-10"><a href="lab-vii-regression-discontinuity-designs.html#cb127-10" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="fu">seq</span>(<span class="dv">21</span> <span class="sc">-</span> window, <span class="dv">21</span>, <span class="at">by =</span> <span class="fl">0.1</span>), <span class="fu">coef</span>(Alc.RD.Replicate.left)[<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">coef</span>(Alc.RD.Replicate.left)[<span class="dv">2</span>]<span class="sc">*</span><span class="fu">seq</span>(<span class="sc">-</span>window, <span class="dv">0</span>, <span class="at">by =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb127-11"><a href="lab-vii-regression-discontinuity-designs.html#cb127-11" aria-hidden="true" tabindex="-1"></a>         <span class="fu">coef</span>(Alc.RD.Replicate.left)[<span class="dv">3</span>]<span class="sc">*</span>(<span class="fu">seq</span>(<span class="sc">-</span>window, <span class="dv">0</span>, <span class="at">by =</span> <span class="fl">0.1</span>)<span class="sc">^</span><span class="dv">2</span>), <span class="at">type =</span> <span class="st">&#39;l&#39;</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb127-12"><a href="lab-vii-regression-discontinuity-designs.html#cb127-12" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="fu">seq</span>(<span class="dv">21</span>, <span class="dv">21</span> <span class="sc">+</span> window, <span class="at">by =</span> <span class="fl">0.1</span>), <span class="fu">coef</span>(Alc.RD.Replicate.right)[<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">coef</span>(Alc.RD.Replicate.right)[<span class="dv">2</span>]<span class="sc">*</span><span class="fu">seq</span>(<span class="dv">0</span>, window, <span class="at">by =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb127-13"><a href="lab-vii-regression-discontinuity-designs.html#cb127-13" aria-hidden="true" tabindex="-1"></a>         <span class="fu">coef</span>(Alc.RD.Replicate.right)[<span class="dv">3</span>]<span class="sc">*</span>(<span class="fu">seq</span>(<span class="dv">0</span>, window, <span class="at">by =</span> <span class="fl">0.1</span>)<span class="sc">^</span><span class="dv">2</span>), <span class="at">type =</span> <span class="st">&#39;l&#39;</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb127-14"><a href="lab-vii-regression-discontinuity-designs.html#cb127-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb127-15"><a href="lab-vii-regression-discontinuity-designs.html#cb127-15" aria-hidden="true" tabindex="-1"></a><span class="co"># PROPERTY</span></span>
+<span id="cb127-16"><a href="lab-vii-regression-discontinuity-designs.html#cb127-16" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(dta_bin<span class="sc">$</span>age_fortnight_bin, dta_bin<span class="sc">$</span>property_r_bin,  <span class="at">pch =</span> <span class="dv">1</span>, <span class="at">cex =</span> <span class="fl">0.5</span>, <span class="at">col =</span> <span class="st">&quot;darkblue&quot;</span>)</span>
+<span id="cb127-17"><a href="lab-vii-regression-discontinuity-designs.html#cb127-17" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="fu">seq</span>(<span class="dv">21</span> <span class="sc">-</span> window, <span class="dv">21</span>, <span class="at">by =</span> <span class="fl">0.1</span>), <span class="fu">coef</span>(Prop.RD.Replicate.left)[<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">coef</span>(Prop.RD.Replicate.left)[<span class="dv">2</span>]<span class="sc">*</span><span class="fu">seq</span>(<span class="sc">-</span>window, <span class="dv">0</span>, <span class="at">by =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb127-18"><a href="lab-vii-regression-discontinuity-designs.html#cb127-18" aria-hidden="true" tabindex="-1"></a>         <span class="fu">coef</span>(Prop.RD.Replicate.left)[<span class="dv">3</span>]<span class="sc">*</span>(<span class="fu">seq</span>(<span class="sc">-</span>window, <span class="dv">0</span>, <span class="at">by =</span> <span class="fl">0.1</span>)<span class="sc">^</span><span class="dv">2</span>), <span class="at">type =</span> <span class="st">&#39;l&#39;</span>, <span class="at">col =</span> <span class="st">&quot;darkblue&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb127-19"><a href="lab-vii-regression-discontinuity-designs.html#cb127-19" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="fu">seq</span>(<span class="dv">21</span>, <span class="dv">21</span> <span class="sc">+</span> window, <span class="at">by =</span> <span class="fl">0.1</span>), <span class="fu">coef</span>(Prop.RD.Replicate.right)[<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">coef</span>(Prop.RD.Replicate.right)[<span class="dv">2</span>]<span class="sc">*</span><span class="fu">seq</span>(<span class="dv">0</span>, window, <span class="at">by =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb127-20"><a href="lab-vii-regression-discontinuity-designs.html#cb127-20" aria-hidden="true" tabindex="-1"></a>         <span class="fu">coef</span>(Prop.RD.Replicate.right)[<span class="dv">3</span>]<span class="sc">*</span>(<span class="fu">seq</span>(<span class="dv">0</span>, window, <span class="at">by =</span> <span class="fl">0.1</span>)<span class="sc">^</span><span class="dv">2</span>), <span class="at">type =</span> <span class="st">&#39;l&#39;</span>, <span class="at">col =</span> <span class="st">&quot;darkblue&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb127-21"><a href="lab-vii-regression-discontinuity-designs.html#cb127-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb127-22"><a href="lab-vii-regression-discontinuity-designs.html#cb127-22" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">22</span>, <span class="dv">390</span>, <span class="st">&quot;Alcohol&quot;</span>)</span>
+<span id="cb127-23"><a href="lab-vii-regression-discontinuity-designs.html#cb127-23" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">22</span>, <span class="dv">220</span>, <span class="st">&quot;Property&quot;</span>, <span class="at">col =</span> <span class="st">&quot;darkblue&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-61-1.png" width="672" /></p>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="lab-vii-regression-discontinuity-designs.html#cb128-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a dataframe that contains average crime rates grouped by bin, limited to the </span></span>
+<span id="cb128-2"><a href="lab-vii-regression-discontinuity-designs.html#cb128-2" aria-hidden="true" tabindex="-1"></a><span class="co"># window set by the window parameter</span></span>
+<span id="cb128-3"><a href="lab-vii-regression-discontinuity-designs.html#cb128-3" aria-hidden="true" tabindex="-1"></a>window <span class="ot">=</span> <span class="dv">4</span></span>
+<span id="cb128-4"><a href="lab-vii-regression-discontinuity-designs.html#cb128-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb128-5"><a href="lab-vii-regression-discontinuity-designs.html#cb128-5" aria-hidden="true" tabindex="-1"></a>dta_bin <span class="ot">&lt;-</span>  dta <span class="sc">%&gt;%</span> </span>
+<span id="cb128-6"><a href="lab-vii-regression-discontinuity-designs.html#cb128-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(days_to_21, all_r, property_r, age_fortnight, alcohol_r, bin) <span class="sc">%&gt;%</span></span>
+<span id="cb128-7"><a href="lab-vii-regression-discontinuity-designs.html#cb128-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(bin) <span class="sc">%&gt;%</span></span>
+<span id="cb128-8"><a href="lab-vii-regression-discontinuity-designs.html#cb128-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">property_r_bin =</span> <span class="fu">mean</span>(property_r), </span>
+<span id="cb128-9"><a href="lab-vii-regression-discontinuity-designs.html#cb128-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">all_r_bin =</span> <span class="fu">mean</span>(all_r), </span>
+<span id="cb128-10"><a href="lab-vii-regression-discontinuity-designs.html#cb128-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">alcohol_r_bin =</span> <span class="fu">mean</span>(alcohol_r), </span>
+<span id="cb128-11"><a href="lab-vii-regression-discontinuity-designs.html#cb128-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">age_fortnight_bin =</span> <span class="fu">mean</span>(age_fortnight)) <span class="sc">%&gt;%</span></span>
+<span id="cb128-12"><a href="lab-vii-regression-discontinuity-designs.html#cb128-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(age_fortnight_bin <span class="sc">&gt;=</span> <span class="dv">21</span><span class="sc">-</span> window <span class="sc">&amp;</span> age_fortnight_bin <span class="sc">&lt;=</span> <span class="dv">21</span> <span class="sc">+</span> window)</span>
+<span id="cb128-13"><a href="lab-vii-regression-discontinuity-designs.html#cb128-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-14"><a href="lab-vii-regression-discontinuity-designs.html#cb128-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-15"><a href="lab-vii-regression-discontinuity-designs.html#cb128-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Linear model with varying slopes below and above threshhold</span></span>
+<span id="cb128-16"><a href="lab-vii-regression-discontinuity-designs.html#cb128-16" aria-hidden="true" tabindex="-1"></a><span class="co"># ALCOHOL ARREST RATES</span></span>
+<span id="cb128-17"><a href="lab-vii-regression-discontinuity-designs.html#cb128-17" aria-hidden="true" tabindex="-1"></a>Alc.RD.linear.left <span class="ot">=</span> <span class="fu">lm</span>(alcohol_r <span class="sc">~</span> linear, dta[dta<span class="sc">$</span>linear <span class="sc">&gt;</span> <span class="sc">-</span>window <span class="sc">&amp;</span> dta<span class="sc">$</span>linear <span class="sc">&lt;</span><span class="dv">0</span>, ])</span>
+<span id="cb128-18"><a href="lab-vii-regression-discontinuity-designs.html#cb128-18" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Alc.RD.linear.left)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = alcohol_r ~ linear, data = dta[dta$linear &gt; -window &amp; 
+##     dta$linear &lt; 0, ])
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -82.86 -31.18   0.58  28.79 207.23 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  451.961      1.821   248.3   &lt;2e-16 ***
+## linear        63.473      0.788    80.5   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 35 on 1457 degrees of freedom
+## Multiple R-squared:  0.816,  Adjusted R-squared:  0.816 
+## F-statistic: 6.48e+03 on 1 and 1457 DF,  p-value: &lt;2e-16</code></pre>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="lab-vii-regression-discontinuity-designs.html#cb130-1" aria-hidden="true" tabindex="-1"></a>Alc.RD.linear.right <span class="ot">=</span> <span class="fu">lm</span>(alcohol_r <span class="sc">~</span> linear, dta[dta<span class="sc">$</span>linear  <span class="sc">&lt;</span> window <span class="sc">&amp;</span> dta<span class="sc">$</span>linear <span class="sc">&gt;</span><span class="dv">0</span>, ])</span>
+<span id="cb130-2"><a href="lab-vii-regression-discontinuity-designs.html#cb130-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Alc.RD.linear.right)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = alcohol_r ~ linear, data = dta[dta$linear &lt; window &amp; 
+##     dta$linear &gt; 0, ])
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+##  -40.8   -9.2   -1.1    7.1  486.9 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   417.48       1.11   376.3   &lt;2e-16 ***
+## linear        -11.31       0.48   -23.6   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 21 on 1457 degrees of freedom
+## Multiple R-squared:  0.276,  Adjusted R-squared:  0.275 
+## F-statistic:  555 on 1 and 1457 DF,  p-value: &lt;2e-16</code></pre>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="lab-vii-regression-discontinuity-designs.html#cb132-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a scatter plot</span></span>
+<span id="cb132-2"><a href="lab-vii-regression-discontinuity-designs.html#cb132-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(dta_bin<span class="sc">$</span>age_fortnight_bin, dta_bin<span class="sc">$</span>alcohol_r_bin,  <span class="at">type =</span> <span class="st">&quot;p&quot;</span>, <span class="at">pch =</span> <span class="dv">1</span>, <span class="at">cex =</span> <span class="fl">0.5</span>, <span class="at">cex.main =</span> <span class="fl">0.8</span>, <span class="at">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;&quot;</span>, <span class="at">xaxt=</span><span class="st">&#39;n&#39;</span>, <span class="at">yaxt=</span><span class="st">&#39;n&#39;</span>)</span>
+<span id="cb132-3"><a href="lab-vii-regression-discontinuity-designs.html#cb132-3" aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="dv">2</span>, <span class="at">las =</span> <span class="dv">1</span>, <span class="at">tick =</span> T, <span class="at">cex.axis =</span> .<span class="dv">8</span>, <span class="at">mgp =</span> <span class="fu">c</span>(<span class="dv">2</span>,.<span class="dv">7</span>,<span class="dv">0</span>))</span>
+<span id="cb132-4"><a href="lab-vii-regression-discontinuity-designs.html#cb132-4" aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="dv">1</span>, <span class="at">tick =</span> T, <span class="at">at=</span> <span class="fu">seq</span>(<span class="dv">17</span>, <span class="dv">25</span>, <span class="at">by=</span><span class="dv">1</span>), <span class="at">labels =</span><span class="fu">seq</span>(<span class="dv">17</span>, <span class="dv">25</span>, <span class="at">by=</span><span class="dv">1</span>),<span class="at">cex.axis =</span> .<span class="dv">8</span>, <span class="at">mgp =</span> <span class="fu">c</span>(<span class="dv">2</span>,.<span class="dv">3</span>,<span class="dv">0</span>))</span>
+<span id="cb132-5"><a href="lab-vii-regression-discontinuity-designs.html#cb132-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mtext</span>(<span class="st">&quot;Arrest rate&quot;</span>,    <span class="at">las =</span> <span class="dv">1</span>, <span class="at">side =</span> <span class="dv">2</span>, <span class="at">at =</span> <span class="dv">520</span>, <span class="at">line =</span> <span class="sc">-</span><span class="fl">0.2</span>, <span class="at">cex =</span> <span class="dv">1</span>)</span>
+<span id="cb132-6"><a href="lab-vii-regression-discontinuity-designs.html#cb132-6" aria-hidden="true" tabindex="-1"></a><span class="fu">mtext</span>(<span class="st">&quot;Age at time of arrest&quot;</span>,  <span class="at">side =</span> <span class="dv">1</span>, <span class="at">line =</span> <span class="fl">1.</span>, <span class="at">cex =</span> <span class="fl">0.8</span>)</span>
+<span id="cb132-7"><a href="lab-vii-regression-discontinuity-designs.html#cb132-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb132-8"><a href="lab-vii-regression-discontinuity-designs.html#cb132-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Add fitted lines from &quot;left&quot; and &quot;right&quot; models</span></span>
+<span id="cb132-9"><a href="lab-vii-regression-discontinuity-designs.html#cb132-9" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="fu">seq</span>(<span class="dv">21</span> <span class="sc">-</span> window, <span class="dv">21</span>, <span class="at">by =</span> <span class="fl">0.1</span>), <span class="fu">coef</span>(Alc.RD.linear.left) [<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">coef</span>(Alc.RD.linear.left) [<span class="dv">2</span>]<span class="sc">*</span><span class="fu">seq</span>(<span class="sc">-</span>window, <span class="dv">0</span>, <span class="at">by =</span> <span class="fl">0.1</span>), <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;darkblue&quot;</span>, <span class="at">type =</span> <span class="st">&#39;l&#39;</span>)</span>
+<span id="cb132-10"><a href="lab-vii-regression-discontinuity-designs.html#cb132-10" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="fu">seq</span>(<span class="dv">21</span>, <span class="dv">21</span> <span class="sc">+</span> window, <span class="at">by =</span> <span class="fl">0.1</span>), <span class="fu">coef</span>(Alc.RD.linear.right)[<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">coef</span>(Alc.RD.linear.right)[<span class="dv">2</span>]<span class="sc">*</span><span class="fu">seq</span>(<span class="dv">0</span>, window , <span class="at">by =</span> <span class="fl">0.1</span>), <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;darkblue&quot;</span>, <span class="at">type =</span> <span class="st">&#39;l&#39;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-61-2.png" width="672" /></p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="lab-vi-lists-loops-functions-in-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="lab-viii-time-series.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

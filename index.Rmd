@@ -983,3 +983,548 @@ ols_results2 <- lapply(stk_tickers, function(x){
 head(ols_results2)
 
 ```
+
+# Lab VII: Regression Discontinuity Designs
+
+```{r, echo=FALSE}
+knitr::include_graphics("Images/image_7.jpg")
+```
+
+### Preparation
+
+```{r, message = FALSE, warning = FALSE}
+## Packages
+require(knitr)
+require(haven)
+require(dplyr)
+library(rdrobust)
+
+# Load data: data saved as object named "dta"
+load("~/GOVT8002/Spring 2023/Lab VIII/Ch11_Lab_AlcoholCrime.RData")
+```
+
+Carpenter and  Dobkin (2015) analyzes the relationship between alcohol and crime using a regression discontinuity design.
+
+In this lab we will replicate the results and then explore different specifications.  As you will see, some reasonable alternative specifications yield quite different results.  The goal here will be to see if we can make any progress in explaining why the results vary as we vary the specification.
+
+From the codebook: "The individual level arrest records are collapsed into arrest counts by age in days for each crime type  in the SAS program "P01 Estimate Age Profile of Crime Rates.sas". This program uses populations estimated from the census in "P00 Estimate Population Denominators.sas" to compute arrest rates per 10,000."
+
+The main variables are 
+
+- *all_r*: number of arrrests across all categories.  Our main dependent variable. Arrest data is also broken down for *violent_r*, *property_r*, *ill_drugs_r* and *alcohol_r*
+- *post* a dumm variable indicating the individual is over 21 years of age
+- *linear*: the number of years from being age 21 (that is, *linear* = 1.0 indicates 22 year olds.  Negative values means the individual is under 21 and positive values indicate the individual is over than 21.
+- *square*: the squared value of linear
+- *linear_post*: interaction of linear and post
+- *square_post*: interaction of square and post
+- birthday dummies: e.g., birthday_19 is a dummy for a person's 19th birthday and birthday_19_1 is a dummy for the day after a person's 19th birthday. Use this code in your formula: + birthday_19  + birthday_19_1 + birthday_20  + birthday_20_1 + birthday_21  + birthday_21_1 + birthday_22 + birthday_22_1 + birthday_23 + birthday_23_1
+
+See Carpenter, Christopher and Carlos Dobkin. 2015. The Minimum Legal Drinking Age and Crime. *The Review of Economics and Statistics.* 97:2, 521-524.
+
+## Replicate the main result using the specification for Table 1. In this model, the RD allows for differential quadratic models above and below the threshold and also has dummy variables for birthdays.  The data is limited to observations within 2 years of 21.
+
+```{r message = FALSE}
+## Basic RD model
+rd_basic <- lm(all_r ~ post + linear,  data=dta[abs(dta$linear) <= 2, ])
+summary(rd_basic)
+
+## Differing Slopes
+rd_basic <- lm(all_r ~ post*linear,  data=dta[abs(dta$linear) <= 2, ])
+summary(rd_basic)
+
+## Model with covariates and vary
+rd_replicate <- lm(all_r ~ post + linear + square + linear_post + square_post + birthday_19  + birthday_20  + birthday_20_1 + birthday_21  + birthday_21_1 + birthday_22 + birthday_22_1,  data=dta[abs(dta$linear) <= 2, ])
+summary(rd_replicate)
+
+## Diagnostic plot
+hist(dta$linear, main = "Diagnostic Plot", xlab = "Age", las=1)
+```
+
+## Estimate a series of models with slightly different specifications. First, try the above specification with only linear age variable, first fixing slope to be the same above and below the threshhold and then allowing slope to vary above and below the threshhold.
+
+```{r}
+## Additional Models
+RD.1 <- lm(all_r ~ post + linear + birthday_19  + birthday_20  + birthday_20_1 + birthday_21  + birthday_21_1 + birthday_22 + birthday_22_1,  data=dta[abs(dta$linear) <= 2, ])
+summary(RD.1)
+
+RD.2 <- lm(all_r ~ post + linear + linear_post + birthday_19  + birthday_20  + birthday_20_1 + birthday_21  + birthday_21_1 + birthday_22 + birthday_22_1,  data=dta[abs(dta$linear) <= 2, ])
+summary(RD.2)
+
+```
+
+## Now see what happens when you use a different window sizes.  Feel free to experiment (but only need to report one specification.)
+
+```{r}
+## Different window sizes
+RD.3 <- lm(all_r ~ post + linear + linear_post,  data=dta[abs(dta$linear) <= 1, ])
+summary(RD.3)
+
+RD.4 <- lm(all_r ~ post + linear + linear_post,  data=dta[abs(dta$linear) <= 3, ])
+summary(RD.4)
+
+```
+
+## To figure out what is going on, let's create some figures. First, let's re-create Figure 1 in the paper. I provide the code to create a binned graph for the alcohol arrest rate.  Your task is to add another arrest category to the plot.
+
+```{r}
+# The original paper used 2 week intervals for bins, using the following to 
+# generate a number indicating age in years grouped into 2 week intervals
+dta$age_fortnight = 21 + (14*floor(dta$days_to_21/14))/365
+
+# Create a variable placing each observation in a "bin"
+dta$bin  = rep(1:length(unique(dta$age_fortnight)), table(dta$age_fortnight))
+
+# Use "window" to set how wide the window is above and below 21; e.g. window = 2
+# limits years 19 to 23
+window = 2
+
+# Create a dataframe that contains average crime rates grouped by bin
+# Use the dplyr package to simplify data organization
+dta_bin <-  dta %>% 
+  select(days_to_21, all_r, property_r, age_fortnight, alcohol_r, bin) %>%
+  group_by(bin) %>%
+  summarise(property_r_bin = mean(property_r), 
+            all_r_bin = mean(all_r), 
+            alcohol_r_bin = mean(alcohol_r), 
+            age_fortnight_bin = mean(age_fortnight)) %>%
+  filter(age_fortnight_bin >= 21- window & age_fortnight_bin <= 21 + window)
+
+## With rdrobust
+rdplot(dta$all_r , dta$linear, c=0, kernel = "triangular", x.label = "Year from Age Cutoff", y.label
+= "Arrest Rate", title = "Effect of Alcohol on Crime", binselect = "es")
+
+# Create a dataframe that contains average crime rates grouped by bin, limited to the 
+# window set by the window parameter
+dta$age_fortnight = 21 + (14*floor(dta$days_to_21/14))/365
+
+# Create a variable placing each observation in a "bin"
+dta$bin  = rep(1:length(unique(dta$age_fortnight)), table(dta$age_fortnight))
+
+window <- 4
+
+dta_bin <-  dta %>% 
+  select(days_to_21, all_r, property_r, age_fortnight, alcohol_r, bin) %>%
+  group_by(bin) %>%
+  summarise(property_r_bin = mean(property_r), 
+            all_r_bin = mean(all_r), 
+            alcohol_r_bin = mean(alcohol_r), 
+            age_fortnight_bin = mean(age_fortnight)) %>%
+  filter(age_fortnight_bin >= 21- window & age_fortnight_bin <= 21 + window)
+
+# Linear model with varying slopes below and above threshhold
+# ALCOHOL ARREST RATES
+rd_linear_left <- lm(all_r ~ linear, dta[dta$linear > -window & dta$linear <0, ])
+
+rd_linear_right <- lm(all_r ~ linear, dta[dta$linear  < window & dta$linear >0, ])
+
+# Create a scatter plot
+plot(dta_bin$age_fortnight_bin, dta_bin$all_r_bin,  type = "p", pch = 1, cex = 0.5, 
+     cex.main = 0.8, xlab = "", ylab = "", xaxt='n', yaxt='n')
+axis(2, las = 1, tick = T, cex.axis = .8, mgp = c(2,.7,0))
+axis(1, tick = T, at= seq(17, 25, by=1), labels =seq(17, 25, by=1),cex.axis = .8, mgp = c(2,.3,0))
+mtext("Arrest rate", 	las = 1, side = 2, at = 520, line = -0.2, cex = 1)
+mtext("Age at time of arrest", 	side = 1, line = 1., cex = 0.8)
+
+# Add fitted lines from "left" and "right" models
+points(seq(21 - window, 21, by = 0.1), coef(rd_linear_left) [1] + 
+         coef(rd_linear_left) [2]*seq(-window, 0, by = 0.1), lwd = 2, 
+       col = "darkblue", type = 'l')
+points(seq(21, 21 + window, by = 0.1), coef(rd_linear_right)[1] + 
+         coef(rd_linear_right)[2]*seq(0, window , by = 0.1), lwd = 2, 
+       col = "darkblue", type = 'l')
+
+
+
+```
+
+## Now create a figure based on a linear model.  You can try different window sizes but need only report one. Do this for alcohol (and feel free to add other crimes, but not required.)
+
+```{r}
+# Create a dataframe that contains average crime rates grouped by bin, limited to the 
+# window set by the window parameter
+window = 4
+library(dplyr)
+dta_bin <-  dta %>% 
+  select(days_to_21, all_r, property_r, age_fortnight, alcohol_r, bin) %>%
+  group_by(bin) %>%
+  summarise(property_r_bin = mean(property_r), 
+            all_r_bin = mean(all_r), 
+            alcohol_r_bin = mean(alcohol_r), 
+            age_fortnight_bin = mean(age_fortnight)) %>%
+  filter(age_fortnight_bin >= 21- window & age_fortnight_bin <= 21 + window)
+
+# The original paper used 2 week intervals for bins, using the following to 
+# generate a number indicating age in years grouped into 2 week intervals
+dta$age_fortnight = 21 + (14*floor(dta$days_to_21/14))/365
+
+# Create a variable placing each observation in a "bin"
+dta$bin  = rep(1:length(unique(dta$age_fortnight)), table(dta$age_fortnight))
+
+# Use "window" to set how wide the window is above and below 21; e.g. window = 2
+# limits years 19 to 23
+window = 2
+
+
+# Create a dataframe that contains average crime rates grouped by bin
+# Use the dplyr package to simplify data organization
+dta_bin <-  dta %>% 
+  select(days_to_21, all_r, property_r, age_fortnight, alcohol_r, bin) %>%
+  group_by(bin) %>%
+  summarise(property_r_bin = mean(property_r), 
+            all_r_bin = mean(all_r), 
+            alcohol_r_bin = mean(alcohol_r), 
+            age_fortnight_bin = mean(age_fortnight)) %>%
+  filter(age_fortnight_bin >= 21- window & age_fortnight_bin <= 21 + window)
+
+# Quadratic model with varying parameters below and above threshhold
+# ALCOHOL ARREST RATES
+Alc.RD.Replicate.left = lm(alcohol_r ~ linear + square, dta[dta$linear > -window & dta$linear <0, ])
+summary(Alc.RD.Replicate.left)
+
+Alc.RD.Replicate.right = lm(alcohol_r ~ linear + square, dta[dta$linear  < window & dta$linear >0, ])
+summary(Alc.RD.Replicate.right)
+
+# Quadratic model with varying parameters below and above threshhold
+# PROPERTY ARREST RATES
+Prop.RD.Replicate.left = lm(property_r ~ linear + square, dta[dta$linear > -window & dta$linear <0, ])
+summary(Prop.RD.Replicate.left)
+
+Prop.RD.Replicate.right = lm(property_r ~ linear + square, dta[dta$linear  < window & dta$linear >0, ])
+summary(Prop.RD.Replicate.right)
+
+# Create a # scatter plot
+plot(dta_bin$age_fortnight_bin, dta_bin$alcohol_r_bin,  type = "p", pch = 1, cex = 0.5, cex.main = 0.8, xlab = "", ylab = "", xaxt='n', yaxt='n', ylim = c(180, 480))
+axis(2, las = 1, tick = T, cex.axis = .8, mgp = c(2,.7,0))
+axis(1, tick = T, at= seq(17, 25, by=1), labels =seq(17, 25, by=1),cex.axis = .8, mgp = c(2,.3,0))
+mtext("Arrest rate", 	las = 1, side = 2, at = 510, line = -0.2, cex = 1)	
+mtext("Age at time of arrest", 	side = 1, line = 1., cex = 1)
+
+# Add fitted lines from "left" and "right" models
+# ALCOHOL
+points(seq(21 - window, 21, by = 0.1), coef(Alc.RD.Replicate.left)[1] + coef(Alc.RD.Replicate.left)[2]*seq(-window, 0, by = 0.1) +
+         coef(Alc.RD.Replicate.left)[3]*(seq(-window, 0, by = 0.1)^2), type = 'l', lwd = 2)
+points(seq(21, 21 + window, by = 0.1), coef(Alc.RD.Replicate.right)[1] + coef(Alc.RD.Replicate.right)[2]*seq(0, window, by = 0.1) +
+         coef(Alc.RD.Replicate.right)[3]*(seq(0, window, by = 0.1)^2), type = 'l', lwd = 2)
+
+# PROPERTY
+points(dta_bin$age_fortnight_bin, dta_bin$property_r_bin,  pch = 1, cex = 0.5, col = "darkblue")
+points(seq(21 - window, 21, by = 0.1), coef(Prop.RD.Replicate.left)[1] + coef(Prop.RD.Replicate.left)[2]*seq(-window, 0, by = 0.1) +
+         coef(Prop.RD.Replicate.left)[3]*(seq(-window, 0, by = 0.1)^2), type = 'l', col = "darkblue", lwd = 2)
+points(seq(21, 21 + window, by = 0.1), coef(Prop.RD.Replicate.right)[1] + coef(Prop.RD.Replicate.right)[2]*seq(0, window, by = 0.1) +
+         coef(Prop.RD.Replicate.right)[3]*(seq(0, window, by = 0.1)^2), type = 'l', col = "darkblue", lwd = 2)
+
+text(22, 390, "Alcohol")
+text(22, 220, "Property", col = "darkblue")
+
+# Create a dataframe that contains average crime rates grouped by bin, limited to the 
+# window set by the window parameter
+window = 4
+library(dplyr)
+dta_bin <-  dta %>% 
+  select(days_to_21, all_r, property_r, age_fortnight, alcohol_r, bin) %>%
+  group_by(bin) %>%
+  summarise(property_r_bin = mean(property_r), 
+            all_r_bin = mean(all_r), 
+            alcohol_r_bin = mean(alcohol_r), 
+            age_fortnight_bin = mean(age_fortnight)) %>%
+  filter(age_fortnight_bin >= 21- window & age_fortnight_bin <= 21 + window)
+
+
+# Linear model with varying slopes below and above threshhold
+# ALCOHOL ARREST RATES
+Alc.RD.linear.left = lm(alcohol_r ~ linear, dta[dta$linear > -window & dta$linear <0, ])
+summary(Alc.RD.linear.left)
+
+Alc.RD.linear.right = lm(alcohol_r ~ linear, dta[dta$linear  < window & dta$linear >0, ])
+summary(Alc.RD.linear.right)
+
+# Create a scatter plot
+plot(dta_bin$age_fortnight_bin, dta_bin$alcohol_r_bin,  type = "p", pch = 1, cex = 0.5, cex.main = 0.8, xlab = "", ylab = "", xaxt='n', yaxt='n')
+axis(2, las = 1, tick = T, cex.axis = .8, mgp = c(2,.7,0))
+axis(1, tick = T, at= seq(17, 25, by=1), labels =seq(17, 25, by=1),cex.axis = .8, mgp = c(2,.3,0))
+mtext("Arrest rate", 	las = 1, side = 2, at = 520, line = -0.2, cex = 1)
+mtext("Age at time of arrest", 	side = 1, line = 1., cex = 0.8)
+
+# Add fitted lines from "left" and "right" models
+points(seq(21 - window, 21, by = 0.1), coef(Alc.RD.linear.left) [1] + coef(Alc.RD.linear.left) [2]*seq(-window, 0, by = 0.1), lwd = 2, col = "darkblue", type = 'l')
+points(seq(21, 21 + window, by = 0.1), coef(Alc.RD.linear.right)[1] + coef(Alc.RD.linear.right)[2]*seq(0, window , by = 0.1), lwd = 2, col = "darkblue", type = 'l')
+
+
+
+```
+
+# Lab VIII: Time Series
+
+```{r, echo=FALSE}
+knitr::include_graphics("Images/image_8.png")
+```
+
+## Preparation
+
+```{r, warning=FALSE, message=FALSE}
+## Setup Options
+options(digits = 3)
+
+## Packages
+library(haven)
+library(AER)
+library(orcutt)
+library(tidyverse)
+library(lubridate)
+library(lmtest)
+library(sandwich)
+
+## Loading Data
+load("~/GOVT8002/Spring 2023/Lab IX/Ch13_Lab_GasPrices.RData")
+
+```
+
+## Data description:
+
+Variable  | 	Description
+------------- | -------------
+year	| Year
+month	| Month
+time	| Time identifier (1 for first observation, etc)
+logMilesNA	| Log of vehicle miles traveled (in millions) in the U.S., not seasonally adjusted
+logLightTruckSales 	| Log of retail sales of light weight trucks in the U.S. (in thousands)
+logGasReal	| Log of real price of gas
+unem	| Unemployment rate
+logPop 	| Log of U.S. population (in thousands) 
+
+## Estimate a model with the log of miles driven (use the unadjusted data: logMilesNA) as a function of log gas prices, unemployment and log of population.  (Don't account for autocorrelation.)  Is the effect of gas statistically significant?
+
+```{r}
+## Model 1
+reg.1 <- dta %>%
+  lm(logMilesNA ~ logGasReal + unem + logPop, data = .)
+
+## Summary Output
+summary(reg.1)
+
+## 95% CI
+confint(reg.1)
+
+```
+
+## Do you think there is seasonality in driving?  Test by adding dummy variables for month to the above model. Is there evidence of monthly variation?  Is the effect of gas statistically significant? Now create a categorical variable for seasons and run the model without the month dummy variable.
+
+```{r}
+## Removing NAs
+dta <- dta %>%
+  drop_na()
+
+## Creating a variable for seasons
+dta <- dta %>%
+  mutate(season = case_when(
+    month == 1 | month == 2 | month == 3 ~ "Winter",
+    month == 4 | month == 5 | month == 6 ~ "Spring",
+    month == 7 | month == 8 | month == 9 ~ "Summer",
+    month == 10 | month == 11 | month == 12 ~ "Fall")
+    )
+
+## Model 2 Months
+reg.2a <- dta %>%
+  lm(logMilesNA ~ logGasReal + unem + logPop + factor(month), data = .)
+
+## Summary Output
+summary(reg.2a)
+
+## 95% CI
+confint(reg.2a)
+
+## Model 2 Seasons
+reg.2b <- dta %>%
+  lm(logMilesNA ~ logGasReal + unem + logPop + factor(season), data = .)
+
+## Summary Output
+summary(reg.2b)
+
+## 95% CI
+confint(reg.2b)
+
+```
+
+## Briefly explain why there might be autocorrelation.
+
+With 50 years of data, there are certainly time trends and we can reasonably expect the error term of one year to be correlated with the error term of the previous year. For example, if more people began longer commutes in the 1990s, the longer commutes (more miles driven) will continue into the 2000s so the errors will be correlated year by year.
+
+## Create a figure that is useful to assess whether there is autocorrelation (you have two choices here).  Draw a sketch here.
+
+```{r, warning=FALSE, message=FALSE}
+## Saving the Residuals
+dta$residual_errors  <- resid(reg.2a)
+
+## Regressing Residuals
+lag_err <- c(NA, dta$residual_errors[1:(length(dta$residual_errors)-1)])
+
+plot(lag_err, dta$residual_errors, pch=20, xlab = "Lagged Residuals", 
+     ylab = "Residuals", bty="n", col="dark blue", las=1)
+abline(lm(dta$residual_errors ~ lag_err), lwd=2)
+
+## Plotting Over Time
+plot(dta$residual_errors, pch=20, xlab = "Time", las=1, 
+     ylab = "Residuals", bty="n", col="dark blue")
+
+# Creating season category and plotting residual error
+dta %>% 
+  ggplot() +
+  geom_line(aes(x=as.Date(date), y=residual_errors, col=season), size=.8) +
+  scale_color_manual(values=c("orange", "green", "red", "darkblue"))+
+  labs(x="Date", y="Residual Errors") +
+  theme_classic() +
+  theme(panel.grid.major.y=element_line(color="darkgrey", linetype="dotted"), panel.grid.minor.y=element_line(color="darkgrey", linetype="dotted")) %>%
+  labs(col="Season")
+
+# Creating season category and plotting residual error
+dta %>% 
+  ggplot() +
+  geom_point(aes(x=as.Date(date), y=residual_errors, col=season)) +
+  scale_color_manual(values=c("orange", "green", "red", "darkblue"))+
+  labs(x="Date", y="Residual Errors") +
+  theme_classic() +
+  theme(panel.grid.major.y=element_line(color="darkgrey", linetype="dotted"), panel.grid.minor.y=element_line(color="darkgrey", linetype="dotted")) %>%
+  labs(col="Season")
+
+```
+
+## Test whether there is first order autocorrelation.  Report the key statistic from this test. What would a coefficient of 1 indicate?
+
+```{r}
+## Error on Lagged Error Regression
+reg.lag <- lm(dta$residual_errors ~ lag_err)
+summary(reg.lag)
+
+## Durbin-Watson
+dwtest(reg.2a)
+
+```
+
+## Use Newey-West standard errors to account for autocorrelation.  Use the same variables as in part (b).  Determine the t-stats and describe the similarities and difference with earlier results.
+
+```{r}
+## Calculating Newey West Standard Errors
+sqrt(diag(NeweyWest(reg.2a, lag=4, prewhite=FALSE, adjust=TRUE)))
+
+## Checking t-stats
+coef(reg.2a) / sqrt(diag(NeweyWest(reg.2a, lag=4, prewhite=FALSE, adjust=TRUE)))
+
+```
+
+## Estimate a model that adjusts for autocorrelation.  Use the same variables as in part (b).  Describe similarities and difference with earlier results.
+
+```{r}
+## Cochrane-Orcutt Model
+reg.orc <- cochrane.orcutt(reg.2a)
+summary(reg.orc)
+
+## "By Hand"
+reg.2a <- dta %>%
+  lm(logMilesNA ~ logGasReal + unem + logPop + factor(month), data = .)
+
+## Error on Lagged Error Regression
+reg.lag <- lm(dta$residual_errors ~ lag_err)
+rho <- summary(reg.lag)$coef[2]
+
+## Lagging Each Variable
+dta$lagmile <- dplyr::lag(dta$logMilesNA)
+dta$lag_gas <- lag(dta$logGasReal)
+dta$lag_unem <- lag(dta$unem)
+dta$lag_pop <- lag(dta$logPop)
+dta$lag_month <- lag(dta$month)
+
+## Rho-transforming
+rho_mile <- dta$logMilesNA - rho*dta$lagmile
+rho_gas <- dta$logGasReal - rho*dta$lag_gas
+rho_unem <- dta$unem - rho*dta$lag_unem
+rho_pop <- dta$logPop - rho*dta$lag_pop
+rho_month <- dta$month - rho*dta$lag_month
+
+## Running rho-transformed model
+rho_trans_model <- lm(rho_mile ~ rho_gas + rho_unem + rho_pop + factor(rho_month))
+summary(rho_trans_model)
+
+```
+
+## Estimate a dynamic model of miles driven using control variables from above.  Discuss key differences.
+
+```{r}
+## Distributed Lag Model
+## Creating lagged miles variable
+reg.2.dyn <- lm(logMilesNA ~ lagmile + logGasReal + unem + logPop + factor(month) , data=dta)
+summary(reg.2.dyn)
+
+## Saving the Residuals
+residual_errors  <- resid(reg.2.dyn)
+
+## Regressing Residuals
+lag_err <- c(NA, residual_errors[1:(length(residual_errors)-1)])
+
+## Residuals from Dynamic Model
+plot(lag_err, residual_errors, pch=20, xlab = "Lagged Residuals", 
+     ylab = "Residuals", bty="n", col="dark blue", las=1)
+
+
+```
+
+## Run an Augmented Dickey-Fuller Test on logMilesNA.
+
+```{r}
+## Change in miles
+delta_miles <- dta$logMilesNA - dta$lagmile
+
+## Lagged Change in Miles
+lag_delta_miles <- c(NA, delta_miles[1:(length(dta$lagmile)-1)])
+
+## Augmented Dickey-Fuller Test
+aug_dickey_fuller <- lm(delta_miles ~ dta$lagmile + dta$year + lag_delta_miles)
+summary(aug_dickey_fuller)
+
+```
+
+## OPTIONAL QUESTION: Conduct the same analysis from a, b, d, and g using light truck sales as the dependent variable.  (Light truck sales use more gas than cars, so the question is whether gas prices affect the kind of car people buy which will affect gas consumption for the life of the car.)
+
+```{r, warning=FALSE, warning=FALSE}
+## The Model
+reg.lt <- lm(lttrucksales~logGasReal + unem + logPop + factor(month) , data=dta)
+summary(reg.lt)
+
+## Saving the Residuals
+dta$residual_errors  <- resid(reg.lt)
+
+## Regressing Residuals
+lag_err <- c(NA, dta$residual_errors[1:(length(dta$residual_errors)-1)])
+
+plot(lag_err, dta$residual_errors, pch=20, xlab = "Lagged Residuals", 
+     ylab = "Residuals", bty="n", col="dark blue", las=1)
+abline(lm(dta$residual_errors ~ lag_err), lwd=2)
+
+## Plotting Over Time
+plot(dta$residual_errors, pch=20, xlab = "Time", las=1, 
+     ylab = "Residuals", bty="n", col="dark blue")
+
+# Creating season category and plotting residual error
+dta %>% 
+  ggplot() +
+  geom_line(aes(x=as.Date(date), y=residual_errors, col=season), size=.8) +
+  scale_color_manual(values=c("orange", "green", "red", "darkblue"))+
+  labs(x="Date", y="Residual Errors") +
+  theme_classic() +
+  theme(panel.grid.major.y=element_line(color="darkgrey", linetype="dotted"), panel.grid.minor.y=element_line(color="darkgrey", linetype="dotted")) %>%
+  labs(col="Season")
+
+# Creating season category and plotting residual error
+dta %>% 
+  ggplot() +
+  geom_point(aes(x=as.Date(date), y=residual_errors, col=season)) +
+  scale_color_manual(values=c("orange", "green", "red", "darkblue"))+
+  labs(x="Date", y="Residual Errors") +
+  theme_classic() +
+  theme(panel.grid.major.y=element_line(color="darkgrey", linetype="dotted"), panel.grid.minor.y=element_line(color="darkgrey", linetype="dotted")) %>%
+  labs(col="Season")
+
+## Cochrane-Orcutt Model
+reg.orc2 <- cochrane.orcutt(reg.lt)
+summary(reg.orc2)
+
+```
