@@ -1068,92 +1068,10 @@ summary(RD.4)
 ## To figure out what is going on, let's create some figures. First, let's re-create Figure 1 in the paper. I provide the code to create a binned graph for the alcohol arrest rate.  Your task is to add another arrest category to the plot.
 
 ```{r}
-# The original paper used 2 week intervals for bins, using the following to 
-# generate a number indicating age in years grouped into 2 week intervals
-dta$age_fortnight = 21 + (14*floor(dta$days_to_21/14))/365
-
-# Create a variable placing each observation in a "bin"
-dta$bin  = rep(1:length(unique(dta$age_fortnight)), table(dta$age_fortnight))
-
-# Use "window" to set how wide the window is above and below 21; e.g. window = 2
-# limits years 19 to 23
-window = 2
-
-# Create a dataframe that contains average crime rates grouped by bin
-# Use the dplyr package to simplify data organization
-dta_bin <-  dta %>% 
-  select(days_to_21, all_r, property_r, age_fortnight, alcohol_r, bin) %>%
-  group_by(bin) %>%
-  summarise(property_r_bin = mean(property_r), 
-            all_r_bin = mean(all_r), 
-            alcohol_r_bin = mean(alcohol_r), 
-            age_fortnight_bin = mean(age_fortnight)) %>%
-  filter(age_fortnight_bin >= 21- window & age_fortnight_bin <= 21 + window)
-
 ## With rdrobust
 rdplot(dta$all_r , dta$linear, c=0, kernel = "triangular", x.label = "Year from Age Cutoff", y.label
 = "Arrest Rate", title = "Effect of Alcohol on Crime", binselect = "es")
 
-# Create a dataframe that contains average crime rates grouped by bin, limited to the 
-# window set by the window parameter
-dta$age_fortnight = 21 + (14*floor(dta$days_to_21/14))/365
-
-# Create a variable placing each observation in a "bin"
-dta$bin  = rep(1:length(unique(dta$age_fortnight)), table(dta$age_fortnight))
-
-window <- 4
-
-dta_bin <-  dta %>% 
-  select(days_to_21, all_r, property_r, age_fortnight, alcohol_r, bin) %>%
-  group_by(bin) %>%
-  summarise(property_r_bin = mean(property_r), 
-            all_r_bin = mean(all_r), 
-            alcohol_r_bin = mean(alcohol_r), 
-            age_fortnight_bin = mean(age_fortnight)) %>%
-  filter(age_fortnight_bin >= 21- window & age_fortnight_bin <= 21 + window)
-
-# Linear model with varying slopes below and above threshhold
-# ALCOHOL ARREST RATES
-rd_linear_left <- lm(all_r ~ linear, dta[dta$linear > -window & dta$linear <0, ])
-
-rd_linear_right <- lm(all_r ~ linear, dta[dta$linear  < window & dta$linear >0, ])
-
-# Create a scatter plot
-plot(dta_bin$age_fortnight_bin, dta_bin$all_r_bin,  type = "p", pch = 1, cex = 0.5, 
-     cex.main = 0.8, xlab = "", ylab = "", xaxt='n', yaxt='n')
-axis(2, las = 1, tick = T, cex.axis = .8, mgp = c(2,.7,0))
-axis(1, tick = T, at= seq(17, 25, by=1), labels =seq(17, 25, by=1),cex.axis = .8, mgp = c(2,.3,0))
-mtext("Arrest rate", 	las = 1, side = 2, at = 520, line = -0.2, cex = 1)
-mtext("Age at time of arrest", 	side = 1, line = 1., cex = 0.8)
-
-# Add fitted lines from "left" and "right" models
-points(seq(21 - window, 21, by = 0.1), coef(rd_linear_left) [1] + 
-         coef(rd_linear_left) [2]*seq(-window, 0, by = 0.1), lwd = 2, 
-       col = "darkblue", type = 'l')
-points(seq(21, 21 + window, by = 0.1), coef(rd_linear_right)[1] + 
-         coef(rd_linear_right)[2]*seq(0, window , by = 0.1), lwd = 2, 
-       col = "darkblue", type = 'l')
-
-
-
-```
-
-## Now create a figure based on a linear model.  You can try different window sizes but need only report one. Do this for alcohol (and feel free to add other crimes, but not required.)
-
-```{r}
-# Create a dataframe that contains average crime rates grouped by bin, limited to the 
-# window set by the window parameter
-window = 4
-library(dplyr)
-dta_bin <-  dta %>% 
-  select(days_to_21, all_r, property_r, age_fortnight, alcohol_r, bin) %>%
-  group_by(bin) %>%
-  summarise(property_r_bin = mean(property_r), 
-            all_r_bin = mean(all_r), 
-            alcohol_r_bin = mean(alcohol_r), 
-            age_fortnight_bin = mean(age_fortnight)) %>%
-  filter(age_fortnight_bin >= 21- window & age_fortnight_bin <= 21 + window)
-
 # The original paper used 2 week intervals for bins, using the following to 
 # generate a number indicating age in years grouped into 2 week intervals
 dta$age_fortnight = 21 + (14*floor(dta$days_to_21/14))/365
@@ -1170,12 +1088,7 @@ window = 2
 # Use the dplyr package to simplify data organization
 dta_bin <-  dta %>% 
   select(days_to_21, all_r, property_r, age_fortnight, alcohol_r, bin) %>%
-  group_by(bin) %>%
-  summarise(property_r_bin = mean(property_r), 
-            all_r_bin = mean(all_r), 
-            alcohol_r_bin = mean(alcohol_r), 
-            age_fortnight_bin = mean(age_fortnight)) %>%
-  filter(age_fortnight_bin >= 21- window & age_fortnight_bin <= 21 + window)
+  group_by(bin)
 
 # Quadratic model with varying parameters below and above threshhold
 # ALCOHOL ARREST RATES
@@ -1194,7 +1107,7 @@ Prop.RD.Replicate.right = lm(property_r ~ linear + square, dta[dta$linear  < win
 summary(Prop.RD.Replicate.right)
 
 # Create a # scatter plot
-plot(dta_bin$age_fortnight_bin, dta_bin$alcohol_r_bin,  type = "p", pch = 1, cex = 0.5, cex.main = 0.8, xlab = "", ylab = "", xaxt='n', yaxt='n', ylim = c(180, 480))
+plot(dta_bin$age_fortnight, dta_bin$alcohol_r,  type = "p", pch = 1, cex = 0.5, cex.main = 0.8, xlab = "", ylab = "", xaxt='n', yaxt='n', ylim = c(180, 480))
 axis(2, las = 1, tick = T, cex.axis = .8, mgp = c(2,.7,0))
 axis(1, tick = T, at= seq(17, 25, by=1), labels =seq(17, 25, by=1),cex.axis = .8, mgp = c(2,.3,0))
 mtext("Arrest rate", 	las = 1, side = 2, at = 510, line = -0.2, cex = 1)	
@@ -1207,31 +1120,18 @@ points(seq(21 - window, 21, by = 0.1), coef(Alc.RD.Replicate.left)[1] + coef(Alc
 points(seq(21, 21 + window, by = 0.1), coef(Alc.RD.Replicate.right)[1] + coef(Alc.RD.Replicate.right)[2]*seq(0, window, by = 0.1) +
          coef(Alc.RD.Replicate.right)[3]*(seq(0, window, by = 0.1)^2), type = 'l', lwd = 2)
 
-# PROPERTY
-points(dta_bin$age_fortnight_bin, dta_bin$property_r_bin,  pch = 1, cex = 0.5, col = "darkblue")
-points(seq(21 - window, 21, by = 0.1), coef(Prop.RD.Replicate.left)[1] + coef(Prop.RD.Replicate.left)[2]*seq(-window, 0, by = 0.1) +
-         coef(Prop.RD.Replicate.left)[3]*(seq(-window, 0, by = 0.1)^2), type = 'l', col = "darkblue", lwd = 2)
-points(seq(21, 21 + window, by = 0.1), coef(Prop.RD.Replicate.right)[1] + coef(Prop.RD.Replicate.right)[2]*seq(0, window, by = 0.1) +
-         coef(Prop.RD.Replicate.right)[3]*(seq(0, window, by = 0.1)^2), type = 'l', col = "darkblue", lwd = 2)
 
-text(22, 390, "Alcohol")
-text(22, 220, "Property", col = "darkblue")
+```
 
+## Now create a figure based on a linear model.  You can try different window sizes but need only report one. Do this for alcohol (and feel free to add other crimes, but not required.)
+
+```{r}
 # Create a dataframe that contains average crime rates grouped by bin, limited to the 
 # window set by the window parameter
 window = 4
 library(dplyr)
-dta_bin <-  dta %>% 
-  select(days_to_21, all_r, property_r, age_fortnight, alcohol_r, bin) %>%
-  group_by(bin) %>%
-  summarise(property_r_bin = mean(property_r), 
-            all_r_bin = mean(all_r), 
-            alcohol_r_bin = mean(alcohol_r), 
-            age_fortnight_bin = mean(age_fortnight)) %>%
-  filter(age_fortnight_bin >= 21- window & age_fortnight_bin <= 21 + window)
 
-
-# Linear model with varying slopes below and above threshhold
+# Linear model with varying slopes below and above threshold
 # ALCOHOL ARREST RATES
 Alc.RD.linear.left = lm(alcohol_r ~ linear, dta[dta$linear > -window & dta$linear <0, ])
 summary(Alc.RD.linear.left)
@@ -1240,7 +1140,7 @@ Alc.RD.linear.right = lm(alcohol_r ~ linear, dta[dta$linear  < window & dta$line
 summary(Alc.RD.linear.right)
 
 # Create a scatter plot
-plot(dta_bin$age_fortnight_bin, dta_bin$alcohol_r_bin,  type = "p", pch = 1, cex = 0.5, cex.main = 0.8, xlab = "", ylab = "", xaxt='n', yaxt='n')
+plot(dta_bin$age_fortnight, dta_bin$alcohol_r,  type = "p", pch = 1, cex = 0.5, cex.main = 0.8, xlab = "", ylab = "", xaxt='n', yaxt='n')
 axis(2, las = 1, tick = T, cex.axis = .8, mgp = c(2,.7,0))
 axis(1, tick = T, at= seq(17, 25, by=1), labels =seq(17, 25, by=1),cex.axis = .8, mgp = c(2,.3,0))
 mtext("Arrest rate", 	las = 1, side = 2, at = 520, line = -0.2, cex = 1)
@@ -1249,8 +1149,6 @@ mtext("Age at time of arrest", 	side = 1, line = 1., cex = 0.8)
 # Add fitted lines from "left" and "right" models
 points(seq(21 - window, 21, by = 0.1), coef(Alc.RD.linear.left) [1] + coef(Alc.RD.linear.left) [2]*seq(-window, 0, by = 0.1), lwd = 2, col = "darkblue", type = 'l')
 points(seq(21, 21 + window, by = 0.1), coef(Alc.RD.linear.right)[1] + coef(Alc.RD.linear.right)[2]*seq(0, window , by = 0.1), lwd = 2, col = "darkblue", type = 'l')
-
-
 
 ```
 

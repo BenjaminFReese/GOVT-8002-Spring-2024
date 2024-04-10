@@ -267,7 +267,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb62-4"><a href="lab-iv-data-visualization.html#cb62-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb62-5"><a href="lab-iv-data-visualization.html#cb62-5" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(df, <span class="at">caption =</span> <span class="st">&quot;Table: Population and survey percentages by age group&quot;</span>)</span></code></pre></div>
 <table>
-<caption><span id="tab:unnamed-chunk-30">Table 5.1: </span>Table: Population and survey percentages by age group</caption>
+<caption><span id="tab:unnamed-chunk-70">Table 5.1: </span>Table: Population and survey percentages by age group</caption>
 <thead>
 <tr class="header">
 <th align="left">age</th>
@@ -312,7 +312,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb63-9"><a href="lab-iv-data-visualization.html#cb63-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">35</span>), <span class="at">las=</span><span class="dv">1</span>)</span>
 <span id="cb63-10"><a href="lab-iv-data-visualization.html#cb63-10" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;bottomleft&quot;</span>,<span class="fu">c</span>(<span class="st">&quot;Surveyed %&quot;</span>, <span class="st">&quot;Population %&quot;</span>),</span>
 <span id="cb63-11"><a href="lab-iv-data-visualization.html#cb63-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill=</span><span class="fu">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;light gray&quot;</span>), <span class="at">horiz=</span><span class="cn">FALSE</span>, <span class="at">cex=</span><span class="fl">0.73</span>, <span class="at">bg=</span><span class="st">&quot;white&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-71-1.png" width="672" /></p>
 </div>
 <div id="base-r-version-2" class="section level2 hasAnchor" number="5.2">
 <h2><span class="header-section-number">5.2</span> Base R Version 2<a href="lab-iv-data-visualization.html#base-r-version-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -388,7 +388,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb64-70"><a href="lab-iv-data-visualization.html#cb64-70" aria-hidden="true" tabindex="-1"></a>  <span class="fu">text</span>(<span class="sc">-</span><span class="fl">14.</span>, <span class="fu">dim</span>(dataDiff)[<span class="dv">1</span>]<span class="sc">-</span>aa<span class="sc">+</span><span class="dv">1</span>, dataDiff<span class="sc">$</span>category[aa], <span class="at">cex =</span> <span class="fl">0.9</span>,</span>
 <span id="cb64-71"><a href="lab-iv-data-visualization.html#cb64-71" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="st">&quot;darkgreen&quot;</span>)</span>
 <span id="cb64-72"><a href="lab-iv-data-visualization.html#cb64-72" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-72-1.png" width="672" /></p>
 </div>
 <div id="libraryggplot-version-1" class="section level2 hasAnchor" number="5.3">
 <h2><span class="header-section-number">5.3</span> <code>library(ggplot)</code> Version 1<a href="lab-iv-data-visualization.html#libraryggplot-version-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -402,7 +402,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb65-8"><a href="lab-iv-data-visualization.html#cb65-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
 <span id="cb65-9"><a href="lab-iv-data-visualization.html#cb65-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Age Group&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Percent&quot;</span>,</span>
 <span id="cb65-10"><a href="lab-iv-data-visualization.html#cb65-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Population and Survey Sample Proportions by Age Group&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-73-1.png" width="672" /></p>
 </div>
 <div id="libraryggplot-version-2" class="section level2 hasAnchor" number="5.4">
 <h2><span class="header-section-number">5.4</span> <code>library(ggplot)</code> Version 2<a href="lab-iv-data-visualization.html#libraryggplot-version-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -417,7 +417,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb66-9"><a href="lab-iv-data-visualization.html#cb66-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
 <span id="cb66-10"><a href="lab-iv-data-visualization.html#cb66-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Age Group&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Percent&quot;</span>,</span>
 <span id="cb66-11"><a href="lab-iv-data-visualization.html#cb66-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Population and Survey Sample Proportions by Age Group&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-74-1.png" width="672" /></p>
 </div>
 <div id="alternative-plot-of-your-choice" class="section level2 hasAnchor" number="5.5">
 <h2><span class="header-section-number">5.5</span> Alternative Plot of Your Choice<a href="lab-iv-data-visualization.html#alternative-plot-of-your-choice" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -434,7 +434,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb67-11"><a href="lab-iv-data-visualization.html#cb67-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
 <span id="cb67-12"><a href="lab-iv-data-visualization.html#cb67-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Age Group&quot;</span>, <span class="at">y=</span><span class="st">&quot;Percent&quot;</span>, <span class="at">fill=</span><span class="cn">NULL</span>,</span>
 <span id="cb67-13"><a href="lab-iv-data-visualization.html#cb67-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Percent Surveyed and Percent in Population by Age Group&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-75-1.png" width="672" /></p>
 </div>
 </div>
             </section>
