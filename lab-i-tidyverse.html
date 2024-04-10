@@ -315,18 +315,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb4-10"><a href="lab-i-tidyverse.html#cb4-10" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(submission_date, state, new_case, new_death, deathsPC, casesPC) <span class="sc">%&gt;%</span> </span>
 <span id="cb4-11"><a href="lab-i-tidyverse.html#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span></code></pre></div>
 <pre><code>##   submission_date state new_case new_death deathsPC casesPC
-## 1      10/18/2021    ID     1290        42      2.4      72
-## 2      10/18/2021    AK      691        16      2.2      94
-## 3      10/18/2021    MT      426        19      1.8      40
-## 4      10/18/2021    AL      961        84      1.7      20
-## 5      10/18/2021    WV      689        26      1.5      38</code></pre>
+## 1      10/18/2021    ID     1290        42     2.35    72.2
+## 2      10/18/2021    AK      691        16     2.19    94.5
+## 3      10/18/2021    MT      426        19     1.78    39.9
+## 4      10/18/2021    AL      961        84     1.71    19.6
+## 5      10/18/2021    WV      689        26     1.45    38.4</code></pre>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="lab-i-tidyverse.html#cb6-1" aria-hidden="true" tabindex="-1"></a>df_day <span class="sc">%&gt;%</span> </span>
 <span id="cb6-2"><a href="lab-i-tidyverse.html#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">meanVaxedPct =</span> <span class="fu">mean</span>(vaxedPct),</span>
 <span id="cb6-3"><a href="lab-i-tidyverse.html#cb6-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">meanDeath =</span> <span class="fu">mean</span>(deathsPC),</span>
 <span id="cb6-4"><a href="lab-i-tidyverse.html#cb6-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">minDeath =</span> <span class="fu">min</span>(deathsPC),</span>
 <span id="cb6-5"><a href="lab-i-tidyverse.html#cb6-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">maxDeath =</span> <span class="fu">max</span>(deathsPC))</span></code></pre></div>
 <pre><code>##   meanVaxedPct meanDeath minDeath maxDeath
-## 1         0.64      0.46        0      2.4</code></pre>
+## 1        0.639     0.459        0     2.35</code></pre>
 </div>
 <div id="estimate-three-regression-models-with-deaths-per-capita-on-your-selected-day-as-the-dependent-variable." class="section level2 hasAnchor" number="2.3">
 <h2><span class="header-section-number">2.3</span> Estimate three regression models with deaths per capita on your selected day as the dependent variable.<a href="lab-i-tidyverse.html#estimate-three-regression-models-with-deaths-per-capita-on-your-selected-day-as-the-dependent-variable." class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -355,7 +355,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 0.53 on 49 degrees of freedom
+## Residual standard error: 0.528 on 49 degrees of freedom
 ## Multiple R-squared:  0.172,  Adjusted R-squared:  0.155 
 ## F-statistic: 10.2 on 1 and 49 DF,  p-value: 0.00246</code></pre>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="lab-i-tidyverse.html#cb10-1" aria-hidden="true" tabindex="-1"></a>ols<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">lm</span>(deathsPC <span class="sc">~</span> trump2020Pct <span class="sc">+</span> vaxedPct, <span class="at">data =</span> df_day)</span>
@@ -376,7 +376,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 0.47 on 48 degrees of freedom
+## Residual standard error: 0.467 on 48 degrees of freedom
 ## Multiple R-squared:  0.364,  Adjusted R-squared:  0.337 
 ## F-statistic: 13.7 on 2 and 48 DF,  p-value: 1.94e-05</code></pre>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="lab-i-tidyverse.html#cb12-1" aria-hidden="true" tabindex="-1"></a>ols<span class="fl">.3</span> <span class="ot">&lt;-</span> <span class="fu">lm</span>(deathsPC <span class="sc">~</span> trump2020Pct <span class="sc">+</span> vaxedPct <span class="sc">+</span> density, <span class="at">data =</span> df_day)</span>
@@ -398,7 +398,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 0.47 on 47 degrees of freedom
+## Residual standard error: 0.472 on 47 degrees of freedom
 ## Multiple R-squared:  0.364,  Adjusted R-squared:  0.323 
 ## F-statistic: 8.97 on 3 and 47 DF,  p-value: 8.33e-05</code></pre>
 </div>
@@ -499,10 +499,10 @@ Model 4
 trump2020Pct
 </td>
 <td>
-2.000
+1.990
 </td>
 <td>
-0.220
+0.219
 </td>
 <td>
 0.120
@@ -514,13 +514,13 @@ trump2020Pct
 <td style="text-align:left">
 </td>
 <td>
-(0.620)
+(0.622)
 </td>
 <td>
-(0.720)
+(0.721)
 </td>
 <td>
-(0.960)
+(0.956)
 </td>
 <td>
 </td>
@@ -529,13 +529,13 @@ trump2020Pct
 <td style="text-align:left">
 </td>
 <td>
-t = 3.200
+t = 3.190
 </td>
 <td>
-t = 0.300
+t = 0.304
 </td>
 <td>
-t = 0.130
+t = 0.126
 </td>
 <td>
 </td>
@@ -559,10 +559,10 @@ vaxedPct
 <td>
 </td>
 <td>
--2.600
+-2.630
 </td>
 <td>
--2.700
+-2.670
 </td>
 <td>
 </td>
@@ -573,10 +573,10 @@ vaxedPct
 <td>
 </td>
 <td>
-(0.690)
+(0.691)
 </td>
 <td>
-(0.750)
+(0.751)
 </td>
 <td>
 </td>
@@ -590,7 +590,7 @@ vaxedPct
 t = -3.800
 </td>
 <td>
-t = -3.600
+t = -3.560
 </td>
 <td>
 </td>
@@ -616,7 +616,7 @@ density
 <td>
 </td>
 <td>
--8.800
+-8.770
 </td>
 <td>
 </td>
@@ -696,7 +696,7 @@ vaxedPctJans
 <td>
 </td>
 <td>
-t = 0.440
+t = 0.436
 </td>
 </tr>
 <tr>
@@ -748,7 +748,7 @@ vaxedPctModerna
 <td>
 </td>
 <td>
-t = -0.290
+t = -0.289
 </td>
 </tr>
 <tr>
@@ -800,7 +800,7 @@ vaxedPctPfizer
 <td>
 </td>
 <td>
-t = -2.200
+t = -2.220
 </td>
 </tr>
 <tr>
@@ -820,48 +820,48 @@ t = -2.200
 Constant
 </td>
 <td>
--0.520
+-0.519
 </td>
 <td>
-2.000
+2.030
 </td>
 <td>
-2.100
+2.110
 </td>
 <td>
-2.400
+2.390
 </td>
 </tr>
 <tr>
 <td style="text-align:left">
 </td>
 <td>
-(0.320)
+(0.315)
 </td>
 <td>
-(0.730)
+(0.726)
 </td>
 <td>
 (0.890)
 </td>
 <td>
-(0.650)
+(0.653)
 </td>
 </tr>
 <tr>
 <td style="text-align:left">
 </td>
 <td>
-t = -1.600
+t = -1.650
 </td>
 <td>
-t = 2.800
+t = 2.790
 </td>
 <td>
-t = 2.400
+t = 2.370
 </td>
 <td>
-t = 3.700
+t = 3.670
 </td>
 </tr>
 <tr>
@@ -902,16 +902,16 @@ Observations
 R<sup>2</sup>
 </td>
 <td>
-0.170
+0.172
 </td>
 <td>
-0.360
+0.364
 </td>
 <td>
-0.360
+0.364
 </td>
 <td>
-0.230
+0.228
 </td>
 </tr>
 <tr>
@@ -919,13 +919,13 @@ R<sup>2</sup>
 Residual Std. Error
 </td>
 <td>
-0.530 (df = 49)
+0.528 (df = 49)
 </td>
 <td>
-0.470 (df = 48)
+0.467 (df = 48)
 </td>
 <td>
-0.470 (df = 47)
+0.472 (df = 47)
 </td>
 <td>
 0.520 (df = 47)
@@ -936,16 +936,16 @@ Residual Std. Error
 F Statistic
 </td>
 <td>
-10.000<sup>***</sup> (df = 1; 49)
+10.200<sup>***</sup> (df = 1; 49)
 </td>
 <td>
-14.000<sup>***</sup> (df = 2; 48)
+13.700<sup>***</sup> (df = 2; 48)
 </td>
 <td>
-9.000<sup>***</sup> (df = 3; 47)
+8.970<sup>***</sup> (df = 3; 47)
 </td>
 <td>
-4.600<sup>***</sup> (df = 3; 47)
+4.630<sup>***</sup> (df = 3; 47)
 </td>
 </tr>
 <tr>

@@ -375,9 +375,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="lab-ii-panel-data.html#cb28-1" aria-hidden="true" tabindex="-1"></a>fe<span class="fl">.1</span> <span class="ot">=</span> <span class="fu">lm</span>(casesPC <span class="sc">~</span> GovernmentResponseIndex <span class="sc">+</span> <span class="fu">factor</span>(RegionName), <span class="at">data =</span> dfState)</span>
 <span id="cb28-2"><a href="lab-ii-panel-data.html#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co">#summary(fe.1)</span></span>
 <span id="cb28-3"><a href="lab-ii-panel-data.html#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">coefficients</span>(<span class="fu">summary</span>(fe<span class="fl">.1</span>))[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>,]</span></code></pre></div>
-<pre><code>##                         Estimate Std. Error t value Pr(&gt;|t|)
-## (Intercept)                404.5      33.55      12  2.4e-33
-## GovernmentResponseIndex     -5.7       0.26     -22 7.5e-107</code></pre>
+<pre><code>##                         Estimate Std. Error t value  Pr(&gt;|t|)
+## (Intercept)               404.51     33.549    12.1  2.37e-33
+## GovernmentResponseIndex    -5.66      0.256   -22.1 7.54e-107</code></pre>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="lab-ii-panel-data.html#cb30-1" aria-hidden="true" tabindex="-1"></a>fe<span class="fl">.1</span>plm <span class="ot">=</span> <span class="fu">plm</span>(casesPC <span class="sc">~</span> GovernmentResponseIndex, </span>
 <span id="cb30-2"><a href="lab-ii-panel-data.html#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dfState, </span>
 <span id="cb30-3"><a href="lab-ii-panel-data.html#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">index =</span> <span class="fu">c</span>(<span class="st">&quot;RegionName&quot;</span>,<span class="st">&quot;Date&quot;</span>),</span>
@@ -414,8 +414,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb32-3"><a href="lab-ii-panel-data.html#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Show non-fixed effect coefficients</span></span>
 <span id="cb32-4"><a href="lab-ii-panel-data.html#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="fu">coefficients</span>(<span class="fu">summary</span>(fe<span class="fl">.2</span>))[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>,]</span></code></pre></div>
 <pre><code>##                         Estimate Std. Error t value Pr(&gt;|t|)
-## (Intercept)                393.5      86.62     4.5  5.6e-06
-## GovernmentResponseIndex     -6.8       0.76    -9.0  2.4e-19</code></pre>
+## (Intercept)               393.55     86.623    4.54 5.58e-06
+## GovernmentResponseIndex    -6.82      0.758   -9.00 2.38e-19</code></pre>
 <div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="lab-ii-panel-data.html#cb34-1" aria-hidden="true" tabindex="-1"></a>fe<span class="fl">.2</span>plm <span class="ot">=</span> <span class="fu">plm</span>(casesPC <span class="sc">~</span> GovernmentResponseIndex, </span>
 <span id="cb34-2"><a href="lab-ii-panel-data.html#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dfState, </span>
 <span id="cb34-3"><a href="lab-ii-panel-data.html#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">index =</span> <span class="fu">c</span>(<span class="st">&quot;RegionName&quot;</span>,<span class="st">&quot;Date&quot;</span>),</span>

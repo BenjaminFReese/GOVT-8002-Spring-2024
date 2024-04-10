@@ -1001,6 +1001,7 @@ library(rdrobust)
 
 # Load data: data saved as object named "dta"
 load("~/GOVT8002/Spring 2023/Lab VIII/Ch11_Lab_AlcoholCrime.RData")
+
 ```
 
 Carpenter and  Dobkin (2015) analyzes the relationship between alcohol and crime using a regression discontinuity design.
