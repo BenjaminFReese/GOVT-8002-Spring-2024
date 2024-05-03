@@ -1,4 +1,4 @@
-tab:unnamed-chunk-70
+tab:unnamed-chunk-32
 introduction
 purpose-of-this-site
 loading-data
@@ -72,3 +72,17 @@ estimate-a-model-that-adjusts-for-autocorrelation.-use-the-same-variables-as-in-
 estimate-a-dynamic-model-of-miles-driven-using-control-variables-from-above.-discuss-key-differences.
 run-an-augmented-dickey-fuller-test-on-logmilesna.
 optional-question-conduct-the-same-analysis-from-a-b-d-and-g-using-light-truck-sales-as-the-dependent-variable.-light-truck-sales-use-more-gas-than-cars-so-the-question-is-whether-gas-prices-affect-the-kind-of-car-people-buy-which-will-affect-gas-consumption-for-the-life-of-the-car.
+lab-ix-binary-response-models
+preparation-7
+use-a-lpm-to-estimate-the-effect-of-passenger-class-on-survival.
+assess-the-following-did-being-a-women-or-child-affected-survival-did-boarding-location-a-rough-proxy-for-country-of-origin-affect-survival-ireland-is-queenstown-q-france-is-cherbourg-c-and-the-englad-is-southampton-s.-treat-southampton-as-the-reference-category.-control-for-age-in-your-model.
+for-the-model-from-above-what-are-the-minimum-and-maximum-predicted-probabilities-of-survival
+what-is-the-name-age-gender-and-passenger-class-of-the-person-with-the-lowest-probability-of-surviving
+what-is-the-name-of-the-person-with-the-highest-probability-of-surviving
+estimate-a-probit-model-where-survival-is-a-function-of-only-passenger-class.-treat-passenger-class-as-a-nominal-variable.-compare-statistical-significance-to-a-similar-lpm-model.-is-there-an-easy-way-to-interpret-the-coefficients
+estimate-a-probit-model-where-survival-is-a-function-of-passenger-class-treated-as-a-nominal-variable-age-gender-child-and-embarkation-location.-what-is-the-minimum-and-maximum-fitted-value
+what-is-the-name-of-the-person-with-the-lowest-probability-of-surviving
+for-the-above-model-what-is-the-effect-of-growing-one-year-older-for-an-adult-do-this-manually-using-the-observed-value-discrete-difference-method-described-in-the-booklecture.
+compare-the-probit-effect-of-age-to-the-lpm-effect-of-age-in-part-b
+what-is-the-effect-of-the-passenger-class-female-and-child-variables-in-the-above-probit-model-use-the-mfx-package-as-described-in-the-lecture.-compare-the-predicted-effects-of-these-variables-in-the-probit-model-to-the-results-in-the-lpm-in-part-b.-you-need-only-discuss-one-of-these-variables-but-please-note-all-of-them-as-you-do-the-work.
+extra-plots

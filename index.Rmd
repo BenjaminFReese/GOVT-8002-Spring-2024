@@ -148,7 +148,7 @@ df_day %>%
   slice(1:5)
 
 df_day %>% 
-  summarize(meanVaxedPct = mean(vaxedPct),
+  dplyr::summarize(meanVaxedPct = mean(vaxedPct),
             meanDeath = mean(deathsPC),
             minDeath = min(deathsPC),
             maxDeath = max(deathsPC))
@@ -1087,7 +1087,7 @@ window = 2
 # Create a dataframe that contains average crime rates grouped by bin
 # Use the dplyr package to simplify data organization
 dta_bin <-  dta %>% 
-  select(days_to_21, all_r, property_r, age_fortnight, alcohol_r, bin) %>%
+  dplyr::select(days_to_21, all_r, property_r, age_fortnight, alcohol_r, bin) %>%
   group_by(bin)
 
 # Quadratic model with varying parameters below and above threshhold
@@ -1425,5 +1425,224 @@ dta %>%
 ## Cochrane-Orcutt Model
 reg.orc2 <- cochrane.orcutt(reg.lt)
 summary(reg.orc2)
+
+```
+
+# Lab IX: Binary Response Models
+
+```{r, echo=FALSE}
+knitr::include_graphics("Images/image_9.png")
+```
+
+### Preparation
+
+```{r, message = FALSE, warning = FALSE}
+
+## Packages You May Need
+library(knitr)
+library(haven)  ## install.packages("haven")
+library(car)    ## install.packages("car")
+library(AER)    ## install.packages("AER")
+library(Hmisc)  ## use the describe command
+library(mfx)    ## for marginal effects calculation
+library(tidyverse)
+
+## Loading Data
+dta <- read_dta("~/GOVT8002/Spring 2023/Lab X/Ch12_Lab_Titanic.dta")
+
+```
+
+## Use a LPM to estimate the effect of passenger class on survival.
+
+```{r}
+## Creating Variables
+dta$pclass_2 <- (dta$pclass == 2)
+dta$pclass_3 <- (dta$pclass == 3)
+
+## LPM Model
+lpm_1 <- lm(survived ~ pclass_2 + pclass_3, data = dta)
+summary(lpm_1)
+
+## Can also use factor(pclass)
+
+```
+
+## Assess the following: did being a women or child affected survival? Did boarding location (a rough proxy for country of origin) affect survival?  Ireland is Queenstown ("Q"), France is Cherbourg ("C") and the Englad is Southampton ("S").  Treat Southampton as the reference category.  Control for age in your model.
+
+```{r}
+## Creating Variables
+dta$female <- (dta$sex == "female")
+dta$child <- (dta$age < 17)
+dta$Queensland <- (dta$embarked == "Q")
+dta$Cherbourg <- (dta$embarked == "C")
+
+## LPM Model
+lpm_2 <- lm(survived ~ pclass_2 + pclass_3 + female + child + Queensland + Cherbourg + age, data = dta)
+
+## Summary Output
+summary(lpm_2)
+
+```
+
+## For the model from above, what are the minimum and maximum predicted probabilities of survival?
+
+```{r}
+## Finding Min and Max
+results_pred <- predict(lpm_2)
+max(results_pred)
+min(results_pred)
+
+```
+
+## What is the name, age, gender and passenger class of the person with the lowest probability of surviving?
+
+```{r}
+## Extract the "ID" of individual with minimum survival probability 
+id <- names(results_pred[results_pred == min(results_pred)])
+
+## Look up the person from the original data
+dta$name[as.numeric(id)]   # name
+
+dta$age[as.numeric(id)]    # age
+
+dta$sex[as.numeric(id)]    # gender
+
+dta$pclass[as.numeric(id)] # passenger class
+
+
+```
+
+## What is the name of the person with the highest probability of surviving?
+
+```{r}
+## Same as above but now for min
+id_1 <- names(results_pred[results_pred == max(results_pred)])
+
+dta$name[as.numeric(id_1)]   # name
+dta$age[as.numeric(id_1)]    # age
+dta$sex[as.numeric(id_1)]    # gender
+dta$pclass[as.numeric(id_1)] # class
+
+```
+
+## Estimate a probit model where survival is a function of (only) passenger class. Treat passenger class as a nominal variable.  Compare statistical significance to a similar LPM model.  Is there an easy way to interpret the coefficients?
+
+```{r}
+## Probit Model
+prob_1 <- glm(survived ~ pclass_2 + pclass_3, data = dta, 
+                family = binomial(link = "probit"))
+summary(prob_1)
+
+
+## Logit Model
+logit_1 <- glm(survived ~ pclass_2 + pclass_3, data = dta, 
+                family = binomial(link = "logit"))
+summary(logit_1)
+
+```
+
+## Estimate a probit model where survival is a function of passenger class (treated as a nominal variable) age, gender, child and embarkation location.  What is the minimum and maximum fitted value?
+
+```{r}
+## Probit Model
+prob_2 <- glm(survived ~ pclass_2 + pclass_3 + age + female + child + Queensland + Cherbourg, 
+              data = dta, family = binomial(link = "probit"))
+summary(prob_2)
+
+## Logit Model
+logit_2 <- glm(survived ~ pclass_2 + pclass_3 + age + female + child + Queensland + Cherbourg, 
+              data = dta, family = binomial(link = "logit"))
+summary(logit_2)
+
+## Compute predicted probabilities
+prob_pred <- predict(prob_2, type = "response")
+max(prob_pred)
+min(prob_pred)
+
+## For the logit model
+logit_pred <- predict(logit_2, type = "response")
+max(logit_pred)
+min(logit_pred)
+
+``` 
+
+## What is the name of the person with the lowest probability of surviving?
+
+```{r}
+## Finding the Name and other demographic factors
+id_2 <- names(prob_pred[prob_pred == min(prob_pred)])
+dta$name[as.numeric(id_2)]
+dta$pclass[as.numeric(id_2)]
+dta$age[as.numeric(id_2)]
+dta$sex[as.numeric(id_2)]
+
+```
+
+## For the above model, what is the effect of growing one year older (for an adult)?  (Do this "manually", using the observed-value, discrete difference method described in the book/lecture.)
+
+```{r}
+## Generate "P1" - the predicted values at actual values of X
+p_1 <- pnorm(coef(prob_2)[1] + coef(prob_2)[2]*dta$pclass_2 + coef(prob_2)[3]*dta$pclass_3 + coef(prob_2)[4]*dta$age + coef(prob_2)[5]*dta$female + coef(prob_2)[6]*dta$child + coef(prob_2)[7]*dta$Queensland + coef(prob_2)[8]*dta$Cherbourg)
+
+## Generate "P2" - the predicted values with age increased by 1
+p_2 <- pnorm(coef(prob_2)[1] + coef(prob_2)[2] *dta$pclass_2 + coef(prob_2)[3]*dta$pclass_3 + coef(prob_2)[4]*(dta$age + 1) + coef(prob_2)[5]*dta$female + coef(prob_2)[6]*dta$child + coef(prob_2)[7]*dta$Queensland + coef(prob_2)[8]*dta$Cherbourg)
+
+## Taking the Difference
+diff_age <- p_2 - p_1
+
+## Finding the Mean Difference
+mean(diff_age, na.rm = T)
+
+## The Marginal Effects Way
+mean(dnorm(coef(prob_2)[1] + coef(prob_2)[2] *dta$pclass_2 + coef(prob_2)[3]*dta$pclass_3 + coef(prob_2)[4]*dta$age + coef(prob_2)[5]*dta$female + coef(prob_2)[6]*dta$child + coef(prob_2)[7]*dta$Queensland + coef(prob_2)[8]*dta$Cherbourg)*coef(prob_2)[4], na.rm=T)
+
+```
+
+## Compare the probit effect of age to the LPM effect of age in part (b)
+
+They are basically the same.
+
+
+## What is the effect of the passenger class, female and child variables in the above probit model? Use the mfx package as described in the lecture. Compare the predicted effects of these variables in the probit model to the results in the LPM in part (b).  You need only discuss one of these variables, but please note all of them as you do the work.
+
+```{r}
+## Marginal Effects Approach
+
+## Probt Model
+probitmfx(prob_2, data = dta, atmean = FALSE)
+
+## Logit Model
+logitmfx(logit_2, data = dta, atmean = FALSE)
+
+```
+
+#### Extra Plots
+
+```{r, warning=FALSE, message=FALSE}
+## LPM Plot
+dta %>%
+  ggplot(aes(x = fare, y = survived)) + 
+  geom_point() +
+  stat_smooth(method = "lm", se = FALSE, color = "black") +
+  theme_bw()
+
+## Probit Plot
+dta %>%
+  ggplot(aes(x = fare, y = survived)) + 
+  geom_point() +
+  stat_smooth(method = "glm", se = FALSE, color = "black",
+              method.args = list(family=binomial(link = "probit")))+
+  theme_bw()
+
+## Both
+dta %>%
+  ggplot(aes(x = fare, y = survived)) + 
+  geom_point() +
+  stat_smooth(method = "glm", se = FALSE, color = "tomato", 
+              method.args = list(family=binomial(link = "probit"))) +
+  stat_smooth(method = "lm", se = FALSE, color = "light blue") +
+  theme_bw() +
+  labs(y = "Survived", x = "Cost of Fare")
+
 
 ```
